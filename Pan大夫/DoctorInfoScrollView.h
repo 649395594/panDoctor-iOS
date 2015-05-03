@@ -17,8 +17,6 @@
     CGFloat userConOffsetX;
 }
 
-@property (strong, nonatomic)CertificationViewController *certificateViewController;
-@property (strong, nonatomic)CommentViewController *commentViewController;
 @property (strong, nonatomic)TimeTableViewController *timeTableViewController;
 @property (strong, nonatomic)DoctorInformationViewController *docInfoViewController;
 

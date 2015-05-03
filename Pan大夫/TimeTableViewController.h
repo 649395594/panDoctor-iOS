@@ -10,7 +10,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TimeTableViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
+@interface TimeTableViewController : UIViewController
 
 @property(nonatomic)NSInteger selectedTimeLong;//订单持续时长，单位是半小时
 @property(nonatomic)NSInteger outputStartPosition;//开始时间点在时间表字符串中的下表
@@ -18,6 +18,5 @@
 
 -(id)initWithTimeTable:(NSString *)_timeTable Frame:(CGRect)frame;
 -(void)setCurrentDate:(NSString *)currentDate;
--(BOOL)appointmentButtonClicked;
 
 @end
