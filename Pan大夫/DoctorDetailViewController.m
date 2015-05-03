@@ -46,10 +46,7 @@
 #define kLineViewHeight 0.5
 #define kEmptyViewHeight 0.017605
 #define kTabBarHeight 100.0/736.0
-#define kAppointButtonTop 9.0/736.0
-#define kAppointButtonLeft 7.0/414.0
-#define kAppointButtonWidth 400/414.0
-#define kAppointButtonHeight 48.0/736.0
+
 @interface DoctorDetailViewController ()
 @property (strong, nonatomic) Doctor *localDoctor;
 @property (strong, nonatomic) UIView *basicInfoView;
@@ -63,14 +60,9 @@
 
 @property (strong, nonatomic) UIButton *timeTableButton;
 @property (strong, nonatomic) UIButton *docInfoButton;
-@property (strong, nonatomic) UIButton *certificateButton;
-@property (strong, nonatomic) UIButton *evaluationButton;
 @property (strong, nonatomic) UIButton *previousButton;
-@property (strong, nonatomic) UIButton *appointButton;
 
 @property (strong, nonatomic) UITextView *introductionTextView;
-
-@property (strong, nonatomic) UIView *appointView;
 
 @property (strong, nonatomic) DoctorInfoScrollView *docScrollView;
 @property (strong, nonatomic) LoginViewController *loginView;
@@ -86,10 +78,9 @@
 @synthesize basicInfoView;
 @synthesize docPic;
 @synthesize docNameLabel,secAgeLabel,ageLabel,sexLabel,markLabel,secMarkLabel;
-@synthesize timeTableButton,docInfoButton,certificateButton,evaluationButton,appointButton;
+@synthesize timeTableButton,docInfoButton;
 @synthesize docScrollView;
 @synthesize introductionTextView;
-@synthesize appointView;
 @synthesize docStarRate,speStr;
 @synthesize netOp;
 @synthesize infoVC,loginView;
@@ -118,23 +109,23 @@
         [self setMoreInfoButton];
         //初始化下部的scrollView
         if (KDeviceWidth>=319&&KDeviceWidth<=321&&KDeviceHeight>=567&&KDeviceHeight<=569) {
-            docScrollView = [[DoctorInfoScrollView alloc]initWithFrame:CGRectMake(CGRectGetMinX(docInfoButton.frame), CGRectGetMaxY(timeTableButton.frame), kBasicViewWidth*KDeviceWidth,287 + kTabBarHeight*KDeviceHeight) AndDoctor:localDoctor];
+            docScrollView = [[DoctorInfoScrollView alloc]initWithFrame:CGRectMake(CGRectGetMinX(docInfoButton.frame), CGRectGetMaxY(timeTableButton.frame), kBasicViewWidth*KDeviceWidth,336) AndDoctor:localDoctor];
             docScrollView.userInteractionEnabled = YES;
         }
         if (KDeviceWidth>=319&&KDeviceWidth<=321&&KDeviceHeight>=479&&KDeviceHeight<=481) {
-            docScrollView = [[DoctorInfoScrollView alloc]initWithFrame:CGRectMake(CGRectGetMinX(docInfoButton.frame), CGRectGetMaxY(timeTableButton.frame), kBasicViewWidth*KDeviceWidth,233 + kTabBarHeight*KDeviceHeight) AndDoctor:localDoctor];
+            docScrollView = [[DoctorInfoScrollView alloc]initWithFrame:CGRectMake(CGRectGetMinX(docInfoButton.frame), CGRectGetMaxY(timeTableButton.frame), kBasicViewWidth*KDeviceWidth,282) AndDoctor:localDoctor];
             docScrollView.userInteractionEnabled = YES;
         }
         if (KDeviceWidth>=374&&KDeviceWidth<=376) {
-            docScrollView = [[DoctorInfoScrollView alloc]initWithFrame:CGRectMake(CGRectGetMinX(docInfoButton.frame), CGRectGetMaxY(timeTableButton.frame), kBasicViewWidth*KDeviceWidth,350 + kTabBarHeight*KDeviceHeight) AndDoctor:localDoctor];
+            docScrollView = [[DoctorInfoScrollView alloc]initWithFrame:CGRectMake(CGRectGetMinX(docInfoButton.frame), CGRectGetMaxY(timeTableButton.frame), kBasicViewWidth*KDeviceWidth,399) AndDoctor:localDoctor];
             docScrollView.userInteractionEnabled = YES;
         }
         if (KDeviceWidth>=413&&KDeviceWidth<=415) {
-            docScrollView = [[DoctorInfoScrollView alloc]initWithFrame:CGRectMake(CGRectGetMinX(docInfoButton.frame), CGRectGetMaxY(timeTableButton.frame), kBasicViewWidth*KDeviceWidth,393 + kTabBarHeight*KDeviceHeight) AndDoctor:localDoctor];
+            docScrollView = [[DoctorInfoScrollView alloc]initWithFrame:CGRectMake(CGRectGetMinX(docInfoButton.frame), CGRectGetMaxY(timeTableButton.frame), kBasicViewWidth*KDeviceWidth,432) AndDoctor:localDoctor];
             docScrollView.userInteractionEnabled = YES;
         }
         [self.view addSubview:docScrollView];
-
+        
         
         UIImageView *LineView = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectGetMinX(docInfoButton.frame), CGRectGetMaxY(timeTableButton.frame)-5, 4*kButtonWidth*KDeviceWidth, kLineViewHeight)];
         [LineView setBackgroundColor:[UIColor colorWithRed:150.0/255.0 green:150.0/255 blue:150.0/255.0 alpha:1.0]];
@@ -146,7 +137,7 @@
         UIImageView *leftView = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectGetMinX(docInfoButton.frame), CGRectGetMaxY(timeTableButton.frame)-5, 0.5, 30)];
         [leftView setBackgroundColor:[UIColor colorWithRed:150.0/255.0 green:150.0/255 blue:150.0/255.0 alpha:1.0]];
         
-        UIImageView *rightView = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectGetMaxX(evaluationButton.frame)-0.5, CGRectGetMaxY(timeTableButton.frame)-5, 0.5, 30)];
+        UIImageView *rightView = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectGetMaxX(timeTableButton.frame)-0.5, CGRectGetMaxY(timeTableButton.frame)-5, 0.5, 30)];
         [rightView setBackgroundColor:[UIColor colorWithRed:150.0/255.0 green:150.0/255 blue:150.0/255.0 alpha:1.0]];
         
         docPic = [[UIImageView alloc]initWithFrame:CGRectMake(kPicLeftInterval*KDeviceWidth, kPicTopInterval*KDeviceHeight, kPicWidth*KDeviceWidth, kPicWidth*KDeviceWidth)];
@@ -184,10 +175,6 @@
         [self.view addSubview:LineView];
         [self.view addSubview:leftView];
         [self.view addSubview:rightView];
-//        [self.view addSubview:appointView];
-//        [appointView addSubview:appointButton];
-        
-
     }
     return self;
 }
@@ -209,34 +196,34 @@
 
 - (void)setContentOfLabel{
     if (!localDoctor.docName) {
-      docNameLabel.text = @"";
+        docNameLabel.text = @"";
     }
     else{
-      docNameLabel.text = localDoctor.docName;
+        docNameLabel.text = localDoctor.docName;
     }
     if (!localDoctor.docSex) {
-      sexLabel.text = @"";
+        sexLabel.text = @"";
     }
     else{
-      sexLabel.text = localDoctor.docSex;
+        sexLabel.text = localDoctor.docSex;
     }
     if (!localDoctor.docAge) {
-      ageLabel.text = @"";
+        ageLabel.text = @"";
     }
     else{
-      ageLabel.text = localDoctor.docAge;
+        ageLabel.text = localDoctor.docAge;
     }
     if (!localDoctor.docIntroduction) {
-      introductionTextView.text = @"";
+        introductionTextView.text = @"";
     }
     else{
-      introductionTextView.text = localDoctor.docIntroduction;
+        introductionTextView.text = localDoctor.docIntroduction;
     }
     if (!localDoctor.docMark) {
-      docStarRate.scorePercent = 0/5.0;
+        docStarRate.scorePercent = 0/5.0;
     }
     else{
-      docStarRate.scorePercent = [localDoctor.docMark floatValue]/5.0;
+        docStarRate.scorePercent = [localDoctor.docMark floatValue]/5.0;
     }
 }
 
@@ -252,10 +239,6 @@
         
         timeTableButton.titleLabel.font = [UIFont systemFontOfSize:15];
         docInfoButton.titleLabel.font = [UIFont systemFontOfSize:15];
-        certificateButton.titleLabel.font = [UIFont systemFontOfSize:15];
-        evaluationButton.titleLabel.font = [UIFont systemFontOfSize:15];
-        
-        appointButton.titleLabel.font = [UIFont systemFontOfSize:20];
     }
     if (KDeviceWidth>=319&&KDeviceWidth<=321&&KDeviceHeight>=479&&KDeviceHeight<=481){
         docNameLabel.font = [UIFont systemFontOfSize:16];
@@ -268,10 +251,6 @@
         
         timeTableButton.titleLabel.font = [UIFont systemFontOfSize:13];
         docInfoButton.titleLabel.font = [UIFont systemFontOfSize:13];
-        certificateButton.titleLabel.font = [UIFont systemFontOfSize:13];
-        evaluationButton.titleLabel.font = [UIFont systemFontOfSize:13];
-        
-        appointButton.titleLabel.font = [UIFont systemFontOfSize:18];
     }
     if (KDeviceWidth>=374&&KDeviceWidth<=376) {
         docNameLabel.font = [UIFont systemFontOfSize:22];
@@ -284,10 +263,6 @@
         
         timeTableButton.titleLabel.font = [UIFont systemFontOfSize:17];
         docInfoButton.titleLabel.font = [UIFont systemFontOfSize:17];
-        certificateButton.titleLabel.font = [UIFont systemFontOfSize:17];
-        evaluationButton.titleLabel.font = [UIFont systemFontOfSize:17];
-        
-        appointButton.titleLabel.font = [UIFont systemFontOfSize:26];
     }
     if (KDeviceWidth>=413&&KDeviceWidth<=415) {
         docNameLabel.font = [UIFont systemFontOfSize:24];
@@ -300,16 +275,11 @@
         
         timeTableButton.titleLabel.font = [UIFont systemFontOfSize:19];
         docInfoButton.titleLabel.font = [UIFont systemFontOfSize:19];
-        certificateButton.titleLabel.font = [UIFont systemFontOfSize:19];
-        evaluationButton.titleLabel.font = [UIFont systemFontOfSize:19];
-        
-        appointButton.titleLabel.font = [UIFont systemFontOfSize:28];
     }
 }
 
 //设置选项卡的按钮
 - (void)setMoreInfoButton{
-
     
     docInfoButton = [UIButton buttonWithType:UIButtonTypeCustom];
     docInfoButton.frame = CGRectMake(CGRectGetMinX(basicInfoView.frame), CGRectGetMaxY(basicInfoView.frame)+kBasicDownInterval*KDeviceHeight, kButtonWidth*KDeviceWidth, kButtonHeight*KDeviceHeight);
@@ -489,14 +459,5 @@
         [appDelegate.netEngine enqueueOperation:netOp];
     }
 }
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

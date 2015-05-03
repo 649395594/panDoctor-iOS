@@ -24,7 +24,7 @@
 @end
 @implementation DoctorInfoScrollView
 
-@synthesize certificateViewController,commentViewController,timeTableViewController,docInfoViewController;
+@synthesize timeTableViewController,docInfoViewController;
 @synthesize doctor;
 @synthesize netOp;
 @synthesize timetable,currentDate;
@@ -62,14 +62,14 @@
 }
 //得到点击按钮的tag值
 - (void)getButtonID:(long)tag{
-    [self setContentOffset:CGPointMake(tag*4*kButtonWidth, 0) animated:NO];
+    [self setContentOffset:CGPointMake(tag*2*kButtonWidth, 0) animated:NO];
     if (!timeTableViewController) {
     }
 }
 
 - (void)showTimeTable{
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-
+    
     NSString *path = [NSString stringWithFormat:@"/timetable.php?action=get&doctorId=%@",self.doctor.docID];
     NSLog(@"doctor id = %@",self.doctor.docID);
     netOp = [appDelegate.netEngine operationWithPath:path];
@@ -89,12 +89,12 @@
             localTimeTable = [dic objectForKey:@"table"];
             localCurrentDate = [dic objectForKey:@"date"];
             timeTableViewController = [[TimeTableViewController alloc]initWithTimeTable:localTimeTable Frame:CGRectMake(0, 0, 2*kButtonWidth, localSelf.frame.size.height)];
-            timeTableViewController.view.frame  = CGRectMake(4*kButtonWidth, 0, 2*kButtonWidth, localSelf.frame.size.height);
+            timeTableViewController.view.frame  = CGRectMake(2*kButtonWidth, 0, 2*kButtonWidth, localSelf.frame.size.height);
             [timeTableViewController setCurrentDate:localCurrentDate];
             
             [localSelf addSubview:timeTableViewController.view];
         }
-
+        
         
     } errorHandler:^(MKNetworkOperation *operation,NSError *error){
         NSLog(@"网络加载失败");

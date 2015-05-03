@@ -13,7 +13,6 @@
 #define kTimeButtonWidth (68 * deviceWidthRate)
 #define kDateButtonHeiht (60 * deviceWidthRate)
 #define kTimeButtonHeight (35 * deviceWidthRate)
-#define ktimeLongButtonHeight (0 * deviceWidthRate)
 #define kstartTimeLabelHeight (20 * deviceWidthRate)
 #define ktimeLongLabelWidth (60*deviceWidthRate)
 #define kleftInterval (15 * deviceWidthRate)
@@ -39,11 +38,7 @@
 @property(nonatomic, strong)NSString *timeTableString;
 @property(nonatomic, strong)UIButton *previousDateButton;
 @property(nonatomic, strong)UIButton *previousTimeButton;
-@property(nonatomic, strong)UIButton *timeLongButton;
 @property(nonatomic, strong)UILabel *startTimeLabel;
-@property(nonatomic, strong)UILabel *timeLongLabel;
-@property(nonatomic, strong)UITableView *timeLongTableView;
-@property(nonatomic, strong)NSArray *timeLongArray;
 @property(nonatomic, strong)NSString *timeTableDividedString;
 @property(nonatomic, strong)NSString *outputStartTime;
 @property(nonatomic, strong)NSIndexPath *previousIndexPath;
@@ -65,7 +60,7 @@
 
 @implementation TimeTableViewController
 
-@synthesize backgroundView, dateScrollerView, timeScrollerView, previousDateButton, previousTimeButton, timeLongButton, startTimeLabel, timeLongLabel, isTimeListHide, timeLongTableView, timeLongArray, selectedDateNo, selectedTimeNo, selectedTimeLong, maxTimeLongAvailable, timeTableString, timeTableDividedString, outputStartPosition, outputStartTime, today, isStartTimeSelected, isTimeLongSelectd, previousIndexPath, themeColor, outputTimeInterval, deviceWidthRate, themeColorImage, whiteColorImage, lightGrayImage;
+@synthesize backgroundView, dateScrollerView, timeScrollerView, previousDateButton, previousTimeButton, startTimeLabel, isTimeListHide, selectedDateNo, selectedTimeNo, selectedTimeLong, maxTimeLongAvailable, timeTableString, timeTableDividedString, outputStartPosition, outputStartTime, today, isStartTimeSelected, isTimeLongSelectd, previousIndexPath, themeColor, outputTimeInterval, deviceWidthRate, themeColorImage, whiteColorImage, lightGrayImage;
 
 -(id)initWithTimeTable:(NSString *)_timeTable Frame:(CGRect)frame{
     timeTableString = _timeTable;
@@ -97,7 +92,7 @@
         self.automaticallyAdjustsScrollViewInsets = NO;
         
         backgroundView = [[UIScrollView alloc]initWithFrame:frame];
-        backgroundView.contentSize = CGSizeMake(frame.size.width, ktopInterval + kDateButtonHeiht + kstartTimeLabelHeight + kTimeButtonHeight*kdisplayTime/4 + ktimeLongButtonHeight + kverticalInterval*2);
+        backgroundView.contentSize = CGSizeMake(frame.size.width, ktopInterval + kDateButtonHeiht + kstartTimeLabelHeight + kTimeButtonHeight*kdisplayTime/4 + kverticalInterval*2);
         backgroundView.showsVerticalScrollIndicator = YES;
         //日期背景
         dateScrollerView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, ktopInterval, frame.size.width, kDateButtonHeiht)];
@@ -111,11 +106,11 @@
         //时间背景
         timeScrollerView = [[UIView alloc]initWithFrame:CGRectMake(0, ktopInterval + kDateButtonHeiht + kstartTimeLabelHeight, frame.size.width, (kTimeButtonHeight + ktimeVerticalInterval)*kdisplayTime/4)];
         [self showTimeButton];
-                
+        
         [backgroundView addSubview:dateScrollerView];
         [self.view addSubview:backgroundView];
         
-    
+        
     }
     return self;
 }
@@ -130,7 +125,6 @@
     
     //设置dateButton的格式
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-//    [dateFormatter setDateFormat:@"MM.dd\n eee"];
     [dateFormatter setDateFormat:@"eee"];
     dateFormatter.locale = [[NSLocale alloc]initWithLocaleIdentifier:@"zh_CN"];
     NSString *dateString = [dateFormatter stringFromDate:today];
@@ -177,7 +171,7 @@
                 if (testInteger == 1) {
                     button.enabled = YES;
                     [button.layer setBorderWidth:1.0];
-                    [button addTarget:self action:@selector(timeButtonClicked:)forControlEvents:UIControlEventTouchUpInside];
+                    //                    [button addTarget:self action:@selector(timeButtonClicked:)forControlEvents:UIControlEventTouchUpInside];
                 }else{
                     button.enabled = NO;
                     [button.layer setBorderWidth:0];
@@ -219,7 +213,7 @@
             if (testInteger == 1) {
                 timeButton.enabled = YES;
                 [timeButton.layer setBorderWidth:1.0];
-                [timeButton addTarget:self action:@selector(timeButtonClicked:)forControlEvents:UIControlEventTouchUpInside];
+                //                [timeButton addTarget:self action:@selector(timeButtonClicked:)forControlEvents:UIControlEventTouchUpInside];
             }else{
                 timeButton.enabled = NO;
                 [timeButton.layer setBorderWidth:0];
@@ -243,118 +237,118 @@
         previousTimeButton.selected = NO;
         [previousTimeButton.layer setBorderWidth:1.0];
         previousTimeButton = nil;
-        [timeLongButton setTitle:@"请选择咨询时长" forState:UIControlStateNormal];
-        [timeLongTableView deselectRowAtIndexPath:previousIndexPath animated:NO];
+        //        [timeLongButton setTitle:@"请选择咨询时长" forState:UIControlStateNormal];
+        //        [timeLongTableView deselectRowAtIndexPath:previousIndexPath animated:NO];
         [self showTimeButton];
     }
     previousDateButton = _dateButton;
 }
 
-//当timeButton被点击时触发事件
--(void)timeButtonClicked:(UIButton *)_timeButton{
-    if (_timeButton == previousTimeButton) {
-        return;
-    }
-    if (previousTimeButton) {
-        previousTimeButton.selected = NO;
-        [previousTimeButton.layer setBorderWidth:1.0];
-        [timeLongButton setTitle:@"请选择咨询时长" forState:UIControlStateNormal];
-    }
-    _timeButton.selected = YES;
-    
-    selectedTimeNo = _timeButton.tag - ktimeButtonTag;
-    
-    //设置最大的可选择时长
-    maxTimeLongAvailable = 0;
-    for (long i = selectedTimeNo; i<kdisplayTime ; i++) {
-        NSInteger testInteger = [[timeTableDividedString substringWithRange:NSMakeRange(i, 1)] intValue];
-        if (testInteger == 1) {
-            maxTimeLongAvailable++;
-        }else{
-            break;
-        }
-    }
-    
-    previousTimeButton = _timeButton;
-    isStartTimeSelected = YES;
-    isTimeLongSelectd = NO;
-    [timeLongTableView deselectRowAtIndexPath:previousIndexPath animated:NO];
-    NSLog(@"button: %ld maxTimeLongAvailable: %ld", selectedTimeNo, maxTimeLongAvailable);
-}
-
-#pragma mark - TableView datasource
-//设置cell高度
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return  maxTimeLongAvailable;
-}
-
-//设置cell
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *cellIndentifier = @"cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIndentifier];
-    if(cell==nil){
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIndentifier];
-        cell.textLabel.textAlignment = NSTextAlignmentCenter;
-        cell.textLabel.textColor = themeColor;
-        cell.textLabel.highlightedTextColor = [UIColor whiteColor];
-        cell.selectedBackgroundView = [[UIView alloc]initWithFrame:cell.frame];
-        cell.selectedBackgroundView.backgroundColor = themeColor;
-    }
-    cell.textLabel.text = timeLongArray[indexPath.row];
-    return  cell;
-}
-
-//选择时长触发
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [self performSelector:@selector(hideTimeLongList) withObject:self afterDelay: 0.3];
-    [timeLongButton setTitle:timeLongArray[indexPath.row] forState:UIControlStateNormal];
-    
-    isTimeLongSelectd = YES;
-    selectedTimeLong = indexPath.row + 1;
-    previousIndexPath = indexPath;
-}
-
-//选择预约时长button点击时触发
--(void)timeLongButtonClicked:(UIButton *)_timeLongButton{
-    if (isTimeListHide) {
-        [self showTimeLongList];
-    }else{
-        [self hideTimeLongList];
-    }
-}
-
-//显示下拉菜单
--(void)showTimeLongList{
-    [backgroundView addSubview:timeLongTableView];
-    [backgroundView setContentOffset:CGPointMake(0, ktopInterval + kDateButtonHeiht + kstartTimeLabelHeight + (kTimeButtonHeight + ktimeVerticalInterval)*kdisplayTime/4 - ktimeVerticalInterval) animated:YES];
-    backgroundView.scrollEnabled = NO;
-    isTimeListHide = NO;
-}
-
-//隐藏下拉菜单
--(void)hideTimeLongList{
-    [backgroundView setContentOffset:CGPointMake(0, 0) animated:YES];
-    [timeLongTableView performSelector:@selector(removeFromSuperview) withObject:self afterDelay: 0.3];
-    backgroundView.scrollEnabled = YES;
-    isTimeListHide = YES;
-}
-
-//预约button点击时触发
--(BOOL)appointmentButtonClicked{
-    //未完成相关信息时候提示
-    if (isStartTimeSelected == NO || isTimeLongSelectd == NO) {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未完成相关信息" delegate:self cancelButtonTitle:@"返回继续编辑" otherButtonTitles:nil];
-        [alert show];
-        return NO;
-    }
-    outputStartPosition = selectedDateNo*kdisplayTime + selectedTimeNo;
-    NSDateFormatter *outputFormatter = [[NSDateFormatter alloc]init];
-    [outputFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
-    outputFormatter.locale = [[NSLocale alloc]initWithLocaleIdentifier:@"zh_CN"];
-    NSDate *selectedStartTime = [[NSDate alloc]initWithTimeInterval:(kstartTimeSeconds + 24*60*60*selectedDateNo + 30*60*selectedTimeNo) sinceDate:today];
-    outputTimeInterval = [selectedStartTime timeIntervalSince1970];
-    return YES;
-}
+////当timeButton被点击时触发事件
+//-(void)timeButtonClicked:(UIButton *)_timeButton{
+//    if (_timeButton == previousTimeButton) {
+//        return;
+//    }
+//    if (previousTimeButton) {
+//        previousTimeButton.selected = NO;
+//        [previousTimeButton.layer setBorderWidth:1.0];
+////        [timeLongButton setTitle:@"请选择咨询时长" forState:UIControlStateNormal];
+//    }
+//    _timeButton.selected = YES;
+//
+//    selectedTimeNo = _timeButton.tag - ktimeButtonTag;
+//
+//    //设置最大的可选择时长
+//    maxTimeLongAvailable = 0;
+//    for (long i = selectedTimeNo; i<kdisplayTime ; i++) {
+//        NSInteger testInteger = [[timeTableDividedString substringWithRange:NSMakeRange(i, 1)] intValue];
+//        if (testInteger == 1) {
+//            maxTimeLongAvailable++;
+//        }else{
+//            break;
+//        }
+//    }
+//
+//    previousTimeButton = _timeButton;
+//    isStartTimeSelected = YES;
+//    isTimeLongSelectd = NO;
+//    [timeLongTableView deselectRowAtIndexPath:previousIndexPath animated:NO];
+//    NSLog(@"button: %ld maxTimeLongAvailable: %ld", selectedTimeNo, maxTimeLongAvailable);
+//}
+//
+//#pragma mark - TableView datasource
+////设置cell高度
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+//    return  maxTimeLongAvailable;
+//}
+//
+////设置cell
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    static NSString *cellIndentifier = @"cell";
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIndentifier];
+//    if(cell==nil){
+//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIndentifier];
+//        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+//        cell.textLabel.textColor = themeColor;
+//        cell.textLabel.highlightedTextColor = [UIColor whiteColor];
+//        cell.selectedBackgroundView = [[UIView alloc]initWithFrame:cell.frame];
+//        cell.selectedBackgroundView.backgroundColor = themeColor;
+//    }
+//    cell.textLabel.text = timeLongArray[indexPath.row];
+//    return  cell;
+//}
+//
+////选择时长触发
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+//    [self performSelector:@selector(hideTimeLongList) withObject:self afterDelay: 0.3];
+//    [timeLongButton setTitle:timeLongArray[indexPath.row] forState:UIControlStateNormal];
+//
+//    isTimeLongSelectd = YES;
+//    selectedTimeLong = indexPath.row + 1;
+//    previousIndexPath = indexPath;
+//}
+//
+////选择预约时长button点击时触发
+//-(void)timeLongButtonClicked:(UIButton *)_timeLongButton{
+//    if (isTimeListHide) {
+//        [self showTimeLongList];
+//    }else{
+//        [self hideTimeLongList];
+//    }
+//}
+//
+////显示下拉菜单
+//-(void)showTimeLongList{
+//    [backgroundView addSubview:timeLongTableView];
+//    [backgroundView setContentOffset:CGPointMake(0, ktopInterval + kDateButtonHeiht + kstartTimeLabelHeight + (kTimeButtonHeight + ktimeVerticalInterval)*kdisplayTime/4 - ktimeVerticalInterval) animated:YES];
+//    backgroundView.scrollEnabled = NO;
+//    isTimeListHide = NO;
+//}
+//
+////隐藏下拉菜单
+//-(void)hideTimeLongList{
+//    [backgroundView setContentOffset:CGPointMake(0, 0) animated:YES];
+//    [timeLongTableView performSelector:@selector(removeFromSuperview) withObject:self afterDelay: 0.3];
+//    backgroundView.scrollEnabled = YES;
+//    isTimeListHide = YES;
+//}
+//
+////预约button点击时触发
+//-(BOOL)appointmentButtonClicked{
+//    //未完成相关信息时候提示
+//    if (isStartTimeSelected == NO || isTimeLongSelectd == NO) {
+//        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您还未完成相关信息" delegate:self cancelButtonTitle:@"返回继续编辑" otherButtonTitles:nil];
+//        [alert show];
+//        return NO;
+//    }
+//    outputStartPosition = selectedDateNo*kdisplayTime + selectedTimeNo;
+//    NSDateFormatter *outputFormatter = [[NSDateFormatter alloc]init];
+//    [outputFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+//    outputFormatter.locale = [[NSLocale alloc]initWithLocaleIdentifier:@"zh_CN"];
+//    NSDate *selectedStartTime = [[NSDate alloc]initWithTimeInterval:(kstartTimeSeconds + 24*60*60*selectedDateNo + 30*60*selectedTimeNo) sinceDate:today];
+//    outputTimeInterval = [selectedStartTime timeIntervalSince1970];
+//    return YES;
+//}
 
 //UIColor 转UIImage
 - (UIImage *)createImageWithColor: (UIColor*) color
