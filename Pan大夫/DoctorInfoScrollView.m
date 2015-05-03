@@ -12,7 +12,7 @@
 #define kInterval 4
 #define KDeviceWidth [[UIScreen mainScreen]bounds].size.width
 #define KDeviceHeight [[UIScreen mainScreen]bounds].size.height
-#define kButtonWidth (KDeviceWidth-2*kInterval)/4
+#define kButtonWidth (KDeviceWidth-2*kInterval)/2
 @interface DoctorInfoScrollView ()
 
 @property (strong, nonatomic)Doctor *doctor;
@@ -55,18 +55,10 @@
 - (void)initWithViewControllers{
     [self showTimeTable];
     
-    UIView *docInfoView = [[UIView alloc]initWithFrame:CGRectMake(4*kButtonWidth, 0, 4*kButtonWidth, self.frame.size.height)];
+    UIView *docInfoView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 2*kButtonWidth, self.frame.size.height)];
     docInfoViewController = [[DoctorInformationViewController alloc]initWithDocInfo:doctor AndView:docInfoView];
     [self addSubview:docInfoView];
     
-    certificateViewController = [[CertificationViewController alloc]init];
-    certificateViewController.view = [[UIView alloc]initWithFrame:CGRectMake(8*kButtonWidth, 0, 4*kButtonWidth, self.frame.size.height)];
-    certificateViewController.view.backgroundColor = [UIColor whiteColor];
-    [self addSubview:certificateViewController.view];
-    
-    commentViewController = [[CommentViewController alloc]initWithDoctor:self.doctor];
-    commentViewController.view.frame = CGRectMake(12*kButtonWidth, 0, 4*kButtonWidth, self.frame.size.height);
-    [self addSubview:commentViewController.view];
 }
 //得到点击按钮的tag值
 - (void)getButtonID:(long)tag{
@@ -96,8 +88,8 @@
         else{
             localTimeTable = [dic objectForKey:@"table"];
             localCurrentDate = [dic objectForKey:@"date"];
-            timeTableViewController = [[TimeTableViewController alloc]initWithTimeTable:localTimeTable Frame:CGRectMake(0, 0, 4*kButtonWidth, localSelf.frame.size.height)];
-            timeTableViewController.view.frame  = CGRectMake(0, 0, 4*kButtonWidth, localSelf.frame.size.height);
+            timeTableViewController = [[TimeTableViewController alloc]initWithTimeTable:localTimeTable Frame:CGRectMake(0, 0, 2*kButtonWidth, localSelf.frame.size.height)];
+            timeTableViewController.view.frame  = CGRectMake(4*kButtonWidth, 0, 2*kButtonWidth, localSelf.frame.size.height);
             [timeTableViewController setCurrentDate:localCurrentDate];
             
             [localSelf addSubview:timeTableViewController.view];

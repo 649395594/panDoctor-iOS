@@ -39,7 +39,7 @@
 #define kTextViewWidth 0.65625
 #define kTextViewHeight 0.132042
 #define kPicWidthRatio 85.0f/320.0f
-#define kButtonWidth 0.24375
+#define kButtonWidth 0.24375*2
 #define kButtonHeight 0.056338
 #define kScrollViewHeight 0.492957
 #define kBasicDownInterval 0.007042
@@ -118,43 +118,32 @@
         [self setMoreInfoButton];
         //初始化下部的scrollView
         if (KDeviceWidth>=319&&KDeviceWidth<=321&&KDeviceHeight>=567&&KDeviceHeight<=569) {
-            docScrollView = [[DoctorInfoScrollView alloc]initWithFrame:CGRectMake(CGRectGetMinX(timeTableButton.frame), CGRectGetMaxY(timeTableButton.frame), kBasicViewWidth*KDeviceWidth,287) AndDoctor:localDoctor];
+            docScrollView = [[DoctorInfoScrollView alloc]initWithFrame:CGRectMake(CGRectGetMinX(docInfoButton.frame), CGRectGetMaxY(timeTableButton.frame), kBasicViewWidth*KDeviceWidth,287 + kTabBarHeight*KDeviceHeight) AndDoctor:localDoctor];
             docScrollView.userInteractionEnabled = YES;
         }
         if (KDeviceWidth>=319&&KDeviceWidth<=321&&KDeviceHeight>=479&&KDeviceHeight<=481) {
-            docScrollView = [[DoctorInfoScrollView alloc]initWithFrame:CGRectMake(CGRectGetMinX(timeTableButton.frame), CGRectGetMaxY(timeTableButton.frame), kBasicViewWidth*KDeviceWidth,233) AndDoctor:localDoctor];
+            docScrollView = [[DoctorInfoScrollView alloc]initWithFrame:CGRectMake(CGRectGetMinX(docInfoButton.frame), CGRectGetMaxY(timeTableButton.frame), kBasicViewWidth*KDeviceWidth,233 + kTabBarHeight*KDeviceHeight) AndDoctor:localDoctor];
             docScrollView.userInteractionEnabled = YES;
         }
         if (KDeviceWidth>=374&&KDeviceWidth<=376) {
-            docScrollView = [[DoctorInfoScrollView alloc]initWithFrame:CGRectMake(CGRectGetMinX(timeTableButton.frame), CGRectGetMaxY(timeTableButton.frame), kBasicViewWidth*KDeviceWidth,350) AndDoctor:localDoctor];
+            docScrollView = [[DoctorInfoScrollView alloc]initWithFrame:CGRectMake(CGRectGetMinX(docInfoButton.frame), CGRectGetMaxY(timeTableButton.frame), kBasicViewWidth*KDeviceWidth,350 + kTabBarHeight*KDeviceHeight) AndDoctor:localDoctor];
             docScrollView.userInteractionEnabled = YES;
         }
         if (KDeviceWidth>=413&&KDeviceWidth<=415) {
-            docScrollView = [[DoctorInfoScrollView alloc]initWithFrame:CGRectMake(CGRectGetMinX(timeTableButton.frame), CGRectGetMaxY(timeTableButton.frame), kBasicViewWidth*KDeviceWidth,393) AndDoctor:localDoctor];
+            docScrollView = [[DoctorInfoScrollView alloc]initWithFrame:CGRectMake(CGRectGetMinX(docInfoButton.frame), CGRectGetMaxY(timeTableButton.frame), kBasicViewWidth*KDeviceWidth,393 + kTabBarHeight*KDeviceHeight) AndDoctor:localDoctor];
             docScrollView.userInteractionEnabled = YES;
         }
         [self.view addSubview:docScrollView];
-        
-        //创建tabBar
-        appointView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(docScrollView.frame)+kTopInterval*KDeviceHeight, KDeviceWidth,kTabBarHeight*KDeviceHeight)];
-        appointView.backgroundColor = [UIColor whiteColor];
-        
-        appointButton = [[UIButton alloc]initWithFrame:CGRectMake(kAppointButtonLeft*KDeviceWidth, kAppointButtonTop*KDeviceHeight, kAppointButtonWidth*KDeviceWidth, kAppointButtonHeight*KDeviceHeight)];
-        appointButton.layer.cornerRadius = 5;
-        [appointButton setTitle:@"预    约" forState:UIControlStateNormal];
-        [appointButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [appointButton setBackgroundColor:[UIColor colorWithRed:0/255.0 green:175/255.0 blue:170/255.0 alpha:1.0]];
-        [appointButton addTarget:self action:@selector(appointMentEvents) forControlEvents:UIControlEventTouchUpInside];
 
         
-        UIImageView *LineView = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectGetMinX(timeTableButton.frame), CGRectGetMaxY(timeTableButton.frame)-5, 4*kButtonWidth*KDeviceWidth, kLineViewHeight)];
+        UIImageView *LineView = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectGetMinX(docInfoButton.frame), CGRectGetMaxY(timeTableButton.frame)-5, 4*kButtonWidth*KDeviceWidth, kLineViewHeight)];
         [LineView setBackgroundColor:[UIColor colorWithRed:150.0/255.0 green:150.0/255 blue:150.0/255.0 alpha:1.0]];
         
         //添加覆盖圆角的View
         UIView *emptyView = [[UIView alloc]initWithFrame:CGRectMake(CGRectGetMinX(basicInfoView.frame), CGRectGetMaxY(LineView.frame), 4*kButtonWidth*KDeviceWidth, kEmptyViewHeight*KDeviceHeight)];
         emptyView.backgroundColor = [UIColor whiteColor];
         
-        UIImageView *leftView = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectGetMinX(timeTableButton.frame), CGRectGetMaxY(timeTableButton.frame)-5, 0.5, 30)];
+        UIImageView *leftView = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectGetMinX(docInfoButton.frame), CGRectGetMaxY(timeTableButton.frame)-5, 0.5, 30)];
         [leftView setBackgroundColor:[UIColor colorWithRed:150.0/255.0 green:150.0/255 blue:150.0/255.0 alpha:1.0]];
         
         UIImageView *rightView = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectGetMaxX(evaluationButton.frame)-0.5, CGRectGetMaxY(timeTableButton.frame)-5, 0.5, 30)];
@@ -195,8 +184,8 @@
         [self.view addSubview:LineView];
         [self.view addSubview:leftView];
         [self.view addSubview:rightView];
-        [self.view addSubview:appointView];
-        [appointView addSubview:appointButton];
+//        [self.view addSubview:appointView];
+//        [appointView addSubview:appointButton];
         
 
     }
@@ -320,15 +309,34 @@
 
 //设置选项卡的按钮
 - (void)setMoreInfoButton{
+
+    
+    docInfoButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    docInfoButton.frame = CGRectMake(CGRectGetMinX(basicInfoView.frame), CGRectGetMaxY(basicInfoView.frame)+kBasicDownInterval*KDeviceHeight, kButtonWidth*KDeviceWidth, kButtonHeight*KDeviceHeight);
+    [docInfoButton setBackgroundColor:[UIColor whiteColor]];
+    [docInfoButton setTitle:@"医师信息" forState:UIControlStateNormal];
+    [docInfoButton setTitleColor:[UIColor colorWithRed:150.0/255.0 green:150.0/255 blue:150.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+    [docInfoButton setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
+    docInfoButton.layer.cornerRadius = 5;
+    docInfoButton.tag = 0;
+    [docInfoButton.layer setMasksToBounds:YES];
+    [docInfoButton.layer setBorderWidth:0.5];
+    CGColorSpaceRef infoColorSpace = CGColorSpaceCreateDeviceRGB();
+    CGColorRef infoColorref = CGColorCreate(infoColorSpace,(CGFloat[]){ 150.0/255.0,150.0/255.0, 150.0/255.0, 1 });
+    [docInfoButton.layer setBorderColor:infoColorref];
+    [docInfoButton addTarget:self action:@selector(chooseScrollViewPage:) forControlEvents:UIControlEventTouchUpInside];
+    docInfoButton.selected = YES;
+    [self.view addSubview:docInfoButton];
+    
     timeTableButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    timeTableButton.frame = CGRectMake(CGRectGetMinX(basicInfoView.frame), CGRectGetMaxY(basicInfoView.frame)+kBasicDownInterval*KDeviceHeight, kButtonWidth*KDeviceWidth, kButtonHeight*KDeviceHeight);
-    [timeTableButton setBackgroundColor:[UIColor whiteColor]];
-    timeTableButton.selected = YES;
+    timeTableButton.frame = CGRectMake(CGRectGetMaxX(docInfoButton.frame), CGRectGetMinY(docInfoButton.frame), kButtonWidth*KDeviceWidth, kButtonHeight*KDeviceHeight);
+    [timeTableButton setBackgroundColor:[UIColor colorWithRed:235.0/255.0 green:235.0/255 blue:235.0/255.0 alpha:1.0]];
+    timeTableButton.selected = NO;
     [timeTableButton setTitleColor:[UIColor colorWithRed:150.0/255.0 green:150.0/255.0 blue:150.0/255.0 alpha:1.0] forState:UIControlStateNormal];
     [timeTableButton setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
-    [timeTableButton setTitle:@"预约时间" forState:UIControlStateNormal];
+    [timeTableButton setTitle:@"出诊时间" forState:UIControlStateNormal];
     timeTableButton.layer.cornerRadius = 5;
-    timeTableButton.tag = 0;
+    timeTableButton.tag = 1;
     [timeTableButton.layer setMasksToBounds:YES];
     [timeTableButton.layer setBorderWidth:0.5];
     CGColorSpaceRef timecolorSpace = CGColorSpaceCreateDeviceRGB();
@@ -337,55 +345,7 @@
     [timeTableButton addTarget:self action:@selector(chooseScrollViewPage:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:timeTableButton];
     
-    docInfoButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    docInfoButton.frame = CGRectMake(CGRectGetMaxX(timeTableButton.frame), CGRectGetMinY(timeTableButton.frame), kButtonWidth*KDeviceWidth, kButtonHeight*KDeviceHeight);
-    [docInfoButton setBackgroundColor:[UIColor colorWithRed:235.0/255.0 green:235.0/255 blue:235.0/255.0 alpha:1.0]];
-    [docInfoButton setTitle:@"医师信息" forState:UIControlStateNormal];
-    [docInfoButton setTitleColor:[UIColor colorWithRed:150.0/255.0 green:150.0/255 blue:150.0/255.0 alpha:1.0] forState:UIControlStateNormal];
-    [docInfoButton setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
-    docInfoButton.layer.cornerRadius = 5;
-    docInfoButton.tag = 1;
-    [docInfoButton.layer setMasksToBounds:YES];
-    [docInfoButton.layer setBorderWidth:0.5];
-    CGColorSpaceRef infoColorSpace = CGColorSpaceCreateDeviceRGB();
-    CGColorRef infoColorref = CGColorCreate(infoColorSpace,(CGFloat[]){ 150.0/255.0,150.0/255.0, 150.0/255.0, 1 });
-    [docInfoButton.layer setBorderColor:infoColorref];
-    [docInfoButton addTarget:self action:@selector(chooseScrollViewPage:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:docInfoButton];
-    
-    certificateButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    certificateButton.frame = CGRectMake(CGRectGetMaxX(docInfoButton.frame), CGRectGetMinY(timeTableButton.frame), kButtonWidth*KDeviceWidth, kButtonHeight*KDeviceHeight);
-    [certificateButton setBackgroundColor:[UIColor colorWithRed:235.0/255.0 green:235.0/255 blue:235.0/255.0 alpha:1.0]];
-    [certificateButton setTitle:@"资质证明" forState:UIControlStateNormal];
-    [certificateButton setTitleColor:[UIColor colorWithRed:150.0/255.0 green:150.0/255 blue:150.0/255.0 alpha:1.0] forState:UIControlStateNormal];
-    [certificateButton setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
-    certificateButton.layer.cornerRadius = 5;
-    certificateButton.tag = 2;
-    [certificateButton.layer setMasksToBounds:YES];
-    [certificateButton.layer setBorderWidth:0.5];
-    CGColorSpaceRef certColorSpace = CGColorSpaceCreateDeviceRGB();
-    CGColorRef certColorref = CGColorCreate(certColorSpace,(CGFloat[]){ 150.0/255.0,150.0/255.0, 150.0/255.0, 1 });
-    [certificateButton.layer setBorderColor:certColorref];
-    [certificateButton addTarget:self action:@selector(chooseScrollViewPage:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:certificateButton];
-    
-    evaluationButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    evaluationButton.frame = CGRectMake(CGRectGetMaxX(certificateButton.frame), CGRectGetMinY(timeTableButton.frame), kButtonWidth*KDeviceWidth, kButtonHeight*KDeviceHeight);
-    [evaluationButton setBackgroundColor:[UIColor colorWithRed:235.0/255.0 green:235.0/255 blue:235.0/255.0 alpha:1.0]];
-    [evaluationButton setTitle:@"客户评价" forState:UIControlStateNormal];
-    [evaluationButton setTitleColor:[UIColor colorWithRed:150.0/255.0 green:150.0/255 blue:150.0/255.0 alpha:1.0] forState:UIControlStateNormal];
-    [evaluationButton setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
-    evaluationButton.layer.cornerRadius = 5;
-    evaluationButton.tag = 3;
-    [evaluationButton.layer setMasksToBounds:YES];
-    [evaluationButton.layer setBorderWidth:0.5];
-    CGColorSpaceRef evaColorSpace = CGColorSpaceCreateDeviceRGB();
-    CGColorRef evaColorref = CGColorCreate(evaColorSpace,(CGFloat[]){ 150.0/255.0,150.0/255.0, 150.0/255.0, 1 });
-    [evaluationButton.layer setBorderColor:evaColorref];
-    [evaluationButton addTarget:self action:@selector(chooseScrollViewPage:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:evaluationButton];
-    
-    self.previousButton = timeTableButton;
+    self.previousButton = docInfoButton;
 }
 //获取点击按钮的tag值，并且改变选中按钮的背景颜色
 - (void)chooseScrollViewPage:(UIButton *)sender{
@@ -395,35 +355,6 @@
     [self.previousButton setBackgroundColor:[UIColor colorWithRed:235.0/255.0 green:235.0/255 blue:235.0/255.0 alpha:1.0]];
     [sender setBackgroundColor:[UIColor whiteColor]];
     self.previousButton = sender;
-}
-//点击预约按钮触发事件
-- (void)appointMentEvents{
-    //if语句中判断信息是否完整，否则不做任何处理
-    if ([docScrollView.timeTableViewController appointmentButtonClicked]) {
-        //检查plist文件
-        NSArray *paths =NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
-        NSString *documentsDirectory =[paths objectAtIndex:0];
-        NSString *documentPlistPath = [documentsDirectory stringByAppendingPathComponent:@"login.plist"];//plist文件位置
-        
-        NSMutableDictionary *plistDictionary = [[NSMutableDictionary alloc]initWithContentsOfFile:documentPlistPath];
-        NSString *isLoggedIn = [plistDictionary objectForKey:@"login"];
-        NSLog(@"asd %@",isLoggedIn);
-        
-        //未登录
-        if ([isLoggedIn isEqualToString:@"no"])
-        {
-            self.view.frame = CGRectMake(0, 0, KDeviceWidth, KDeviceHeight);
-            loginView = [[LoginViewController alloc]initWithNav:YES];
-            
-            loginView.title = @"登录";
-            [self.navigationController presentViewController:loginView animated:YES completion:^(void){}];
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToInformationConfirmView) name:@"userLogin" object:nil];
-        }
-        else{
-            [self goToInformationConfirmView];
-        }
-        
-    }
 }
 
 - (void)pushToOrderConfirmViewWithPrice:(float)price{

@@ -13,7 +13,7 @@
 #define kTimeButtonWidth (68 * deviceWidthRate)
 #define kDateButtonHeiht (60 * deviceWidthRate)
 #define kTimeButtonHeight (35 * deviceWidthRate)
-#define ktimeLongButtonHeight (35 * deviceWidthRate)
+#define ktimeLongButtonHeight (0 * deviceWidthRate)
 #define kstartTimeLabelHeight (20 * deviceWidthRate)
 #define ktimeLongLabelWidth (60*deviceWidthRate)
 #define kleftInterval (15 * deviceWidthRate)
@@ -23,7 +23,7 @@
 #define ktopInterval (7 * deviceWidthRate)
 #define kverticalInterval (20 * deviceWidthRate)
 
-#define kdisplayDate 4
+#define kdisplayDate 7
 #define kdisplayTime 24
 #define kstartTimeSeconds (60*60*9 + 24*60*60)
 #define kdateButtonTag 300
@@ -101,46 +101,18 @@
         backgroundView.showsVerticalScrollIndicator = YES;
         //日期背景
         dateScrollerView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, ktopInterval, frame.size.width, kDateButtonHeiht)];
-        dateScrollerView.contentSize = CGSizeMake(kDateButtonWidth * kdisplayDate, kDateButtonHeiht);
+        dateScrollerView.contentSize = CGSizeMake((kDateButtonWidth + kdateInterval) * kdisplayDate + kleftInterval, kDateButtonHeiht);
         //时间label
         startTimeLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, ktopInterval + kDateButtonHeiht, frame.size.width, kstartTimeLabelHeight)];
-        startTimeLabel.text = @"开始时间";
+        startTimeLabel.text = @"出诊时间";
         startTimeLabel.textAlignment = NSTextAlignmentCenter;
         startTimeLabel.font = [UIFont systemFontOfSize:12];
         [backgroundView addSubview:startTimeLabel];
         //时间背景
         timeScrollerView = [[UIView alloc]initWithFrame:CGRectMake(0, ktopInterval + kDateButtonHeiht + kstartTimeLabelHeight, frame.size.width, (kTimeButtonHeight + ktimeVerticalInterval)*kdisplayTime/4)];
         [self showTimeButton];
-        
-        //选择时长Label
-        timeLongLabel = [[UILabel alloc]initWithFrame:CGRectMake(kleftInterval, ktopInterval + kDateButtonHeiht + kstartTimeLabelHeight + kTimeButtonHeight*kdisplayTime/4 + kverticalInterval, ktimeLongLabelWidth, ktimeLongButtonHeight)];
-        timeLongLabel.text = @"咨询时长： ";
-        timeLongLabel.font = [UIFont systemFontOfSize:12];
-        [backgroundView addSubview:timeLongLabel];
-        timeLongLabel.textAlignment = NSTextAlignmentCenter;
-        
-        //选择时长button
-        timeLongButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        timeLongButton.frame = CGRectMake(ktimeLongLabelWidth + kleftInterval, ktopInterval + kDateButtonHeiht + kstartTimeLabelHeight + kTimeButtonHeight*kdisplayTime/4 + kverticalInterval , frame.size.width - kleftInterval*2 - ktimeLongLabelWidth, ktimeLongButtonHeight);
-        [timeLongButton setTitle:@"请选择咨询时长" forState:UIControlStateNormal];
-        [timeLongButton setBackgroundImage:[UIImage imageNamed:@"consultantduration"] forState:UIControlStateNormal];
-        [timeLongButton setTitleColor:themeColor forState:UIControlStateNormal];
-        [timeLongButton addTarget:self action:@selector(timeLongButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-        
-        //时长列表
-        isTimeListHide = YES;
-        timeLongArray = [NSArray arrayWithObjects:@"0.5小时", @"1小时", @"1.5小时", @"2小时",@"2.5小时", @"3小时", @"3.5小时", @"4小时",@"4.5小时", @"5小时", @"5.5小时", @"6小时",@"6.5小时", @"7小时", @"7.5小时", @"8小时", @"8.5小时", @"9小时", @"9.5小时", @"10小时", nil];
-        timeLongTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, ktopInterval + kDateButtonHeiht + kstartTimeLabelHeight + kTimeButtonHeight*kdisplayTime/4 + ktimeLongButtonHeight + kverticalInterval*1.5, frame.size.width, frame.size.height - ktimeLongButtonHeight - kverticalInterval) style:UITableViewStylePlain];
-        timeLongTableView.dataSource = self;
-        timeLongTableView.delegate = self;
-        //设置tableview的headerview, footerview
-        UIView *clearView = [UIView new];
-        clearView.backgroundColor = [UIColor clearColor];
-        [timeLongTableView setTableHeaderView:clearView];
-        [timeLongTableView setTableFooterView:clearView];
-        
+                
         [backgroundView addSubview:dateScrollerView];
-        [backgroundView addSubview:timeLongButton];
         [self.view addSubview:backgroundView];
         
     
@@ -158,7 +130,8 @@
     
     //设置dateButton的格式
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:@"MM.dd\n eee"];
+//    [dateFormatter setDateFormat:@"MM.dd\n eee"];
+    [dateFormatter setDateFormat:@"eee"];
     dateFormatter.locale = [[NSLocale alloc]initWithLocaleIdentifier:@"zh_CN"];
     NSString *dateString = [dateFormatter stringFromDate:today];
     NSTimeInterval secondsPerDay = 24*60*60;
@@ -254,6 +227,7 @@
             [timeScrollerView addSubview:timeButton];
         }
         [backgroundView addSubview:timeScrollerView];
+        timeScrollerView.userInteractionEnabled = NO;
     }
     previousTimeButton = nil;
 }
