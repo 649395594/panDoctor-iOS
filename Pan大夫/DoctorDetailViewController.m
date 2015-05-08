@@ -113,25 +113,25 @@
             docScrollView.userInteractionEnabled = YES;
         }
         if (KDeviceWidth>=319&&KDeviceWidth<=321&&KDeviceHeight>=479&&KDeviceHeight<=481) {
-            docScrollView = [[DoctorInfoScrollView alloc]initWithFrame:CGRectMake(CGRectGetMinX(docInfoButton.frame), CGRectGetMaxY(timeTableButton.frame), kBasicViewWidth*KDeviceWidth,282) AndDoctor:localDoctor];
+            docScrollView = [[DoctorInfoScrollView alloc]initWithFrame:CGRectMake(CGRectGetMinX(docInfoButton.frame), CGRectGetMaxY(timeTableButton.frame), kBasicViewWidth*KDeviceWidth,273) AndDoctor:localDoctor];
             docScrollView.userInteractionEnabled = YES;
         }
         if (KDeviceWidth>=374&&KDeviceWidth<=376) {
-            docScrollView = [[DoctorInfoScrollView alloc]initWithFrame:CGRectMake(CGRectGetMinX(docInfoButton.frame), CGRectGetMaxY(timeTableButton.frame), kBasicViewWidth*KDeviceWidth,399) AndDoctor:localDoctor];
+            docScrollView = [[DoctorInfoScrollView alloc]initWithFrame:CGRectMake(CGRectGetMinX(docInfoButton.frame), CGRectGetMaxY(timeTableButton.frame), kBasicViewWidth*KDeviceWidth,408) AndDoctor:localDoctor];
             docScrollView.userInteractionEnabled = YES;
         }
         if (KDeviceWidth>=413&&KDeviceWidth<=415) {
-            docScrollView = [[DoctorInfoScrollView alloc]initWithFrame:CGRectMake(CGRectGetMinX(docInfoButton.frame), CGRectGetMaxY(timeTableButton.frame), kBasicViewWidth*KDeviceWidth,432) AndDoctor:localDoctor];
+            docScrollView = [[DoctorInfoScrollView alloc]initWithFrame:CGRectMake(CGRectGetMinX(docInfoButton.frame), CGRectGetMaxY(timeTableButton.frame), kBasicViewWidth*KDeviceWidth,456) AndDoctor:localDoctor];
             docScrollView.userInteractionEnabled = YES;
         }
         [self.view addSubview:docScrollView];
         
         
-        UIImageView *LineView = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectGetMinX(docInfoButton.frame), CGRectGetMaxY(timeTableButton.frame)-5, 4*kButtonWidth*KDeviceWidth, kLineViewHeight)];
+        UIImageView *LineView = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectGetMinX(docInfoButton.frame), CGRectGetMaxY(timeTableButton.frame)-5, 2*kButtonWidth*KDeviceWidth, kLineViewHeight)];
         [LineView setBackgroundColor:[UIColor colorWithRed:150.0/255.0 green:150.0/255 blue:150.0/255.0 alpha:1.0]];
         
         //添加覆盖圆角的View
-        UIView *emptyView = [[UIView alloc]initWithFrame:CGRectMake(CGRectGetMinX(basicInfoView.frame), CGRectGetMaxY(LineView.frame), 4*kButtonWidth*KDeviceWidth, kEmptyViewHeight*KDeviceHeight)];
+        UIView *emptyView = [[UIView alloc]initWithFrame:CGRectMake(CGRectGetMinX(basicInfoView.frame), CGRectGetMaxY(LineView.frame), 2*kButtonWidth*KDeviceWidth, kEmptyViewHeight*KDeviceHeight)];
         emptyView.backgroundColor = [UIColor whiteColor];
         
         UIImageView *leftView = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectGetMinX(docInfoButton.frame), CGRectGetMaxY(timeTableButton.frame)-5, 0.5, 30)];
