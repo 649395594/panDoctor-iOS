@@ -156,6 +156,18 @@
         NSLog(@"%@",resourcePlistPath);
     }
     
+    ducumentPlistPath = [documentsDirectory stringByAppendingPathComponent:@"test.plist"];//plist文件位置
+    if ([[NSFileManager defaultManager] fileExistsAtPath:ducumentPlistPath]) {
+        NSLog(@"%@",ducumentPlistPath);
+        NSLog(@"plist文件已经存在了");
+    }
+    else{
+        NSString *resourcePlistPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"test.plist"];
+        NSData *resourcePlistFile = [NSData dataWithContentsOfFile:resourcePlistPath];
+        [[NSFileManager defaultManager] createFileAtPath:ducumentPlistPath contents:resourcePlistFile attributes:nil];
+        NSLog(@"%@",resourcePlistPath);
+    }
+    
     //友盟SDK
     [MobClick startWithAppkey:@"54d5d023fd98c5ef39000456" reportPolicy:BATCH   channelId:nil];
     

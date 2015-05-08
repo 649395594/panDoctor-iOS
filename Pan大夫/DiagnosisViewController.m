@@ -9,11 +9,19 @@
 #import "DiagnosisViewController.h"
 #import "CoreDataManager.h"
 #import "Question.h"
-
+#import "TestCell.h"
 #import "testAnalysisViewController.h"
-
+#import "FunnyTestViewController.h"
+#import <CoreText/CoreText.h>
 
 #define KDeviceWidth [[UIScreen mainScreen]bounds].size.width
+#define FrameH [[UIScreen mainScreen]bounds].size.height
+#define ratio6 375/414
+#define ratio5 320/414
+#define TextFont (((FrameH > 567) && (FrameH < 569))? 13 :(((FrameH > 666) && (FrameH < 668))? 15 : (((FrameH > 735) && (FrameH < 737))? 17 : 13)))
+#define cellHeight (((FrameH > 567) && (FrameH < 569))? 160 * ratio5:(((FrameH > 666) && (FrameH < 668))? 160 * ratio6 : (((FrameH > 735) && (FrameH < 737))? 160 : 160 * ratio5)))
+#define offset (((FrameH > 567) && (FrameH < 569))? 157:(((FrameH > 666) && (FrameH < 668))? 163 : (((FrameH > 735) && (FrameH < 737))? 169 : 153)))
+
 @interface DiagnosisViewController ()
 
 @property (strong , nonatomic) CoreDataManager *manager;
@@ -22,6 +30,7 @@
 
 @property (strong , nonatomic) UIView *viewLeft;
 @property (strong , nonatomic) UIView *viewRight;
+@property (strong , nonatomic) UITextView *testTitle;
 
 @property (strong , nonatomic) UIImageView *bt1;
 @property (strong , nonatomic) UIImageView *bt2;
@@ -37,6 +46,7 @@
 @property(strong, nonatomic) testAnalysisViewController *result;
 
 @property (strong , nonatomic) YiYuTestViewController *test;
+@property (strong , nonatomic) FunnyTestViewController *funnyTest;
 
 @property CGRect viewFrame;
 @property CGRect rightViewFrame;
@@ -48,13 +58,14 @@
 
 @implementation DiagnosisViewController
 @synthesize manager,result;
-@synthesize viewFrame,rightViewFrame,leftViewFrame;
+@synthesize viewFrame,rightViewFrame,leftViewFrame,testTitle;
 @synthesize bt1,bt2,bt3;
 @synthesize table;
-@synthesize buttonLeft,buttonRight,test,choosedKind,temp,choosedSubKind;
+@synthesize buttonLeft,buttonRight,test,choosedKind,temp,choosedSubKind,funnyTest;
 @synthesize bottomSquare;
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     manager = [[CoreDataManager alloc]init];
     if ([[UIScreen mainScreen]bounds].size.height>479&&[[UIScreen mainScreen]bounds].size.height<481) {
         buttonLeft = [[UIButton alloc]initWithFrame:CGRectMake(0, 64, [[UIScreen mainScreen]bounds].size.width/2, 40)];
@@ -236,10 +247,10 @@
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc]init];
     backItem.title = @"返回";
     self.navigationItem.backBarButtonItem = backItem;
-    
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     // Do any additional setup after loading the view.
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -278,6 +289,10 @@
     bt3.backgroundColor = [UIColor grayColor];
 }
 
+-(void)DoLike
+{
+    [table reloadData];
+}
 
 -(void)buttonRightTouched{
     UIImage *imageLeft = [[UIImage alloc]init];
@@ -297,10 +312,13 @@
     [self.buttonLeft setBackgroundImage:imageLeft forState:UIControlStateNormal];
     [self.buttonRight setBackgroundImage:imageRight forState:UIControlStateNormal];
     if (!self.isTableViewExisted) {
-        table = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen]bounds].size.width, [[UIScreen mainScreen] bounds].size.height-(64+buttonRight.frame.size.height+49))];
+        table = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen]bounds].size.width, [[UIScreen mainScreen]bounds].size.height - offset)];
+        table.contentSize = CGSizeMake([[UIScreen mainScreen]bounds].size.width, cellHeight * 19);
         table.delegate = self;
         table.dataSource = self;
         table.separatorStyle = UITableViewCellSeparatorStyleNone;
+        table.scrollEnabled = YES;
+        table.bounces = NO;
         [self.viewRight addSubview:table];
         self.isTableViewExisted = YES;
     }
@@ -314,6 +332,9 @@
     [UIImageView commitAnimations];
     
     self.viewLeft.frame = leftViewFrame;
+    
+
+
     
 }
 
@@ -346,227 +367,60 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex    //设置每个section的cell个数
 {
-    if ([[UIScreen mainScreen] bounds].size.height < 568){
-        return 7;
-    }
-    else{
-        return 9;
-    }
+    return 19;
 }
+
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    TestCell *cell = (TestCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+        cell = [[TestCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-
-    if ([[UIScreen mainScreen] bounds].size.height < 568) {//适配4s的屏幕
-        switch (indexPath.row) {
-            case 0:
-                cell.textLabel.text = @"\t腹痛腹泻，呼吸困难，身体酸痛";
-                cell.textLabel.font = [UIFont systemFontOfSize:15];
-                [cell setBackgroundColor:[UIColor colorWithPatternImage: [UIImage imageNamed:@"4s-frame1"]]];
-                break;
-            case 1:
-                cell.textLabel.text = @"\t无法摆脱无意义的行为，思想";
-                cell.textLabel.font = [UIFont systemFontOfSize:15];
-                [cell setBackgroundColor:[UIColor colorWithPatternImage: [UIImage imageNamed:@"4s-frame2"]]];
-                break;
-            case 2:
-                cell.textLabel.text = @"\t自卑，不自在，消极期待";
-                cell.textLabel.font = [UIFont systemFontOfSize:15];
-                [cell setBackgroundColor:[UIColor colorWithPatternImage: [UIImage imageNamed:@"4s-frame3"]]];
-                break;
-            case 3:
-                cell.textLabel.text = @"\t心情苦闷，悲观，想自杀";
-                cell.textLabel.font = [UIFont systemFontOfSize:15];
-                [cell setBackgroundColor:[UIColor colorWithPatternImage: [UIImage imageNamed:@"4s-frame4"]]];
-                break;
-            case 4:
-                cell.textLabel.text = @"\t烦躁不安，神经过敏，紧张";
-                cell.textLabel.font = [UIFont systemFontOfSize:15];
-                [cell setBackgroundColor:[UIColor colorWithPatternImage: [UIImage imageNamed:@"4s-frame5"]]];
-                break;
-            case 5:
-                cell.textLabel.text = @"\t厌烦感强，不可控的脾气暴发";
-                cell.textLabel.font = [UIFont systemFontOfSize:15];
-                [cell setBackgroundColor:[UIColor colorWithPatternImage: [UIImage imageNamed:@"4s-frame6"]]];
-                break;
-            case 6:
-                cell.textLabel.text = @"\t害怕某个特定场所和物体";
-                cell.textLabel.font = [UIFont systemFontOfSize:15];
-                [cell setBackgroundColor:[UIColor colorWithPatternImage: [UIImage imageNamed:@"4s-frame7"]]];
-                break;
-            default:
-                break;
-        }
-    }
-    else if([[UIScreen mainScreen]bounds].size.height>=568&&[[UIScreen mainScreen]bounds].size.height<570){//适配iphone5之后的机型
-        switch (indexPath.row) {
-            case 0:
-                cell.textLabel.text = @"\t腹痛腹泻，呼吸困难，头晕眼花";
-                cell.textLabel.font = [UIFont systemFontOfSize:15];
-                [cell setBackgroundColor:[UIColor colorWithPatternImage: [UIImage imageNamed:@"5s-frame1"]]];
-                break;
-            case 1:
-                cell.textLabel.text = @"\t头、背、躯干疼痛，肌肉酸痛";
-                cell.textLabel.font = [UIFont systemFontOfSize:15];
-                [cell setBackgroundColor:[UIColor colorWithPatternImage: [UIImage imageNamed:@"5s-frame2"]]];
-                break;
-            case 2:
-                cell.textLabel.text = @"\t无法摆脱无意义行为，思想，冲动";
-                cell.textLabel.font = [UIFont systemFontOfSize:15];
-                [cell setBackgroundColor:[UIColor colorWithPatternImage: [UIImage imageNamed:@"5s-frame3"]]];
-                break;
-            case 3:
-                cell.textLabel.text = @"\t自卑，不自在，心神不安，消极";
-                cell.textLabel.font = [UIFont systemFontOfSize:15];
-                [cell setBackgroundColor:[UIColor colorWithPatternImage: [UIImage imageNamed:@"5s-frame4"]]];
-                break;
-            case 4:
-                cell.textLabel.text = @"\t心情苦闷，悲观失望，想自杀";
-                cell.textLabel.font = [UIFont systemFontOfSize:15];
-                [cell setBackgroundColor:[UIColor colorWithPatternImage: [UIImage imageNamed:@"5s-frame5"]]];
-                break;
-            case 5:
-                cell.textLabel.text = @"\t烦躁，坐立不安，神经过敏，紧张";
-                cell.textLabel.font = [UIFont systemFontOfSize:15];
-                [cell setBackgroundColor:[UIColor colorWithPatternImage: [UIImage imageNamed:@"5s-frame6"]]];
-                break;
-            case 6:
-                cell.textLabel.text = @"\t厌烦感强，不可控的脾气暴发";
-                cell.textLabel.font = [UIFont systemFontOfSize:15];
-                [cell setBackgroundColor:[UIColor colorWithPatternImage: [UIImage imageNamed:@"5s-frame7"]]];
-                break;
-            case 7:
-                cell.textLabel.text = @"\t害怕某个特定场所、物体或事情";
-                cell.textLabel.font = [UIFont systemFontOfSize:15];
-                [cell setBackgroundColor:[UIColor colorWithPatternImage: [UIImage imageNamed:@"5s-frame8"]]];
-                break;
-            case 8:
-                cell.textLabel.text = @"\t猜疑心重，妄想，夸大被动体验";
-                cell.textLabel.font = [UIFont systemFontOfSize:15];
-                [cell setBackgroundColor:[UIColor colorWithPatternImage: [UIImage imageNamed:@"5s-frame9"]]];
-                break;
-            default:
-                break;
-        }
-    }
-    else if([[UIScreen mainScreen]bounds].size.height>=667&&[[UIScreen mainScreen]bounds].size.height<669){
-        switch (indexPath.row) {
-            case 0:
-                cell.textLabel.text = @"\t  腹痛腹泻，呼吸困难，头晕眼花";
-                cell.textLabel.font = [UIFont systemFontOfSize:17];
-                [cell setBackgroundColor:[UIColor colorWithPatternImage: [UIImage imageNamed:@"6-frame1"]]];
-                break;
-            case 1:
-                cell.textLabel.text = @"\t  头、背、躯干疼痛，肌肉酸痛";
-                cell.textLabel.font = [UIFont systemFontOfSize:17];
-                [cell setBackgroundColor:[UIColor colorWithPatternImage: [UIImage imageNamed:@"6-frame2"]]];
-                break;
-            case 2:
-                cell.textLabel.text = @"\t  无法摆脱无意义行为，思想，冲动";
-                cell.textLabel.font = [UIFont systemFontOfSize:17];
-                [cell setBackgroundColor:[UIColor colorWithPatternImage: [UIImage imageNamed:@"6-frame3"]]];
-                break;
-            case 3:
-                cell.textLabel.text = @"\t  自卑，不自在，心神不安，消极";
-                cell.textLabel.font = [UIFont systemFontOfSize:17];
-                [cell setBackgroundColor:[UIColor colorWithPatternImage: [UIImage imageNamed:@"6-frame4"]]];
-                break;
-            case 4:
-                cell.textLabel.text = @"\t  心情苦闷，悲观失望，想自杀";
-                cell.textLabel.font = [UIFont systemFontOfSize:17];
-                [cell setBackgroundColor:[UIColor colorWithPatternImage: [UIImage imageNamed:@"6-frame5"]]];
-                break;
-            case 5:
-                cell.textLabel.text = @"\t  烦躁，坐立不安，神经过敏，紧张";
-                cell.textLabel.font = [UIFont systemFontOfSize:17];
-                [cell setBackgroundColor:[UIColor colorWithPatternImage: [UIImage imageNamed:@"6-frame6"]]];
-                break;
-            case 6:
-                cell.textLabel.text = @"\t  厌烦感强，不可控的脾气暴发";
-                cell.textLabel.font = [UIFont systemFontOfSize:17];
-                [cell setBackgroundColor:[UIColor colorWithPatternImage: [UIImage imageNamed:@"6-frame7"]]];
-                break;
-            case 7:
-                cell.textLabel.text = @"\t  害怕某个特定场所、物体或事情";
-                cell.textLabel.font = [UIFont systemFontOfSize:17];
-                [cell setBackgroundColor:[UIColor colorWithPatternImage: [UIImage imageNamed:@"6-frame8"]]];
-                break;
-            case 8:
-                cell.textLabel.text = @"\t  猜疑心重，妄想，夸大被动体验";
-                cell.textLabel.font = [UIFont systemFontOfSize:17];
-                [cell setBackgroundColor:[UIColor colorWithPatternImage: [UIImage imageNamed:@"6-frame1"]]];
-                break;
-            default:
-                break;
-        }
-    }
-    else{
-        switch (indexPath.row) {
-            case 0:
-                cell.textLabel.text = @"\t  腹痛腹泻，呼吸困难，头晕眼花";
-                cell.textLabel.font = [UIFont systemFontOfSize:18];
-                [cell setBackgroundColor:[UIColor colorWithPatternImage: [UIImage imageNamed:@"6s-frame1"]]];
-                break;
-            case 1:
-                cell.textLabel.text = @"\t  头、背、躯干疼痛，肌肉酸痛";
-                cell.textLabel.font = [UIFont systemFontOfSize:18];
-                [cell setBackgroundColor:[UIColor colorWithPatternImage: [UIImage imageNamed:@"6s-frame2"]]];
-                break;
-            case 2:
-                cell.textLabel.text = @"\t  无法摆脱无意义行为，思想，冲动";
-                cell.textLabel.font = [UIFont systemFontOfSize:18];
-                [cell setBackgroundColor:[UIColor colorWithPatternImage: [UIImage imageNamed:@"6s-frame3"]]];
-                break;
-            case 3:
-                cell.textLabel.text = @"\t  自卑，不自在，心神不安，消极";
-                cell.textLabel.font = [UIFont systemFontOfSize:18];
-                [cell setBackgroundColor:[UIColor colorWithPatternImage: [UIImage imageNamed:@"6s-frame4"]]];
-                break;
-            case 4:
-                cell.textLabel.text = @"\t  心情苦闷，悲观失望，想自杀";
-                cell.textLabel.font = [UIFont systemFontOfSize:18];
-                [cell setBackgroundColor:[UIColor colorWithPatternImage: [UIImage imageNamed:@"6s-frame5"]]];
-                break;
-            case 5:
-                cell.textLabel.text = @"\t  烦躁，坐立不安，神经过敏，紧张";
-                cell.textLabel.font = [UIFont systemFontOfSize:18];
-                [cell setBackgroundColor:[UIColor colorWithPatternImage: [UIImage imageNamed:@"6s-frame6"]]];
-                break;
-            case 6:
-                cell.textLabel.text = @"\t  厌烦感强，不可控的脾气暴发";
-                cell.textLabel.font = [UIFont systemFontOfSize:18];
-                [cell setBackgroundColor:[UIColor colorWithPatternImage: [UIImage imageNamed:@"6s-frame7"]]];
-                break;
-            case 7:
-                cell.textLabel.text = @"\t  害怕某个特定场所、物体或事情";
-                cell.textLabel.font = [UIFont systemFontOfSize:18];
-                [cell setBackgroundColor:[UIColor colorWithPatternImage: [UIImage imageNamed:@"6s-frame8"]]];
-                break;
-            case 8:
-                cell.textLabel.text = @"\t  猜疑心重，妄想，夸大被动体验";
-                cell.textLabel.font = [UIFont systemFontOfSize:18];
-                [cell setBackgroundColor:[UIColor colorWithPatternImage: [UIImage imageNamed:@"6s-frame9"]]];
-                break;
-            default:
-                break;
-        }
-    }
+    
+    NSArray *paths =NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+    NSString *documentsDirectory =[paths objectAtIndex:0];
+    NSString *documentPlistPath = [documentsDirectory stringByAppendingPathComponent:@"test.plist"];//plist文件位置
+    NSMutableDictionary *plistDictionary = [[NSMutableDictionary alloc]initWithContentsOfFile:documentPlistPath];
+    NSDictionary *testItem;
+    
+    cell.heart.tag = indexPath.row;
+    NSString *string = [[NSString alloc] initWithFormat:@"%@%d",@"item", cell.heart.tag];
+    testItem = [plistDictionary objectForKey:string];
+    cell.title.text = [testItem objectForKey:@"title"];
+    cell.title.font = [UIFont boldSystemFontOfSize:TextFont];
+    cell.picture.image = [UIImage imageNamed:[testItem objectForKey:@"image"]];
+    [cell.heart setImage:[UIImage imageNamed:[testItem objectForKey:@"heart"]] forState:UIControlStateNormal];
+    [cell.heart addTarget:self action:@selector(like:) forControlEvents:UIControlEventTouchUpInside];
+    
     return cell;
+}
+
+- (void)like:(id)sender{
+    NSArray *paths =NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+    NSString *documentsDirectory =[paths objectAtIndex:0];
+    NSString *documentPlistPath = [documentsDirectory stringByAppendingPathComponent:@"test.plist"];//plist文件位置
+    NSMutableDictionary *plistDictionary = [[NSMutableDictionary alloc]initWithContentsOfFile:documentPlistPath];
+    NSDictionary *testItem;
+    UIButton* button = (UIButton*)sender;
+    int btnTag = [button tag];
+    NSString *string = [[NSString alloc] initWithFormat:@"%@%d",@"item", btnTag];
+    testItem = [plistDictionary objectForKey:string];
+    if ([[testItem objectForKey:@"heart"] isEqual: @"heart1"]) {
+        [testItem setValue:@"heart2" forKey:@"heart"];
+    } else {
+        [testItem setValue:@"heart1" forKey:@"heart"];
+    }
+    [plistDictionary writeToFile:documentPlistPath atomically:YES];
+    [button setImage:[UIImage imageNamed:[testItem objectForKey:@"heart"]] forState:UIControlStateNormal];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([[UIScreen mainScreen] bounds].size.height < 568){
-        return tableView.frame.size.height/7;
-    }
-    else{
-        return tableView.frame.size.height/9;
-    }
+    return cellHeight;
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
@@ -642,106 +496,52 @@
     [self.navigationController pushViewController:result animated:YES];
 }
 
+
+
+//222222222
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    test = [[YiYuTestViewController alloc]initWithKind:@"SCL"];//创建测试界面视图
-    test.view.backgroundColor = [UIColor whiteColor];//设置背景颜色为白色
     
-    test.kind = @"SCL";
-    choosedKind = @"SCL";
+    NSString *head;
+    UIImage *picture;
+    NSString *explain;
+    NSString *choiceA;
+    NSString *choiceB;
+    NSString *choiceC;
+    NSString *choiceD;
+    NSString *choiceAans;
+    NSString *choiceBans;
+    NSString *choiceCans;
+    NSString *choiceDans;
     
-    test.delegate = self;
-    [self.navigationController pushViewController:test animated:YES];
+    NSString *plist = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"plist"];
+    NSMutableDictionary *plistDictionary = [[NSMutableDictionary alloc]initWithContentsOfFile:plist];
+    NSDictionary *testItem;
+    NSString *string = [[NSString alloc] initWithFormat:@"%@%d",@"item", indexPath.row];
+    testItem = [plistDictionary objectForKey:string];
+    explain = [testItem objectForKey:@"explain"];
     
-    temp = [[NSMutableArray alloc]init];
-    
-    if ([[UIScreen mainScreen] bounds].size.height < 568){
-        switch (indexPath.row) {
-            case 0:
-                [temp addObject:@"1"];[temp addObject:@"4"];[temp addObject:@"12"];[temp addObject:@"27"];[temp addObject:@"40"];[temp addObject:@"42"];[temp addObject:@"48"];[temp addObject:@"49"];[temp addObject:@"52"];
-                [temp addObject:@"53"];[temp addObject:@"56"];[temp addObject:@"58"];
-                choosedSubKind = @"body";
-                break;
-            case 1:
-                [temp addObject:@"3"];[temp addObject:@"9"];[temp addObject:@"10"];[temp addObject:@"28"];[temp addObject:@"38"];[temp addObject:@"45"];[temp addObject:@"46"];[temp addObject:@"51"];[temp addObject:@"55"];
-                [temp addObject:@"65"];
-                choosedSubKind = @"obsession";
-                break;
-            case 2:
-                [temp addObject:@"6"];[temp addObject:@"21"];[temp addObject:@"34"];[temp addObject:@"36"];[temp addObject:@"37"];[temp addObject:@"41"];[temp addObject:@"61"];[temp addObject:@"69"];[temp addObject:@"73"];
-                choosedSubKind = @"sensitiveInterpersonalRelationship";
-                break;
-            case 3:
-                [temp addObject:@"5"];[temp addObject:@"14"];[temp addObject:@"15"];[temp addObject:@"20"];[temp addObject:@"22"];[temp addObject:@"26"];[temp addObject:@"29"];[temp addObject:@"30"];
-                [temp addObject:@"31"];[temp addObject:@"32"];[temp addObject:@"54"];[temp addObject:@"71"];[temp addObject:@"79"];
-                choosedSubKind = @"depression";
-                break;
-            case 4:
-                [temp addObject:@"2"];[temp addObject:@"17"];[temp addObject:@"23"];[temp addObject:@"33"];[temp addObject:@"39"];[temp addObject:@"57"];[temp addObject:@"72"];[temp addObject:@"78"];[temp addObject:@"80"];
-                [temp addObject:@"86"];
-                choosedSubKind = @"anxiety";
-                break;
-            case 5:
-                [temp addObject:@"11"];[temp addObject:@"14"];[temp addObject:@"63"];[temp addObject:@"67"];[temp addObject:@"74"];[temp addObject:@"81"];
-                choosedSubKind = @"hostility";
-                break;
-            case 6:
-                [temp addObject:@"13"];[temp addObject:@"25"];[temp addObject:@"47"];[temp addObject:@"50"];[temp addObject:@"70"];[temp addObject:@"75"];[temp addObject:@"82"];
-                choosedSubKind = @"horror";
-                break;
-            default:
-                break;
-        }
+    if (![explain isEqualToString: @""]) {
+        head = [testItem objectForKey:@"head"];
+        picture = [UIImage imageNamed:[testItem objectForKey:@"picture"]];
+        funnyTest = [[FunnyTestViewController alloc]initWithHead:head picture:picture explain:explain index:indexPath.row];
+    } else {
+        head = [testItem objectForKey:@"head"];
+        picture = [UIImage imageNamed:[testItem objectForKey:@"picture"]];
+        choiceA = [testItem objectForKey:@"A"];
+        choiceB = [testItem objectForKey:@"B"];
+        choiceC = [testItem objectForKey:@"C"];
+        choiceD = [testItem objectForKey:@"D"];
+        choiceAans = [testItem objectForKey:@"Aans"];
+        choiceBans = [testItem objectForKey:@"Bans"];
+        choiceCans = [testItem objectForKey:@"Cans"];
+        choiceDans = [testItem objectForKey:@"Dans"];
+        funnyTest = [[FunnyTestViewController alloc]initWithHead:head picture:picture choiceA:choiceA choiceB:choiceB choiceC:choiceC choiceD:choiceD choiceAans:choiceAans choiceBans:choiceBans choiceCans:choiceCans choiceD:choiceDans index:indexPath.row];
     }
-    else{
-        switch (indexPath.row) {
-            case 0:
-                [temp addObject:@"1"];[temp addObject:@"4"];[temp addObject:@"12"];[temp addObject:@"27"];[temp addObject:@"40"];[temp addObject:@"42"];[temp addObject:@"48"];[temp addObject:@"49"];[temp addObject:@"52"];
-                [temp addObject:@"53"];[temp addObject:@"56"];[temp addObject:@"58"];
-                choosedSubKind = @"body";
-                break;
-            case 1:
-                [temp addObject:@"1"];[temp addObject:@"4"];[temp addObject:@"12"];[temp addObject:@"27"];[temp addObject:@"40"];[temp addObject:@"42"];[temp addObject:@"48"];[temp addObject:@"49"];[temp addObject:@"52"];
-                [temp addObject:@"53"];[temp addObject:@"56"];[temp addObject:@"58"];
-                choosedSubKind = @"body";
-                break;
-            case 2:
-                [temp addObject:@"3"];[temp addObject:@"9"];[temp addObject:@"10"];[temp addObject:@"28"];[temp addObject:@"38"];[temp addObject:@"45"];[temp addObject:@"46"];[temp addObject:@"51"];[temp addObject:@"55"];
-                [temp addObject:@"65"];
-                choosedSubKind = @"obsession";
-                break;
-            case 3:
-                [temp addObject:@"6"];[temp addObject:@"21"];[temp addObject:@"34"];[temp addObject:@"36"];[temp addObject:@"37"];[temp addObject:@"41"];[temp addObject:@"61"];[temp addObject:@"69"];[temp addObject:@"73"];
-                choosedSubKind = @"sensitiveInterpersonalRelationship";
-                break;
-            case 4:
-                [temp addObject:@"5"];[temp addObject:@"14"];[temp addObject:@"15"];[temp addObject:@"20"];[temp addObject:@"22"];[temp addObject:@"26"];[temp addObject:@"29"];[temp addObject:@"30"];
-                [temp addObject:@"31"];[temp addObject:@"32"];[temp addObject:@"54"];[temp addObject:@"71"];[temp addObject:@"79"];
-                choosedSubKind = @"depression";
-                break;
-            case 5:
-                [temp addObject:@"2"];[temp addObject:@"17"];[temp addObject:@"23"];[temp addObject:@"33"];[temp addObject:@"39"];[temp addObject:@"57"];[temp addObject:@"72"];[temp addObject:@"78"];[temp addObject:@"80"];[temp addObject:@"86"];
-                choosedSubKind = @"anxiety";
-                break;
-            case 6:
-                [temp addObject:@"11"];[temp addObject:@"14"];[temp addObject:@"63"];[temp addObject:@"67"];[temp addObject:@"74"];[temp addObject:@"81"];
-                choosedSubKind = @"hostility";
-                break;
-            case 7:
-                [temp addObject:@"13"];[temp addObject:@"25"];[temp addObject:@"47"];[temp addObject:@"50"];[temp addObject:@"70"];[temp addObject:@"75"];[temp addObject:@"82"];
-                choosedSubKind = @"horror";
-                break;
-            case 8:
-                [temp addObject:@"8"];[temp addObject:@"18"];[temp addObject:@"43"];[temp addObject:@"68"];[temp addObject:@"76"];[temp addObject:@"83"];
-                choosedSubKind = @"stubbornness";
-                break;
-            default:
-                break;
-        }
-    }
-    test.tags = temp;
-    test.tag = [temp objectAtIndex:0];
+    funnyTest.delegate = self;
+    funnyTest.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:funnyTest animated:YES];
     
 }
 
