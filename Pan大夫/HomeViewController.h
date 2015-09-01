@@ -15,6 +15,7 @@
 @property (strong, nonatomic) DoctorsListViewController *doctorListVC;
 @property (strong, nonatomic) UIButton *leftButton;
 
+- (void)cellTapedPushWithNumber:(int)number;
 - (void)cellTapedPushWith:(Doctor *)doc Special:(NSString *)special DoctorList:(DoctorsListViewController *)docList;
 //- (void)getUserLocationFromNet;
 

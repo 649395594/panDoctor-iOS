@@ -10,6 +10,7 @@
 #import "UserTableViewController.h"
 #import "MyScrollView.h"
 #import "TestViewController.h"
+#import "LoginViewController.h"
 
 @interface SettingsViewController ()
 
@@ -20,6 +21,7 @@
 @property (nonatomic, strong) NSArray  *imageArray;
 @property (nonatomic, strong) MyScrollView *myScrollView;
 @property(nonatomic) int firstLoad;
+@property (strong, nonatomic)UILabel *IDlabel;
 
 @end
 
@@ -30,7 +32,66 @@
 @synthesize userLabel;
 @synthesize imageArray;
 @synthesize myScrollView;
+@synthesize IDlabel;
 
+-(id)init{
+    self = [super init];
+    if (self) {
+        NSArray *paths =NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+        NSString *documentsDirectory =[paths objectAtIndex:0];
+        NSString *documentPlistPath = [documentsDirectory stringByAppendingPathComponent:@"login.plist"];//plist文件位置
+        NSMutableDictionary *plistDictionary = [[NSMutableDictionary alloc]initWithContentsOfFile:documentPlistPath];
+        
+        NSString *localNum = [NSString new];
+        if ([plistDictionary objectForKey:@"login"]) {
+            localNum = [plistDictionary objectForKey:@"login"];
+        }
+        if (localNum.length == 11) {
+            self.IDNum = localNum;
+        }else{
+            self.IDNum = nil;
+        }
+
+
+    }
+    NSLog(@"in the setting view %@ ~~~~~~~~~~~~~~~~~%@", self, self.navigationController);
+    return self;
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+#if 1
+    if (self.IDNum) {
+        
+        NSLog(@"******id num is :%@ ******", self.IDNum);
+    }else{
+        LoginViewController *loginViewController = [[LoginViewController alloc]initWithNav:YES SettingsViewController:self];
+        loginViewController.hidesBottomBarWhenPushed = YES;
+        loginViewController.title = @"注册";
+        [self.navigationController pushViewController:loginViewController animated:NO];
+        NSLog(@"******nil******");
+    }
+#endif
+}
+
+//-(NSString *)IDNum{
+//    if (! IDlabel) {
+//        _IDNum = [NSString new];
+//        NSArray *paths =NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+//        NSString *documentsDirectory =[paths objectAtIndex:0];
+//        NSString *documentPlistPath = [documentsDirectory stringByAppendingPathComponent:@"login.plist"];//plist文件位置
+//        NSMutableDictionary *plistDictionary = [[NSMutableDictionary alloc]initWithContentsOfFile:documentPlistPath];
+//        NSString *localNum = [[NSString alloc]initWithString:[plistDictionary objectForKey:@"login"]];
+//        if (localNum.length == 11) {
+//            _IDNum = localNum;
+//        }else{
+//            _IDNum = nil;
+//        }
+//    }
+//    NSLog(@" id num :%@", _IDNum);
+//    return _IDNum;
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -44,6 +105,19 @@
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc]init];
     backItem.title = @"返回";
     self.navigationItem.backBarButtonItem = backItem;
+    
+    
+    // 登录的lable
+    IDlabel = [[UILabel alloc]initWithFrame:CGRectMake(0, userImageH + 64, [[UIScreen mainScreen]bounds].size.width, 60)];
+    IDlabel.backgroundColor = [UIColor colorWithRed:255/255.0 green:230/255.0 blue:230/255.0 alpha:0.3];
+    IDlabel.textAlignment = NSTextAlignmentCenter;
+    IDlabel.font = [UIFont systemFontOfSize:25];
+    if (self.IDNum == nil) {
+        IDlabel.text = @"请登陆";
+    }else{
+        IDlabel.text = self.IDNum;
+    }
+    [self.view addSubview:IDlabel];
 }
 
 
@@ -63,7 +137,6 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    
     if (_firstLoad == 0) {
         self.automaticallyAdjustsScrollViewInsets = NO;
         
@@ -82,8 +155,6 @@
         [self.view addSubview:myScrollView];
         _firstLoad++;
     }
-    
-
 }
 
 - (void)didReceiveMemoryWarning {
@@ -91,6 +162,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)userDidLogin:(NSString*)IDNum{
+    self.IDNum = IDNum;
+    IDlabel.text = IDNum;
+}
 
 
 @end

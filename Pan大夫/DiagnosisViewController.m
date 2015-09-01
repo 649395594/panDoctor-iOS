@@ -9,9 +9,9 @@
 #import "DiagnosisViewController.h"
 #import "CoreDataManager.h"
 #import "Question.h"
-#import "TestCell.h"
+//#import "TestCell.h"
 #import "testAnalysisViewController.h"
-#import "FunnyTestViewController.h"
+//#import "FunnyTestViewController.h"
 #import <CoreText/CoreText.h>
 
 #define KDeviceWidth [[UIScreen mainScreen]bounds].size.width
@@ -46,7 +46,7 @@
 @property(strong, nonatomic) testAnalysisViewController *result;
 
 @property (strong , nonatomic) YiYuTestViewController *test;
-@property (strong , nonatomic) FunnyTestViewController *funnyTest;
+//@property (strong , nonatomic) FunnyTestViewController *funnyTest;
 
 @property CGRect viewFrame;
 @property CGRect rightViewFrame;
@@ -61,7 +61,8 @@
 @synthesize viewFrame,rightViewFrame,leftViewFrame,testTitle;
 @synthesize bt1,bt2,bt3;
 @synthesize table;
-@synthesize buttonLeft,buttonRight,test,choosedKind,temp,choosedSubKind,funnyTest;
+@synthesize buttonLeft,buttonRight,test,choosedKind,temp,choosedSubKind;
+//@synthesize  funnyTest;
 @synthesize bottomSquare;
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -279,15 +280,15 @@
 
 
 
--(void)change1Color:(UITapGestureRecognizer *)recognizer{
-    bt1.backgroundColor = [UIColor grayColor];
-}
--(void)change2Color:(UITapGestureRecognizer *)recognizer{
-    bt2.backgroundColor = [UIColor grayColor];
-}
--(void)change3Color:(UITapGestureRecognizer *)recognizer{
-    bt3.backgroundColor = [UIColor grayColor];
-}
+//-(void)change1Color:(UITapGestureRecognizer *)recognizer{
+//    bt1.backgroundColor = [UIColor grayColor];
+//}
+//-(void)change2Color:(UITapGestureRecognizer *)recognizer{
+//    bt2.backgroundColor = [UIColor grayColor];
+//}
+//-(void)change3Color:(UITapGestureRecognizer *)recognizer{
+//    bt3.backgroundColor = [UIColor grayColor];
+//}
 
 -(void)DoLike
 {
@@ -311,17 +312,17 @@
     }
     [self.buttonLeft setBackgroundImage:imageLeft forState:UIControlStateNormal];
     [self.buttonRight setBackgroundImage:imageRight forState:UIControlStateNormal];
-    if (!self.isTableViewExisted) {
-        table = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen]bounds].size.width, [[UIScreen mainScreen]bounds].size.height - offset)];
-        table.contentSize = CGSizeMake([[UIScreen mainScreen]bounds].size.width, cellHeight * 19);
-        table.delegate = self;
-        table.dataSource = self;
-        table.separatorStyle = UITableViewCellSeparatorStyleNone;
-        table.scrollEnabled = YES;
-        table.bounces = NO;
-        [self.viewRight addSubview:table];
-        self.isTableViewExisted = YES;
-    }
+//    if (!self.isTableViewExisted) {
+//        table = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen]bounds].size.width, [[UIScreen mainScreen]bounds].size.height - offset)];
+//        table.contentSize = CGSizeMake([[UIScreen mainScreen]bounds].size.width, cellHeight * 19);
+//        table.delegate = self;
+//        table.dataSource = self;
+//        table.separatorStyle = UITableViewCellSeparatorStyleNone;
+//        table.scrollEnabled = YES;
+//        table.bounces = NO;
+//        [self.viewRight addSubview:table];
+//        self.isTableViewExisted = YES;
+//    }
     
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
@@ -371,33 +372,33 @@
 }
 
 
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *cellIdentifier = @"Cell";
-    TestCell *cell = (TestCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) {
-        cell = [[TestCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    }
-    
-    NSArray *paths =NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
-    NSString *documentsDirectory =[paths objectAtIndex:0];
-    NSString *documentPlistPath = [documentsDirectory stringByAppendingPathComponent:@"test.plist"];//plist文件位置
-    NSMutableDictionary *plistDictionary = [[NSMutableDictionary alloc]initWithContentsOfFile:documentPlistPath];
-    NSDictionary *testItem;
-    
-    cell.heart.tag = indexPath.row;
-    NSString *string = [[NSString alloc] initWithFormat:@"%@%d",@"item", cell.heart.tag];
-    testItem = [plistDictionary objectForKey:string];
-    cell.title.text = [testItem objectForKey:@"title"];
-    cell.title.font = [UIFont boldSystemFontOfSize:TextFont];
-    cell.picture.image = [UIImage imageNamed:[testItem objectForKey:@"image"]];
-    [cell.heart setImage:[UIImage imageNamed:[testItem objectForKey:@"heart"]] forState:UIControlStateNormal];
-    [cell.heart addTarget:self action:@selector(like:) forControlEvents:UIControlEventTouchUpInside];
-    
-    return cell;
-}
+//
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    static NSString *cellIdentifier = @"Cell";
+//    TestCell *cell = (TestCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+//    if (cell == nil) {
+//        cell = [[TestCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//    }
+//    
+//    NSArray *paths =NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+//    NSString *documentsDirectory =[paths objectAtIndex:0];
+//    NSString *documentPlistPath = [documentsDirectory stringByAppendingPathComponent:@"test.plist"];//plist文件位置
+//    NSMutableDictionary *plistDictionary = [[NSMutableDictionary alloc]initWithContentsOfFile:documentPlistPath];
+//    NSDictionary *testItem;
+//    
+//    cell.heart.tag = indexPath.row;
+//    NSString *string = [[NSString alloc] initWithFormat:@"%@%d",@"item", cell.heart.tag];
+//    testItem = [plistDictionary objectForKey:string];
+//    cell.title.text = [testItem objectForKey:@"title"];
+//    cell.title.font = [UIFont boldSystemFontOfSize:TextFont];
+//    cell.picture.image = [UIImage imageNamed:[testItem objectForKey:@"image"]];
+//    [cell.heart setImage:[UIImage imageNamed:[testItem objectForKey:@"heart"]] forState:UIControlStateNormal];
+//    [cell.heart addTarget:self action:@selector(like:) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    return cell;
+//}
 
 - (void)like:(id)sender{
     NSArray *paths =NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
@@ -499,52 +500,52 @@
 
 
 //222222222
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    NSString *head;
-    UIImage *picture;
-    NSString *explain;
-    NSString *choiceA;
-    NSString *choiceB;
-    NSString *choiceC;
-    NSString *choiceD;
-    NSString *choiceAans;
-    NSString *choiceBans;
-    NSString *choiceCans;
-    NSString *choiceDans;
-    
-    NSString *plist = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"plist"];
-    NSMutableDictionary *plistDictionary = [[NSMutableDictionary alloc]initWithContentsOfFile:plist];
-    NSDictionary *testItem;
-    NSString *string = [[NSString alloc] initWithFormat:@"%@%d",@"item", indexPath.row];
-    testItem = [plistDictionary objectForKey:string];
-    explain = [testItem objectForKey:@"explain"];
-    
-    if (![explain isEqualToString: @""]) {
-        head = [testItem objectForKey:@"head"];
-        picture = [UIImage imageNamed:[testItem objectForKey:@"picture"]];
-        funnyTest = [[FunnyTestViewController alloc]initWithHead:head picture:picture explain:explain index:indexPath.row];
-    } else {
-        head = [testItem objectForKey:@"head"];
-        picture = [UIImage imageNamed:[testItem objectForKey:@"picture"]];
-        choiceA = [testItem objectForKey:@"A"];
-        choiceB = [testItem objectForKey:@"B"];
-        choiceC = [testItem objectForKey:@"C"];
-        choiceD = [testItem objectForKey:@"D"];
-        choiceAans = [testItem objectForKey:@"Aans"];
-        choiceBans = [testItem objectForKey:@"Bans"];
-        choiceCans = [testItem objectForKey:@"Cans"];
-        choiceDans = [testItem objectForKey:@"Dans"];
-        funnyTest = [[FunnyTestViewController alloc]initWithHead:head picture:picture choiceA:choiceA choiceB:choiceB choiceC:choiceC choiceD:choiceD choiceAans:choiceAans choiceBans:choiceBans choiceCans:choiceCans choiceD:choiceDans index:indexPath.row];
-    }
-    funnyTest.delegate = self;
-    funnyTest.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:funnyTest animated:YES];
-    
-}
-
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+//    
+//    NSString *head;
+//    UIImage *picture;
+//    NSString *explain;
+//    NSString *choiceA;
+//    NSString *choiceB;
+//    NSString *choiceC;
+//    NSString *choiceD;
+//    NSString *choiceAans;
+//    NSString *choiceBans;
+//    NSString *choiceCans;
+//    NSString *choiceDans;
+//    
+//    NSString *plist = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"plist"];
+//    NSMutableDictionary *plistDictionary = [[NSMutableDictionary alloc]initWithContentsOfFile:plist];
+//    NSDictionary *testItem;
+//    NSString *string = [[NSString alloc] initWithFormat:@"%@%d",@"item", indexPath.row];
+//    testItem = [plistDictionary objectForKey:string];
+//    explain = [testItem objectForKey:@"explain"];
+//    
+//    if (![explain isEqualToString: @""]) {
+//        head = [testItem objectForKey:@"head"];
+//        picture = [UIImage imageNamed:[testItem objectForKey:@"picture"]];
+//        funnyTest = [[FunnyTestViewController alloc]initWithHead:head picture:picture explain:explain index:indexPath.row];
+//    } else {
+//        head = [testItem objectForKey:@"head"];
+//        picture = [UIImage imageNamed:[testItem objectForKey:@"picture"]];
+//        choiceA = [testItem objectForKey:@"A"];
+//        choiceB = [testItem objectForKey:@"B"];
+//        choiceC = [testItem objectForKey:@"C"];
+//        choiceD = [testItem objectForKey:@"D"];
+//        choiceAans = [testItem objectForKey:@"Aans"];
+//        choiceBans = [testItem objectForKey:@"Bans"];
+//        choiceCans = [testItem objectForKey:@"Cans"];
+//        choiceDans = [testItem objectForKey:@"Dans"];
+//        funnyTest = [[FunnyTestViewController alloc]initWithHead:head picture:picture choiceA:choiceA choiceB:choiceB choiceC:choiceC choiceD:choiceD choiceAans:choiceAans choiceBans:choiceBans choiceCans:choiceCans choiceD:choiceDans index:indexPath.row];
+//    }
+//    funnyTest.delegate = self;
+//    funnyTest.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:funnyTest animated:YES];
+//    
+//}
+//
 
 
 /*

@@ -11,6 +11,8 @@
 #import "DoctorDetailViewController.h"
 #import "ChooseCurrentCity.h"
 #import "ServiceItemViewController.h"
+#import "ServiceItemSViewController.h"
+#import "TestViewController.h"
 
 #define KDeviceWidth [[UIScreen mainScreen]bounds].size.width
 #define KDeviceHeight [[UIScreen mainScreen]bounds].size.height
@@ -21,13 +23,16 @@
 @property (strong, nonatomic) ChooseCurrentCity *chooseCityView;
 @property (strong, nonatomic) AppDelegate *appDelegate;
 @property (strong, nonatomic) NSString *defaultCity;
+@property (strong, nonatomic) ServiceItemSViewController *serviceItemSVC;
+@property (strong, nonatomic) UISegmentedControl *segment;
 @end
 
 @implementation HomeViewController
 
-@synthesize serviceItemVC,doctorListVC,chooseCityView;
+@synthesize serviceItemVC,doctorListVC,chooseCityView,serviceItemSVC;
 @synthesize appDelegate;
 @synthesize leftButton;
+@synthesize segment;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -46,7 +51,7 @@
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     //设置segment controller
     NSArray *segmentTitles = [[NSArray alloc]initWithObjects:@"专项",@"医师", nil];
-    UISegmentedControl *segment = [[UISegmentedControl alloc]initWithItems:segmentTitles];
+    segment = [[UISegmentedControl alloc]initWithItems:segmentTitles];
     [segment setTintColor:[UIColor colorWithRed:0/255.0 green:175/255.0 blue:170/255.0 alpha:1.0]];
     segment.frame = CGRectMake(0, (KSegmentWidth-KSegmentWidth)/2, KSegmentWidth, 30);
     segment.selectedSegmentIndex = 0;
@@ -60,9 +65,14 @@
     serviceItemVC = [[ServiceItemViewController alloc]initWithPushDelegate:self];
     serviceItemVC.view.frame = CGRectMake(0, 64, KDeviceWidth, KDeviceHeight - 64 -49);
     
+//    serviceItemSVC = [[ServiceItemSViewController alloc]init];
+    serviceItemSVC = [[ServiceItemSViewController alloc]initWithPushDelegate:self];
+    serviceItemSVC.view.frame = CGRectMake(0, 64, KDeviceWidth, KDeviceHeight - 64 - 49);
+    
     doctorListVC = [[DoctorsListViewController alloc]initWithDelegate:self Special:nil];
     doctorListVC.view.frame = CGRectMake(0, 64, KDeviceWidth, KDeviceHeight - 64 -49);
-    [self.view addSubview:serviceItemVC.view];
+    [self.view addSubview:serviceItemSVC.myTableView];
+//    [self.view addSubview:serviceItemVC.view];
     [self.view addSubview:doctorListVC.view];
     doctorListVC.view.hidden = YES;
     
@@ -83,13 +93,14 @@
     NSLog(@"%ld",(long)index);
     switch (index) {
         case 0:{
-            serviceItemVC.view.hidden = NO;
+//            serviceItemVC.view.hidden = NO;
+            serviceItemSVC.view.hidden = NO;
             doctorListVC.view.hidden = YES;
-            NSLog(@"%ld",(long)index);
             break;
         }
         case 1:{
-            serviceItemVC.view.hidden = YES;
+//            serviceItemVC.view.hidden = YES;
+            serviceItemSVC.view.hidden = YES;
             doctorListVC.view.hidden = NO;
             NSLog(@"%ld",(long)index);
             break;
@@ -151,10 +162,15 @@
 }
 */
 - (void)cellTapedPushWith:(Doctor *)doc Special:(NSString *)special DoctorList:(DoctorsListViewController *)docList{
-    DoctorDetailViewController *docDetailView = [[DoctorDetailViewController alloc]initWithDoctor:doc DoctorList:docList];
-    docDetailView.hidesBottomBarWhenPushed = YES;
-    docDetailView.title = @"医师信息";
-    [self.navigationController pushViewController:docDetailView animated:YES];
+        DoctorDetailViewController *docDetailView = [[DoctorDetailViewController alloc]initWithDoctor:doc DoctorList:docList];
+        docDetailView.hidesBottomBarWhenPushed = YES;
+        docDetailView.title = @"医师信息";
+        [self.navigationController pushViewController:docDetailView animated:YES];
+}
+
+-(void)cellTapedPushWithNumber:(int)number{
+    TestViewController *testVC = [[TestViewController alloc]initWithIndex:number];
+    [self.navigationController pushViewController:testVC animated:YES];
 }
 
 //创建首页左侧顶部定位城市按钮

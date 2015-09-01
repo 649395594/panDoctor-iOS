@@ -15,12 +15,14 @@
 
 @property (nonatomic) NSInteger action;
 
+
 @property (nonatomic, strong) InformationViewController *rootVC;
 
 @property (nonatomic, strong) NSMutableArray *patientsInformation;//总的数据源
 @property (nonatomic, strong) NSMutableArray *defaultInformationArray;//section0的数据源
 @property (nonatomic, strong) NSMutableArray *backupInformationArray;//section1的数据源
 @property (nonatomic, strong) NSString* path;
+
 
 
 - (id)initWithFrame:(CGRect)frame style:(UITableViewStyle)style DefaultUser:(Patient *)defaulPatient BackUpUsers:(NSMutableArray *)backupPatients;

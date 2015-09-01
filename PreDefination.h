@@ -10,6 +10,11 @@
 #ifndef Pan___PreDefination_h
 #define Pan___PreDefination_h
 
-#define HOSTNAME @"192.168.1.108:8888/mental"
+//#define HOSTNAME @"192.168.1.108:8888/mental"
+
+//#define HOSTNAME @"zhangxingyu.sinaapp.com.cn/"
+
+#define HOSTNAME @"pandoctor.sinaapp.com"
+
 
 #endif

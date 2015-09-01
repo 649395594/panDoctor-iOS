@@ -25,15 +25,12 @@
     self.view = [[UIView alloc]initWithFrame:[UIScreen mainScreen].applicationFrame];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
--(id)initWithPushDelegate:(HomeViewController *)Delegate{
+- (id)initWithPushDelegate:(HomeViewController *)Delegate
+{
     self = [super init];
     if (self) {
         self.pushDelegate = Delegate;

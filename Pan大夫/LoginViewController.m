@@ -37,12 +37,14 @@ int navH;
 @synthesize scroll;
 
 //创建登录界面
-- (id)initWithNav:(BOOL)hasNav{
+- (id)initWithNav:(BOOL)hasNav SettingsViewController:(SettingsViewController *)settingsViewController{
     self = [super init];
     if (self) {
         hasNavs = hasNav;
         //[self.view setFrame:CGRectMake(0, 64, userImageW, userImageH + bgH)];
         self.view.backgroundColor = [UIColor colorWithRed:240/255.0 green:239/255.0 blue:245/255.0 alpha:1];
+        settingsView = settingsViewController;
+        NSLog(@"~~~~~~~in longin ~~~~~~~%@", settingsView);
     }
     if (hasNav == YES) {
         navH = 0;
@@ -157,6 +159,14 @@ int navH;
     if (navH == 64) {
         [scroll setContentOffset:CGPointMake(0, 0)];
     }
+    
+    NSLog(@"~~~~~~~~~~ %d", self.navigationController.viewControllers.count);
+    for (UIViewController *VC in self.navigationController.viewControllers) {
+        NSLog(@"~~~~~~~%@", VC);
+    }
+    
+    
+    
     return self;
 }
 
@@ -180,13 +190,15 @@ int navH;
     //单击屏幕时隐藏键盘
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     gesture.numberOfTapsRequired = 1;//手势敲击的次数
-    [self.view addGestureRecognizer:gesture];}
+    [self.view addGestureRecognizer:gesture];
+    self.navigationItem.hidesBackButton = YES;
+}
 
 //隐藏键盘
 -(void)hideKeyboard{
     [telField resignFirstResponder];
     [CAPTCHAField resignFirstResponder];
-    [scroll setContentOffset:CGPointMake(0, OffsetBack)];
+    [scroll setContentOffset:CGPointMake(0, OffsetBack) animated:YES];
     
 }
 
@@ -273,29 +285,39 @@ int navH;
             
         }
     }
+    
+//    验证成功后
     if (100 == alertView.tag) {
-        [self hideKeyboard];
-        if (hasNavs == YES) {
-            [settingsView userDidLogin:telField.text];
-            NSArray *paths =NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
-            NSString *documentsDirectory =[paths objectAtIndex:0];
-            NSString *documentPlistPath = [documentsDirectory stringByAppendingPathComponent:@"login.plist"];//plist文件位置
-            NSMutableDictionary *plistDictionary = [[NSMutableDictionary alloc]initWithContentsOfFile:documentPlistPath];
-            [plistDictionary setObject:telField.text forKey:@"login"];
-            [self dismissViewControllerAnimated:YES completion:^{
-                [[NSNotificationCenter defaultCenter]postNotificationName:@"userLogin" object:nil];
-            }];
-        }else{
-            [self cancelLoginView];
-        }
-        [settingsView userDidLogin:telField.text];
-        NSArray *paths =NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
-        NSString *documentsDirectory =[paths objectAtIndex:0];
-        NSString *documentPlistPath = [documentsDirectory stringByAppendingPathComponent:@"login.plist"];//plist文件位置
-        NSMutableDictionary *plistDictionary = [[NSMutableDictionary alloc]initWithContentsOfFile:documentPlistPath];
-        [plistDictionary setObject:telField.text forKey:@"login"];
-        [plistDictionary writeToFile:documentPlistPath atomically:YES];
+        [self loginSucess];
+        
+        //        if (hasNavs == YES) {
+        //            [settingsView userDidLogin:telField.text];
+        //            NSArray *paths =NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+        //            NSString *documentsDirectory =[paths objectAtIndex:0];
+        //            NSString *documentPlistPath = [documentsDirectory stringByAppendingPathComponent:@"login.plist"];//plist文件位置
+        //            NSMutableDictionary *plistDictionary = [[NSMutableDictionary alloc]initWithContentsOfFile:documentPlistPath];
+        //            [plistDictionary setObject:telField.text forKey:@"login"];
+        //            [self dismissViewControllerAnimated:YES completion:^{
+        //                [[NSNotificationCenter defaultCenter]postNotificationName:@"userLogin" object:nil];
+        //            }];
+        //        }else{
+        //            [self cancelLoginView];
+        //        }
+        //        settingsView = [SettingsViewController new];
     }
+}
+
+-(void)loginSucess{
+    [settingsView userDidLogin:telField.text];
+    NSArray *paths =NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+    NSString *documentsDirectory =[paths objectAtIndex:0];
+    NSString *documentPlistPath = [documentsDirectory stringByAppendingPathComponent:@"login.plist"];//plist文件位置
+    NSMutableDictionary *plistDictionary = [[NSMutableDictionary alloc]initWithContentsOfFile:documentPlistPath];//plist 文件
+    [plistDictionary setObject:telField.text forKey:@"login"];
+    [plistDictionary writeToFile:documentPlistPath atomically:YES];//写入
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"userLogin" object:nil];
+    NSLog(@"%@", self.navigationController);
+    [self performSelector:@selector(pop) withObject:nil afterDelay:0.25];//0.25s键盘动画消失后再pop
 }
 
 
@@ -325,6 +347,8 @@ int navH;
             if (1==state)
             {
                 NSLog(@"验证成功");
+                [self hideKeyboard];
+
                 UIAlertView* alert=[[UIAlertView alloc] initWithTitle:@"恭喜"
                                                               message:@"登录成功"
                                                              delegate:self
@@ -350,12 +374,28 @@ int navH;
     }
 }
 
+-(void)pop{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+- (UIViewController *)settingsViewController{
+    for (UIView *next = [self.view superview] ;next;next = next.superview){
+        UIResponder *nextResponder = [next nextResponder];
+        if ([nextResponder isKindOfClass:[SettingsViewController class]]){
+            NSLog(@"selfController is %@",nextResponder);
+            return (UIViewController *)nextResponder;
+        }
+    }
+    return nil;
+}
+
 /**
  *  用户成功登录时执行，改变成已登录状态
  */
-- (void)cancelLoginView{
-    [self.view removeFromSuperview];
-}
+//- (void)cancelLoginView{
+//    [self.view removeFromSuperview];
+//}
 
 
 @end

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>71F7AB47-56AE-4937-A5EF-B2B3DB2BE5F0</string>
+	<key>IDESourceControlProjectName</key>
+	<string>project</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>C71A612E55CCF042C9D0404A97F793518FAC0059</key>
+		<string>https://github.com/LF1996/panDoctor.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Pan大夫.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>C71A612E55CCF042C9D0404A97F793518FAC0059</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/LF1996/panDoctor.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>C71A612E55CCF042C9D0404A97F793518FAC0059</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C71A612E55CCF042C9D0404A97F793518FAC0059</string>
+			<key>IDESourceControlWCCName</key>
+			<string>panDoctor%203</string>
+		</dict>
+	</array>
+</dict>
+</plist>

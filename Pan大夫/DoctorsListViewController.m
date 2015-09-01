@@ -182,7 +182,7 @@
     [self doctorInfoWillLoad];
     
     chooseCity = [chooseCity stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSString *path = [NSString stringWithFormat:@"/doctordb.php?id=all&nextPage=%d&city=%@",page,chooseCity];
+    NSString *path = [NSString stringWithFormat:@"/mental/doctordb.php?id=all&nextPage=%d&city=%@",page,chooseCity];
     netOp = [appDelegate.netEngine operationWithPath:path];
     
     __block NSMutableArray *localDoctorsArray = doctorsArray;

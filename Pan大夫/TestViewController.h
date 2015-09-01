@@ -10,6 +10,7 @@
 
 @interface TestViewController : UIViewController
 
+-(id)initWithIndex:(int)index;
 -(void)setIndex:(int)index;
 
 @end

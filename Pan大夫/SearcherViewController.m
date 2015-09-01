@@ -201,8 +201,8 @@
     
     self.delegate.Lng = [[dataLng objectAtIndex:indexPath.row]doubleValue];
     self.delegate.Lat = [[dataLat objectAtIndex:indexPath.row]doubleValue];
-    NSLog(@"real Lng = %lf", self.delegate.Lng);
-    NSLog(@"real Lat = %lf", self.delegate.Lat);
+//    NSLog(@"real Lng = %lf", self.delegate.Lng);
+//    NSLog(@"real Lat = %lf", self.delegate.Lat);
     [self.navigationController popViewControllerAnimated: YES];
 }
 

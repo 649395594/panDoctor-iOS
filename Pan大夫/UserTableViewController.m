@@ -11,16 +11,20 @@
 #import "InformationViewController.h"
 #import "MyOrderViewController.h"
 #import "OrdersListViewController.h"
+#import "RegistInformationViewController.h"
+
+#import "LoginViewController.h"
 
 @interface UserTableViewController ()
 @property (strong, nonatomic) AboutUSViewController *aboutUsView;
 @property (strong, nonatomic) InformationViewController *informationViewController;
+@property (strong, nonatomic) RegistInformationViewController *registinformationViewController;
 @end
 
 @implementation UserTableViewController
 
 @synthesize dataList;
-@synthesize aboutUsView,informationViewController;
+@synthesize aboutUsView,informationViewController, registinformationViewController;
 //table创建
 - (id)initWithFrame:(CGRect)frame{
     self = [super init];
@@ -28,7 +32,7 @@
         self.tableView = [[UITableView alloc]initWithFrame:frame style:UITableViewStylePlain];
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
-        self.dataList = [NSArray arrayWithObjects:@"信息管理", @"我的订单", @"会员卡", @"关于我们", nil];
+        self.dataList = [NSArray arrayWithObjects:@"信息管理", @"关于我们", nil];
         self.tableView.scrollEnabled = NO;
     }
     return self;
@@ -51,7 +55,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4; 
+    return self.dataList.count;
 }
 
 //添加分组的footer,header
@@ -96,23 +100,23 @@
             cell.textLabel.textColor = [UIColor colorWithRed:158.0/255.0 green:54.0/255.0 blue:74.0/255.0 alpha:1];
             break;
             
-        case 1:
-            if (FrameH > 319 && FrameH < 321) {
-                cell.imageView.image = [UIImage imageNamed:@"order-4s.png"];
-            }else{
-                cell.imageView.image = [UIImage imageNamed:@"order.png"];
-            }
-            cell.textLabel.textColor = [UIColor colorWithRed:204.0/255.0 green:128.0/255.0 blue:39.0/255.0 alpha:1];
-            break;
+//        case 1:
+//            if (FrameH > 319 && FrameH < 321) {
+//                cell.imageView.image = [UIImage imageNamed:@"order-4s.png"];
+//            }else{
+//                cell.imageView.image = [UIImage imageNamed:@"order.png"];
+//            }
+//            cell.textLabel.textColor = [UIColor colorWithRed:204.0/255.0 green:128.0/255.0 blue:39.0/255.0 alpha:1];
+//            break;
             
-        case 2:
-            if (FrameH > 319 && FrameH < 321) {
-                cell.imageView.image = [UIImage imageNamed:@"credit-4s.png"];
-            }else{
-                cell.imageView.image = [UIImage imageNamed:@"credit.png"];
-            }
-            cell.textLabel.textColor = [UIColor colorWithRed:17.0/255.0 green:135.0/255.0 blue:127.0/255.0 alpha:1];
-            break;
+//        case 2:
+//            if (FrameH > 319 && FrameH < 321) {
+//                cell.imageView.image = [UIImage imageNamed:@"credit-4s.png"];
+//            }else{
+//                cell.imageView.image = [UIImage imageNamed:@"credit.png"];
+//            }
+//            cell.textLabel.textColor = [UIColor colorWithRed:17.0/255.0 green:135.0/255.0 blue:127.0/255.0 alpha:1];
+//            break;
             
         default:
             if (FrameH > 319 && FrameH < 321) {
@@ -137,23 +141,33 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     switch (indexPath.row) {
         case 0:{  
-            informationViewController = [[InformationViewController alloc]initWithPath:@"in"];
-            informationViewController.hidesBottomBarWhenPushed = YES;
-            informationViewController.title = @"地址管理";
-            [[self viewController].navigationController pushViewController:informationViewController animated:YES];
+//            informationViewController = [[InformationViewController alloc]initWithPath:@"in"];
+//            informationViewController.hidesBottomBarWhenPushed = YES;
+//            informationViewController.title = @"地址管理";
+//            [[self viewController].navigationController pushViewController:informationViewController animated:YES];
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"RegistInformation" bundle:[NSBundle mainBundle]];
+            registinformationViewController = [storyboard instantiateViewControllerWithIdentifier:@"Regist"];
+            [[self viewController].navigationController pushViewController:registinformationViewController animated:YES];
+            
             break;
         }
-        case 1:{
+//        case 1:{
 //            OrdersListViewController *orderListViewController = [[OrdersListViewController alloc]init];
 //            orderListViewController.title = @"我的订单";
 //            orderListViewController.hidesBottomBarWhenPushed = YES;
 //            [[self viewController].navigationController pushViewController:orderListViewController animated:YES];
-            break;
-        }
-        case 2:
-            NSLog(@"third cell");
-            break;
-        case 3:{
+////            NSLog(@"%d ~~~~~~~~~~~ %@", [self viewController].navigationController.viewControllers.count, self.navigationController);
+//            break;
+//        }
+//        case 1:
+//        { NSLog(@"third cell");
+//            LoginViewController *lg = [[LoginViewController alloc]initWithNav:YES SettingsViewController:(SettingsViewController *)[self viewController]];
+//            lg.hidesBottomBarWhenPushed = YES;
+//            lg.title = @"注册";
+//            NSLog(@"~~~~~~~~~~~~~~ %@", [self viewController]);
+//            [[self viewController].navigationController pushViewController:lg animated:YES];
+//            break;}
+        case 1:{
             if (!aboutUsView) {
                 aboutUsView = [[AboutUSViewController alloc]initWithTable];
                 aboutUsView.title = @"关于我们";

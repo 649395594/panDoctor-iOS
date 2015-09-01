@@ -304,7 +304,7 @@
             currentAddress = [NSString stringWithFormat:@""];
         }
     }
-    NSLog(@"current city = %@\ncurrent address = %@",currentCity,currentAddress);
+//    NSLog(@"current city = %@\ncurrent address = %@",currentCity,currentAddress);
 //    [homeView getUserLocationFromNet];
 
     NSMutableDictionary *location = [[NSMutableDictionary alloc]init];

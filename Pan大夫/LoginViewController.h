@@ -14,6 +14,6 @@
 @property (strong, nonatomic) SettingsViewController *settingsView;
 
 @property (strong, nonatomic) UIScrollView *scroll;
-- (id)initWithNav:(BOOL)hasNav;
+- (id)initWithNav:(BOOL)hasNav SettingsViewController:(SettingsViewController *)settingsViewController;
 
 @end

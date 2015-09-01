@@ -44,6 +44,7 @@
 
 @interface SettingsViewController : UIViewController
 
+@property(strong, nonatomic)NSString *IDNum;
 
 - (void)userDidLogin:(NSString*)IDNum;
 

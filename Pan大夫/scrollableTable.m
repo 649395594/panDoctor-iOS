@@ -90,8 +90,8 @@
         type = [topView.diseaseArray objectAtIndex:(int)[topView  getButtonId]];
         
         AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-
         NSString *path = [NSString stringWithFormat:@"/newsInfo.php?type=%@&nextPage=%d",type,nextPage];
+        
         op = [appDelegate.netEngine operationWithPath:path];
         
         __block NSMutableArray *localTitles = self.cellTitles;

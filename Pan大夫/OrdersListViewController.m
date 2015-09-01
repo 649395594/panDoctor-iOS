@@ -53,7 +53,9 @@
     [self doctorInfoWillLoad];
     
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+//    NSString *path = [NSString stringWithFormat:@"/orderdb.php?&patientTel=18602412071&nextPage=%d",1];
     NSString *path = [NSString stringWithFormat:@"/orderdb.php?&patientTel=18602412071&nextPage=%d",1];
+
     netOp = [appDelegate.netEngine operationWithPath:path];
     netOp.customExpireTime = [NSString stringWithFormat:@"%d",2];
     __block NSMutableArray *localOrders = orders;
@@ -111,6 +113,8 @@
             }
         }
         [localSelf doctorInfoDidLoad];
+        
+        
         MyOrderViewController *myOrderViewController = [[MyOrderViewController alloc]initWithOrders:localOrders Comments:localComments Delegate:localSelf];
         [localSelf.view addSubview:myOrderViewController];
         

@@ -33,6 +33,14 @@
     number = index;
 }
 
+-(id)initWithIndex:(int)index{
+    self = [super init];
+    if (self) {
+        number = index;
+    }
+    return self;
+}
+
 -(void)popViewController
 {
     [self.navigationController popViewControllerAnimated:YES];

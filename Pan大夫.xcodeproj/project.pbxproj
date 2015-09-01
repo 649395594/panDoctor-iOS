@@ -153,6 +153,11 @@
 		4DE91A8B1AC7FF8C0092D1C5 /* DiagnosisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DE91A8A1AC7FF8C0092D1C5 /* DiagnosisViewController.m */; };
 		4DEFE6AA1AC572CC00F07D1E /* UserStarRateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DEFE6A41AC572CC00F07D1E /* UserStarRateView.m */; };
 		4DEFE6AC1AC572CC00F07D1E /* CommentCommitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DEFE6A81AC572CC00F07D1E /* CommentCommitViewController.m */; };
+		75E552EC1B8C0B7100B864B0 /* ServiceItemSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E552EB1B8C0B7100B864B0 /* ServiceItemSViewController.m */; };
+		75E552F21B8C0D5C00B864B0 /* ServiceItemSTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E552F11B8C0D5C00B864B0 /* ServiceItemSTableViewCell.m */; };
+		E2FA4E421B94360600BDCD81 /* RegistInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2FA4E3F1B94360600BDCD81 /* RegistInformationViewController.m */; };
+		E2FA4E431B94360600BDCD81 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2FA4E411B94360600BDCD81 /* SecondViewController.m */; };
+		E2FA4E461B94366C00BDCD81 /* RegistInformation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2FA4E451B94366C00BDCD81 /* RegistInformation.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -345,7 +350,7 @@
 		4D40CA8D1A932D9C005EB7DE /* SMS_SDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SMS_SDK.framework; path = ShareSDK/SMS_SDK.framework; sourceTree = "<group>"; };
 		4D48F7951ACA3999002BE00D /* DoctorsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoctorsListViewController.m; sourceTree = "<group>"; };
 		4D48F7961ACA3999002BE00D /* DoctorsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoctorsListViewController.h; sourceTree = "<group>"; };
-		4D48F7981ACA39D0002BE00D /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		4D48F7981ACA39D0002BE00D /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = "Pan大夫/AppDelegate.m"; sourceTree = "<group>"; };
 		4D4D0D291ABB255700696379 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		4D4D0D2B1ABB259100696379 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		4D4D0D2D1ABB259900696379 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -355,7 +360,7 @@
 		4D8243F81A91C8AA0050A6A7 /* Pan大夫.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pan大夫.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D8243FC1A91C8AA0050A6A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D8243FD1A91C8AA0050A6A7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		4D8243FF1A91C8AA0050A6A7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		4D8243FF1A91C8AA0050A6A7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = "Pan大夫/AppDelegate.h"; sourceTree = "<group>"; };
 		4D8244061A91C8AA0050A6A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4D82440B1A91C8AA0050A6A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		4D8244111A91C8AA0050A6A7 /* Pan大夫Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Pan大夫Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -471,6 +476,15 @@
 		4DEFE6A41AC572CC00F07D1E /* UserStarRateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserStarRateView.m; sourceTree = "<group>"; };
 		4DEFE6A71AC572CC00F07D1E /* CommentCommitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentCommitViewController.h; sourceTree = "<group>"; };
 		4DEFE6A81AC572CC00F07D1E /* CommentCommitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentCommitViewController.m; sourceTree = "<group>"; };
+		75E552EA1B8C0B7100B864B0 /* ServiceItemSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceItemSViewController.h; sourceTree = "<group>"; };
+		75E552EB1B8C0B7100B864B0 /* ServiceItemSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceItemSViewController.m; sourceTree = "<group>"; };
+		75E552F01B8C0D5C00B864B0 /* ServiceItemSTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceItemSTableViewCell.h; sourceTree = "<group>"; };
+		75E552F11B8C0D5C00B864B0 /* ServiceItemSTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceItemSTableViewCell.m; sourceTree = "<group>"; };
+		E2FA4E3E1B94360600BDCD81 /* RegistInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistInformationViewController.h; sourceTree = "<group>"; };
+		E2FA4E3F1B94360600BDCD81 /* RegistInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistInformationViewController.m; sourceTree = "<group>"; };
+		E2FA4E401B94360600BDCD81 /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
+		E2FA4E411B94360600BDCD81 /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		E2FA4E451B94366C00BDCD81 /* RegistInformation.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = RegistInformation.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -544,6 +558,10 @@
 				2A624B051AAC307A00189660 /* TestViewController.m */,
 				2A624B011AAC304C00189660 /* MyScrollView.h */,
 				2A624B021AAC304C00189660 /* MyScrollView.m */,
+				75E552EA1B8C0B7100B864B0 /* ServiceItemSViewController.h */,
+				75E552EB1B8C0B7100B864B0 /* ServiceItemSViewController.m */,
+				75E552F01B8C0D5C00B864B0 /* ServiceItemSTableViewCell.h */,
+				75E552F11B8C0D5C00B864B0 /* ServiceItemSTableViewCell.m */,
 			);
 			name = ServiceItem;
 			sourceTree = "<group>";
@@ -610,8 +628,8 @@
 				2A8D62CD1ABED284003ADBC6 /* MyTableView.m */,
 				2A8D62D11ABED284003ADBC6 /* detailView.h */,
 				4D06489F1ABFDF8900FBA541 /* detailView.m */,
-				2A8D62D31ABED284003ADBC6 /* CellForUserTableViewCell.mm */,
 				2A8D62D41ABED284003ADBC6 /* CellForUserTableViewCell.h */,
+				2A8D62D31ABED284003ADBC6 /* CellForUserTableViewCell.mm */,
 			);
 			name = InformationManagement;
 			sourceTree = "<group>";
@@ -889,12 +907,13 @@
 				2A6476701AECDCF8007320E0 /* LoginViewController.m */,
 				2AB82AE71ABD19270029E638 /* SettingsViewController.h */,
 				2AB82AE61ABD19270029E638 /* SettingsViewController.m */,
-				2AB82AE91ABD19270029E638 /* JKCountDownButton.m */,
 				2AB82AEA1ABD19270029E638 /* JKCountDownButton.h */,
+				2AB82AE91ABD19270029E638 /* JKCountDownButton.m */,
 				2AB82AEC1ABD19270029E638 /* UserTableViewController.h */,
 				2AB82AEB1ABD19270029E638 /* UserTableViewController.m */,
 				4DCC239E1ABA6DE200AD0601 /* AboutUSViewController.h */,
 				4DCC239C1ABA6DE200AD0601 /* AboutUSViewController.m */,
+				E2FA4E441B94362500BDCD81 /* RegistInformation */,
 				4D1D36071ABB267F00C2B2DD /* InformationManagement */,
 			);
 			name = SettingsView;
@@ -935,6 +954,8 @@
 			isa = PBXGroup;
 			children = (
 				2ADA14F31AC67523001D417C /* Images.xcassets */,
+				4D8243FF1A91C8AA0050A6A7 /* AppDelegate.h */,
+				4D48F7981ACA39D0002BE00D /* AppDelegate.m */,
 				4D8243FA1A91C8AA0050A6A7 /* Pan大夫 */,
 				4D8244141A91C8AA0050A6A7 /* Pan大夫Tests */,
 				4D8243F91A91C8AA0050A6A7 /* Products */,
@@ -959,8 +980,6 @@
 				4D1D366A1ABB2CA800C2B2DD /* SDK */,
 				4D1D36571ABB26F500C2B2DD /* DataStructure */,
 				4D40CA401A922450005EB7DE /* Frameworks */,
-				4D8243FF1A91C8AA0050A6A7 /* AppDelegate.h */,
-				4D48F7981ACA39D0002BE00D /* AppDelegate.m */,
 				4D8247601A91CA440050A6A7 /* Database */,
 				4D8247491A91C9F80050A6A7 /* Table */,
 				4D8244751A91C9440050A6A7 /* ResourcesView */,
@@ -1143,6 +1162,18 @@
 			name = Database;
 			sourceTree = "<group>";
 		};
+		E2FA4E441B94362500BDCD81 /* RegistInformation */ = {
+			isa = PBXGroup;
+			children = (
+				E2FA4E451B94366C00BDCD81 /* RegistInformation.storyboard */,
+				E2FA4E3E1B94360600BDCD81 /* RegistInformationViewController.h */,
+				E2FA4E3F1B94360600BDCD81 /* RegistInformationViewController.m */,
+				E2FA4E401B94360600BDCD81 /* SecondViewController.h */,
+				E2FA4E411B94360600BDCD81 /* SecondViewController.m */,
+			);
+			name = RegistInformation;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1239,6 +1270,7 @@
 				4D40CA861A932D28005EB7DE /* WeiboSDK.bundle in Resources */,
 				4D1D36561ABB26E100C2B2DD /* city.plist in Resources */,
 				4D40CA7F1A932D28005EB7DE /* Resource.bundle in Resources */,
+				E2FA4E461B94366C00BDCD81 /* RegistInformation.storyboard in Resources */,
 				2A7FACFA1AC3E1C300C32C87 /* login.plist in Resources */,
 				4D82440C1A91C8AA0050A6A7 /* LaunchScreen.xib in Resources */,
 			);
@@ -1304,6 +1336,7 @@
 				4DCD17251AC99E7A00FBFB59 /* DoctorDetailViewController.m in Sources */,
 				2AB82AEE1ABD19270029E638 /* SettingsViewController.m in Sources */,
 				4DCD172F1AC99EE900FBFB59 /* OrdersListViewController.m in Sources */,
+				75E552F21B8C0D5C00B864B0 /* ServiceItemSTableViewCell.m in Sources */,
 				4DCC23AA1ABA6FE300AD0601 /* HomeViewController.m in Sources */,
 				2ADD02721ABC5E4000B1A4F3 /* CommentTableView.m in Sources */,
 				2A8D62D91ABED284003ADBC6 /* CellForUserTableViewCell.mm in Sources */,
@@ -1313,6 +1346,7 @@
 				4D8246341A91C9950050A6A7 /* SDWebImagePrefetcher.m in Sources */,
 				2A624B031AAC304C00189660 /* MyScrollView.m in Sources */,
 				4DCD17201AC99DEC00FBFB59 /* PaymentViewController.m in Sources */,
+				E2FA4E431B94360600BDCD81 /* SecondViewController.m in Sources */,
 				4D8246301A91C9950050A6A7 /* SDWebImageDecoder.m in Sources */,
 				4D48F7971ACA3999002BE00D /* DoctorsListViewController.m in Sources */,
 				4DCD17281AC99E9B00FBFB59 /* TimeTableViewController.m in Sources */,
@@ -1321,10 +1355,12 @@
 				4D82462F1A91C9950050A6A7 /* SDWebImageCompat.m in Sources */,
 				4D1D364F1ABB26BD00C2B2DD /* HZAreaPickerView.m in Sources */,
 				4D82463B1A91C9950050A6A7 /* UIView+WebCacheOperation.m in Sources */,
+				75E552EC1B8C0B7100B864B0 /* ServiceItemSViewController.m in Sources */,
 				2ADA24EB1ABE972C00B9BC13 /* Patient.m in Sources */,
 				4D82476A1A91CA5E0050A6A7 /* CoreDataManager.m in Sources */,
 				4D1D36521ABB26BD00C2B2DD /* HZLocation.m in Sources */,
 				2AB82AF81ABD998D0029E638 /* testAnalysisViewController.m in Sources */,
+				E2FA4E421B94360600BDCD81 /* RegistInformationViewController.m in Sources */,
 				4D82462B1A91C9950050A6A7 /* Reachability.m in Sources */,
 				2AB82AF01ABD19270029E638 /* UserTableViewController.m in Sources */,
 				4D82447B1A91C9720050A6A7 /* NewsDetailViewController.m in Sources */,
