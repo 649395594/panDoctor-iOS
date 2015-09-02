@@ -30,6 +30,7 @@
 #define kWebLabelHeight 0.048913
 #define kAlertViewWidth 0.927536
 #define kAlertViewHeight 0.233695
+
 @interface AboutUSViewController ()
 @property (strong, nonatomic) UITableView *aboutUsTable;
 @property (strong, nonatomic) NSArray *aboutUSDataList;

@@ -15,6 +15,6 @@
 //#define HOSTNAME @"zhangxingyu.sinaapp.com.cn/"
 
 #define HOSTNAME @"pandoctor.sinaapp.com"
-
+#define MAS_SHORTHAND
 
 #endif
