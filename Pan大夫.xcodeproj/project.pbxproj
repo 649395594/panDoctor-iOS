@@ -174,6 +174,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		009400B5EE8255F8196CCDF0 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		2ADA14F31AC67523001D417C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "Pan大夫/Images.xcassets"; sourceTree = "<group>"; };
 		4D14A1E11A91D4F60098D198 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		4D14A1E31A91D4FE0098D198 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -205,6 +206,7 @@
 		4D8244171A91C8AA0050A6A7 /* Pan__Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Pan__Tests.m; sourceTree = "<group>"; };
 		4D8247711A91CA7C0050A6A7 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		4DA5C8141A9617E400BFF070 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		5363870BD5CB4C975EC87EBC /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		68D5746E1B95F66300DC4F48 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = SettingView/LoginViewController.m; sourceTree = "<group>"; };
 		68D5746F1B95F66300DC4F48 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = SettingView/SettingsViewController.m; sourceTree = "<group>"; };
 		68D574701B95F66300DC4F48 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = SettingView/LoginViewController.h; sourceTree = "<group>"; };
@@ -593,6 +595,15 @@
 			name = DoctorInfo;
 			sourceTree = "<group>";
 		};
+		36E9406A8302DE5F86BD07E3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5363870BD5CB4C975EC87EBC /* Pods.debug.xcconfig */,
+				009400B5EE8255F8196CCDF0 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		4D40CA401A922450005EB7DE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -653,6 +664,8 @@
 				4D8243FA1A91C8AA0050A6A7 /* Pan大夫 */,
 				4D8244141A91C8AA0050A6A7 /* Pan大夫Tests */,
 				4D8243F91A91C8AA0050A6A7 /* Products */,
+				36E9406A8302DE5F86BD07E3 /* Pods */,
+				7B77AA532DBA2AC1133F13B3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1187,6 +1200,13 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		7B77AA532DBA2AC1133F13B3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1194,9 +1214,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4D82441B1A91C8AA0050A6A7 /* Build configuration list for PBXNativeTarget "Pan大夫" */;
 			buildPhases = (
+				FB5774126B1F52E752A74B8C /* Check Pods Manifest.lock */,
 				4D8243F41A91C8AA0050A6A7 /* Sources */,
 				4D8243F51A91C8AA0050A6A7 /* Frameworks */,
 				4D8243F61A91C8AA0050A6A7 /* Resources */,
+				057D02848F107F2CC808129B /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1299,6 +1321,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		057D02848F107F2CC808129B /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FB5774126B1F52E752A74B8C /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4D8243F41A91C8AA0050A6A7 /* Sources */ = {
@@ -1522,6 +1577,7 @@
 		};
 		4D82441C1A91C8AA0050A6A7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5363870BD5CB4C975EC87EBC /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1572,6 +1628,7 @@
 					"$(PROJECT_DIR)/Pan大夫/SDK/ShareSDK/Extend/SinaWeiboSDK",
 					"$(PROJECT_DIR)/Pan大夫/SDK/ShareSDK/Extend/TencentWeiboSDK",
 					"$(PROJECT_DIR)/Pan大夫/SDK/ShareSDK/Extend/WeChatSDK",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -1587,6 +1644,7 @@
 		};
 		4D82441D1A91C8AA0050A6A7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 009400B5EE8255F8196CCDF0 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1637,6 +1695,7 @@
 					"$(PROJECT_DIR)/Pan大夫/SDK/ShareSDK/Extend/SinaWeiboSDK",
 					"$(PROJECT_DIR)/Pan大夫/SDK/ShareSDK/Extend/TencentWeiboSDK",
 					"$(PROJECT_DIR)/Pan大夫/SDK/ShareSDK/Extend/WeChatSDK",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
