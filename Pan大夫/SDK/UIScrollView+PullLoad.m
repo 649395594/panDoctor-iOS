@@ -7,7 +7,7 @@
 //
 
 #import "UIScrollView+PullLoad.h"
-#import "scrollableTable.h"
+#import "ScrollableTable.h"
 #import <objc/runtime.h>
 
 #define LOADVIEW_HEIGHT         60.0f
@@ -456,7 +456,7 @@ typedef enum {
             [self setContentInset:insets];
         } completion:^(BOOL finished){
             if (finished) {
-                if([self.pullDelegate isKindOfClass:[scrollableTable class]]){
+                if([self.pullDelegate isKindOfClass:[ScrollableTable class]]){
                     [self.pullDelegate showMessage:@"refresh"];
                 }
             }
@@ -471,7 +471,7 @@ typedef enum {
             [self setContentInset:insets];
         }completion:^(BOOL finished){
             if (finished) {
-                if([self.pullDelegate isKindOfClass:[scrollableTable class]]){
+                if([self.pullDelegate isKindOfClass:[ScrollableTable class]]){
                     [self.pullDelegate showMessage:@"load"];
                 }
             }

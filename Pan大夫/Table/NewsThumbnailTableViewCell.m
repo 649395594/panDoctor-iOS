@@ -12,7 +12,7 @@
 #define kTextLeftGap 20
 #define kTopGap 10
 #import "NewsThumbnailTableViewCell.h"
-#import "scrollableTable.h"
+#import "ScrollableTable.h"
 @implementation NewsThumbnailTableViewCell
 
 @synthesize title,image;
@@ -40,7 +40,7 @@
 
 - (void)handleSingleTap:(UITapGestureRecognizer *)sender{
     UITableViewCell *cell = (UITableViewCell *)sender.view;
-    scrollableTable *rootView = (scrollableTable *)[[cell superview]superview];
+    ScrollableTable *rootView = (ScrollableTable *)[[cell superview]superview];
     NSLog(@"tablecell superView is %@",[[cell superview]superview]);
     NSString *Id = [rootView.articles objectAtIndex:self.row];
     [rootView cellClickedWithID:Id];

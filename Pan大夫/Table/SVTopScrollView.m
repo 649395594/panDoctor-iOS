@@ -8,7 +8,7 @@
 
 #import "SVTopScrollView.h"
 #import "SVRootScrollView.h"
-#import "scrollableTable.h"
+#import "ScrollableTable.h"
 
 //按钮空隙
 #define BUTTONGAP 20

@@ -9,7 +9,7 @@
 #import "ResourcesViewController.h"
 #import "MyScollViewController.h"
 #import "SVTopScrollView.h"
-#import "scrollableTable.h"
+#import "ScrollableTable.h"
 #import "NewsDetailViewController.h"
 
 #define kCellCount 10
@@ -43,14 +43,14 @@
     cellTitles = [[NSMutableArray alloc]initWithObjects:@"",@"",@"",@"",@"",@"",@"",@"",@"",@"", nil];
     NSArray *diseaseArray = [[NSArray alloc]initWithObjects:@"depression",@"anxiety",@"hypochondria",@"obsession",@"paranoid",@"phobia",@"amnesia",@"ADHD",nil];
     
-    scrollableTable *table1 = [[scrollableTable alloc]initWithNavPushController:self];
-    scrollableTable *table2 = [[scrollableTable alloc]initWithNavPushController:self];
-    scrollableTable *table3 = [[scrollableTable alloc]initWithNavPushController:self];
-    scrollableTable *table4 = [[scrollableTable alloc]initWithNavPushController:self];
-    scrollableTable *table5 = [[scrollableTable alloc]initWithNavPushController:self];
-    scrollableTable *table6 = [[scrollableTable alloc]initWithNavPushController:self];
-    scrollableTable *table7 = [[scrollableTable alloc]initWithNavPushController:self];
-    scrollableTable *table8 = [[scrollableTable alloc]initWithNavPushController:self];
+    ScrollableTable *table1 = [[ScrollableTable alloc]initWithNavPushController:self];
+    ScrollableTable *table2 = [[ScrollableTable alloc]initWithNavPushController:self];
+    ScrollableTable *table3 = [[ScrollableTable alloc]initWithNavPushController:self];
+    ScrollableTable *table4 = [[ScrollableTable alloc]initWithNavPushController:self];
+    ScrollableTable *table5 = [[ScrollableTable alloc]initWithNavPushController:self];
+    ScrollableTable *table6 = [[ScrollableTable alloc]initWithNavPushController:self];
+    ScrollableTable *table7 = [[ScrollableTable alloc]initWithNavPushController:self];
+    ScrollableTable *table8 = [[ScrollableTable alloc]initWithNavPushController:self];
     
     tables = [NSMutableArray arrayWithObjects:table1,table2,table3,table4,table5,table6,table7,table8,nil];
     MyScollViewController *myScrollViewController = [[MyScollViewController alloc]initWithNameArray:nameArray diseaseArray:diseaseArray AndTables:tables];

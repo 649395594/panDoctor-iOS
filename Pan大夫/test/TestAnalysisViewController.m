@@ -7,7 +7,7 @@
 //  Copyright (c) 2014年 Roman Efimov. All rights reserved.
 //
 
-#import "testAnalysisViewController.h"
+#import "TestAnalysisViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define IS_IPHONE_4S_SCREEN [[UIScreen mainScreen]bounds].size.height<=485.0f&&[[UIScreen mainScreen]bounds].size.height>=475.0f
@@ -18,7 +18,7 @@
 #define KDeviceWidth [[UIScreen mainScreen]bounds].size.width
 #define KDeviceHeight [[UIScreen mainScreen]bounds].size.height
 
-@interface testAnalysisViewController ()
+@interface TestAnalysisViewController ()
 
 @property (nonatomic , strong) UITextView *resultLabel;
 
@@ -55,7 +55,7 @@
 
 @end
 
-@implementation testAnalysisViewController
+@implementation TestAnalysisViewController
 
 @synthesize resultLabel,label,saveButton;
 @synthesize endButton,answers,tags,kind,mark,subKind,factor;

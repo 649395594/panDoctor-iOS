@@ -72,7 +72,7 @@
 		68D574E11B95F96F00DC4F48 /* CommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D574DE1B95F96F00DC4F48 /* CommentTableViewCell.m */; };
 		68D574E21B95F96F00DC4F48 /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68D574DF1B95F96F00DC4F48 /* CommentTableViewCell.xib */; };
 		68D574EA1B95F9EB00DC4F48 /* DiagnosisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D574E51B95F9EB00DC4F48 /* DiagnosisViewController.m */; };
-		68D574EB1B95F9EB00DC4F48 /* testAnalysisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D574E71B95F9EB00DC4F48 /* testAnalysisViewController.m */; };
+		68D574EB1B95F9EB00DC4F48 /* TestAnalysisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D574E71B95F9EB00DC4F48 /* TestAnalysisViewController.m */; };
 		68D574EC1B95F9EB00DC4F48 /* YiYuTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D574E91B95F9EB00DC4F48 /* YiYuTestViewController.m */; };
 		68D574F61B95FA2A00DC4F48 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D574EF1B95FA2A00DC4F48 /* Comment.m */; };
 		68D574F71B95FA2A00DC4F48 /* Doctor.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D574F11B95FA2A00DC4F48 /* Doctor.m */; };
@@ -87,7 +87,7 @@
 		68D575101B95FB8A00DC4F48 /* questionManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D5750B1B95FB8A00DC4F48 /* questionManagedObject.m */; };
 		68D5751C1B95FBDC00DC4F48 /* MyScollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D575131B95FBDC00DC4F48 /* MyScollViewController.m */; };
 		68D5751D1B95FBDC00DC4F48 /* NewsThumbnailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D575151B95FBDC00DC4F48 /* NewsThumbnailTableViewCell.m */; };
-		68D5751E1B95FBDC00DC4F48 /* scrollableTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D575171B95FBDC00DC4F48 /* scrollableTable.m */; };
+		68D5751E1B95FBDC00DC4F48 /* ScrollableTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D575171B95FBDC00DC4F48 /* ScrollableTable.m */; };
 		68D5751F1B95FBDC00DC4F48 /* SVRootScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D575191B95FBDC00DC4F48 /* SVRootScrollView.m */; };
 		68D575201B95FBDC00DC4F48 /* SVTopScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D5751B1B95FBDC00DC4F48 /* SVTopScrollView.m */; };
 		68D575261B95FC2C00DC4F48 /* NewsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D575231B95FC2C00DC4F48 /* NewsDetailViewController.m */; };
@@ -281,8 +281,8 @@
 		68D574DF1B95F96F00DC4F48 /* CommentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
 		68D574E41B95F9EB00DC4F48 /* DiagnosisViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiagnosisViewController.h; sourceTree = "<group>"; };
 		68D574E51B95F9EB00DC4F48 /* DiagnosisViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiagnosisViewController.m; sourceTree = "<group>"; };
-		68D574E61B95F9EB00DC4F48 /* testAnalysisViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testAnalysisViewController.h; sourceTree = "<group>"; };
-		68D574E71B95F9EB00DC4F48 /* testAnalysisViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testAnalysisViewController.m; sourceTree = "<group>"; };
+		68D574E61B95F9EB00DC4F48 /* TestAnalysisViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestAnalysisViewController.h; sourceTree = "<group>"; };
+		68D574E71B95F9EB00DC4F48 /* TestAnalysisViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestAnalysisViewController.m; sourceTree = "<group>"; };
 		68D574E81B95F9EB00DC4F48 /* YiYuTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YiYuTestViewController.h; sourceTree = "<group>"; };
 		68D574E91B95F9EB00DC4F48 /* YiYuTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YiYuTestViewController.m; sourceTree = "<group>"; };
 		68D574EE1B95FA2A00DC4F48 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
@@ -308,8 +308,8 @@
 		68D575131B95FBDC00DC4F48 /* MyScollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyScollViewController.m; sourceTree = "<group>"; };
 		68D575141B95FBDC00DC4F48 /* NewsThumbnailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsThumbnailTableViewCell.h; sourceTree = "<group>"; };
 		68D575151B95FBDC00DC4F48 /* NewsThumbnailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsThumbnailTableViewCell.m; sourceTree = "<group>"; };
-		68D575161B95FBDC00DC4F48 /* scrollableTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scrollableTable.h; sourceTree = "<group>"; };
-		68D575171B95FBDC00DC4F48 /* scrollableTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = scrollableTable.m; sourceTree = "<group>"; };
+		68D575161B95FBDC00DC4F48 /* ScrollableTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollableTable.h; sourceTree = "<group>"; };
+		68D575171B95FBDC00DC4F48 /* ScrollableTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollableTable.m; sourceTree = "<group>"; };
 		68D575181B95FBDC00DC4F48 /* SVRootScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRootScrollView.h; sourceTree = "<group>"; };
 		68D575191B95FBDC00DC4F48 /* SVRootScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVRootScrollView.m; sourceTree = "<group>"; };
 		68D5751A1B95FBDC00DC4F48 /* SVTopScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVTopScrollView.h; sourceTree = "<group>"; };
@@ -813,8 +813,8 @@
 			children = (
 				68D574E41B95F9EB00DC4F48 /* DiagnosisViewController.h */,
 				68D574E51B95F9EB00DC4F48 /* DiagnosisViewController.m */,
-				68D574E61B95F9EB00DC4F48 /* testAnalysisViewController.h */,
-				68D574E71B95F9EB00DC4F48 /* testAnalysisViewController.m */,
+				68D574E61B95F9EB00DC4F48 /* TestAnalysisViewController.h */,
+				68D574E71B95F9EB00DC4F48 /* TestAnalysisViewController.m */,
 				68D574E81B95F9EB00DC4F48 /* YiYuTestViewController.h */,
 				68D574E91B95F9EB00DC4F48 /* YiYuTestViewController.m */,
 			);
@@ -859,8 +859,8 @@
 				68D575131B95FBDC00DC4F48 /* MyScollViewController.m */,
 				68D575141B95FBDC00DC4F48 /* NewsThumbnailTableViewCell.h */,
 				68D575151B95FBDC00DC4F48 /* NewsThumbnailTableViewCell.m */,
-				68D575161B95FBDC00DC4F48 /* scrollableTable.h */,
-				68D575171B95FBDC00DC4F48 /* scrollableTable.m */,
+				68D575161B95FBDC00DC4F48 /* ScrollableTable.h */,
+				68D575171B95FBDC00DC4F48 /* ScrollableTable.m */,
 				68D575181B95FBDC00DC4F48 /* SVRootScrollView.h */,
 				68D575191B95FBDC00DC4F48 /* SVRootScrollView.m */,
 				68D5751A1B95FBDC00DC4F48 /* SVTopScrollView.h */,
@@ -1307,7 +1307,7 @@
 			files = (
 				68D574731B95F66300DC4F48 /* SettingsViewController.m in Sources */,
 				68D576501B95FE5B00DC4F48 /* SDWebImageDownloaderOperation.m in Sources */,
-				68D574EB1B95F9EB00DC4F48 /* testAnalysisViewController.m in Sources */,
+				68D574EB1B95F9EB00DC4F48 /* TestAnalysisViewController.m in Sources */,
 				68D574B51B95F85A00DC4F48 /* OrderCompletionViewController.m in Sources */,
 				68D576591B95FE5B00DC4F48 /* UIView+WebCacheOperation.m in Sources */,
 				68D574851B95F73C00DC4F48 /* OrderItemViewCell.m in Sources */,
@@ -1338,7 +1338,7 @@
 				68D574A41B95F81200DC4F48 /* HomeViewController.m in Sources */,
 				68D574B31B95F85A00DC4F48 /* CommentCommitViewController.m in Sources */,
 				68D574841B95F73C00DC4F48 /* MyOrderViewController.m in Sources */,
-				68D5751E1B95FBDC00DC4F48 /* scrollableTable.m in Sources */,
+				68D5751E1B95FBDC00DC4F48 /* ScrollableTable.m in Sources */,
 				68D5764D1B95FE5B00DC4F48 /* SDWebImageCompat.m in Sources */,
 				68D574D01B95F91700DC4F48 /* DoctorInformationViewController.m in Sources */,
 				68D575421B95FD9A00DC4F48 /* ServiceItemViewController.m in Sources */,

@@ -6,7 +6,7 @@
 //  Copyright (c) 2014年 Roman Efimov. All rights reserved.
 //
 
-#import "scrollableTable.h"
+#import "ScrollableTable.h"
 #import "SVTopScrollView.h"
 #import "UIImageView+WebCache.h"
 #import "NewsThumbnailTableViewCell.h"
@@ -18,7 +18,7 @@
 #define k6_RefreshLabel_Height 20
 #define k6plus_RefreshLabel_Height 24
 
-@interface scrollableTable (){
+@interface ScrollableTable (){
     int nextPage;
     BOOL isEmpty;
     BOOL isSameArticle;
@@ -32,7 +32,7 @@
 @property (strong, nonatomic)  UIImageView *loadView;
 
 @end
-@implementation scrollableTable
+@implementation ScrollableTable
 @synthesize op,cellTitles,imageURLs;
 @synthesize refreshCount;
 @synthesize articles,type,refreshView,loadView;
@@ -50,7 +50,7 @@
     cellTitles = [[NSMutableArray alloc]initWithObjects:@"",@"",@"",@"",@"",@"",@"",@"",@"",@"", nil];
     imageURLs = [[NSMutableArray alloc]initWithObjects:@"",@"",@"",@"",@"",@"",@"",@"",@"",@"", nil];
     articles = [[NSMutableArray alloc]initWithObjects:@"",@"",@"",@"",@"",@"",@"",@"",@"",@"", nil];
-    scrollableTable *table = [super init];
+    ScrollableTable *table = [super init];
     table.delegate = self;
     table.dataSource = self;
     
@@ -97,7 +97,7 @@
         __block NSMutableArray *localTitles = self.cellTitles;
         __block NSMutableArray *localURLs = imageURLs;
         __block NSMutableArray *localIDs = articles;
-        __block scrollableTable *localSelf = self;
+        __block ScrollableTable *localSelf = self;
         //__block BOOL localIsEmpty = isEmpty;
 
         [op addCompletionHandler:^(MKNetworkOperation *operaton){
@@ -177,7 +177,7 @@
     __block NSMutableArray *localTitles = self.cellTitles;
     __block NSMutableArray *localURLs = imageURLs;
     __block NSMutableArray *localIDs = articles;
-    __block scrollableTable *localSelf = self;
+    __block ScrollableTable *localSelf = self;
     
   
     [op addCompletionHandler:^(MKNetworkOperation *operaton){
@@ -230,7 +230,7 @@
     __block NSMutableArray *localTitles = self.cellTitles;
     __block NSMutableArray *localURLs = imageURLs;
     __block NSMutableArray *localIDs = articles;
-    __block scrollableTable *localSelf = self;
+    __block ScrollableTable *localSelf = self;
     
     
     [op addCompletionHandler:^(MKNetworkOperation *operaton){

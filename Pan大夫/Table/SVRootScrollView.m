@@ -8,7 +8,7 @@
 
 #import "SVRootScrollView.h"
 #import "SVTopScrollView.h"
-#import "scrollableTable.h"
+#import "ScrollableTable.h"
 #define POSITIONID (int)(scrollView.contentOffset.x/[[UIScreen mainScreen]bounds].size.width)
 
 @interface SVRootScrollView ()

@@ -7,7 +7,7 @@
 //
 
 #import "MyScollViewController.h"
-#import "scrollableTable.h"
+#import "ScrollableTable.h"
 @interface MyScollViewController ()
 
 @end

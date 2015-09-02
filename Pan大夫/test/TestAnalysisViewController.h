@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface testAnalysisViewController : UIViewController
+@interface TestAnalysisViewController : UIViewController
 
 @property (strong, nonatomic) NSMutableArray *answers;
 

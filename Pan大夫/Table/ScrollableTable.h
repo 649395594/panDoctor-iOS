@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "UIScrollView+PullLoad.h"
 #import "ResourcesViewController.h"
-@interface scrollableTable : UITableView <UITableViewDataSource,UITableViewDelegate,PullDelegate>
+@interface ScrollableTable : UITableView <UITableViewDataSource,UITableViewDelegate,PullDelegate>
 
 @property (strong, nonatomic) NSMutableArray *articles;
 @property (nonatomic) NSInteger *refreshCount;

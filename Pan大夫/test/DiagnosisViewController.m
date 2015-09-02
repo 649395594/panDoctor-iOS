@@ -10,7 +10,7 @@
 #import "CoreDataManager.h"
 #import "Question.h"
 //#import "TestCell.h"
-#import "testAnalysisViewController.h"
+#import "TestAnalysisViewController.h"
 //#import "FunnyTestViewController.h"
 #import <CoreText/CoreText.h>
 
@@ -43,7 +43,7 @@
 @property (strong , nonatomic) NSMutableArray *temp;
 @property (strong , nonatomic) NSString *choosedSubKind;
 
-@property(strong, nonatomic) testAnalysisViewController *result;
+@property(strong, nonatomic) TestAnalysisViewController *result;
 
 @property (strong , nonatomic) YiYuTestViewController *test;
 //@property (strong , nonatomic) FunnyTestViewController *funnyTest;
@@ -489,7 +489,7 @@
 
 -(void)submit{
     NSMutableArray *answers = [manager findAnswersbyKind:choosedKind andTags:temp];
-    result = [[testAnalysisViewController alloc]initWithAnswers:answers];
+    result = [[TestAnalysisViewController alloc]initWithAnswers:answers];
     result.tags = temp;
     result.kind = choosedKind;
     result.subKind = choosedSubKind;

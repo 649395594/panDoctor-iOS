@@ -7,7 +7,7 @@
 //
 #define IS_IPHONE_5_SCREEN [[UIScreen mainScreen] bounds].size.height >= 568.0f && [[UIScreen mainScreen] bounds].size.height < 1024.0f
 #import "YiYuTestViewController.h"
-#import "testAnalysisViewController.h"
+#import "TestAnalysisViewController.h"
 #import "CoreDataManager.h"
 #import "Question.h"
 @interface YiYuTestViewController ()
