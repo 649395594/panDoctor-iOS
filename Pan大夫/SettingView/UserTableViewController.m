@@ -145,8 +145,9 @@
 //            informationViewController.hidesBottomBarWhenPushed = YES;
 //            informationViewController.title = @"地址管理";
 //            [[self viewController].navigationController pushViewController:informationViewController animated:YES];
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"RegistInformation" bundle:[NSBundle mainBundle]];
-            registinformationViewController = [storyboard instantiateViewControllerWithIdentifier:@"Regist"];
+//            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"RegistInformation" bundle:[NSBundle mainBundle]];
+//            registinformationViewController = [storyboard instantiateViewControllerWithIdentifier:@"Regist"];
+            registinformationViewController = [[RegistInformationViewController alloc]init];
             [[self viewController].navigationController pushViewController:registinformationViewController animated:YES];
             
             break;

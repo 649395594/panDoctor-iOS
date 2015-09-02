@@ -61,7 +61,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-#if 1
+#if 0
     if (self.IDNum) {
         
         NSLog(@"******id num is :%@ ******", self.IDNum);

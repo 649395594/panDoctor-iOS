@@ -41,9 +41,6 @@
 		68D574841B95F73C00DC4F48 /* MyOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D5747F1B95F73C00DC4F48 /* MyOrderViewController.m */; };
 		68D574851B95F73C00DC4F48 /* OrderItemViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D574811B95F73C00DC4F48 /* OrderItemViewCell.m */; };
 		68D574861B95F73C00DC4F48 /* OrdersListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D574831B95F73C00DC4F48 /* OrdersListViewController.m */; };
-		68D5748D1B95F78700DC4F48 /* RegistInformation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68D574881B95F78700DC4F48 /* RegistInformation.storyboard */; };
-		68D5748E1B95F78700DC4F48 /* RegistInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D5748A1B95F78700DC4F48 /* RegistInformationViewController.m */; };
-		68D5748F1B95F78700DC4F48 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D5748C1B95F78700DC4F48 /* SecondViewController.m */; };
 		68D5749B1B95F7D500DC4F48 /* CellForUserTableViewCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = 68D574921B95F7D500DC4F48 /* CellForUserTableViewCell.mm */; };
 		68D5749C1B95F7D500DC4F48 /* detailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D574941B95F7D500DC4F48 /* detailView.m */; };
 		68D5749D1B95F7D500DC4F48 /* InformationViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 68D574961B95F7D500DC4F48 /* InformationViewController.mm */; };
@@ -161,6 +158,8 @@
 		68D576741B95FE5C00DC4F48 /* ShareSDKShareActionSheet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D576391B95FE5B00DC4F48 /* ShareSDKShareActionSheet.framework */; };
 		68D576751B95FE5C00DC4F48 /* UIScrollView+PullLoad.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D5763B1B95FE5B00DC4F48 /* UIScrollView+PullLoad.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		68D576771B95FEAD00DC4F48 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D576761B95FEAD00DC4F48 /* main.m */; };
+		E2F84A311B96AED9007EB582 /* RegistInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F84A301B96AED9007EB582 /* RegistInformationViewController.m */; };
+		E2F84A371B971865007EB582 /* ConfirmInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F84A361B971865007EB582 /* ConfirmInformationViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -221,11 +220,6 @@
 		68D574811B95F73C00DC4F48 /* OrderItemViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderItemViewCell.m; sourceTree = "<group>"; };
 		68D574821B95F73C00DC4F48 /* OrdersListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrdersListViewController.h; sourceTree = "<group>"; };
 		68D574831B95F73C00DC4F48 /* OrdersListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrdersListViewController.m; sourceTree = "<group>"; };
-		68D574881B95F78700DC4F48 /* RegistInformation.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = RegistInformation.storyboard; sourceTree = "<group>"; };
-		68D574891B95F78700DC4F48 /* RegistInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistInformationViewController.h; sourceTree = "<group>"; };
-		68D5748A1B95F78700DC4F48 /* RegistInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistInformationViewController.m; sourceTree = "<group>"; };
-		68D5748B1B95F78700DC4F48 /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		68D5748C1B95F78700DC4F48 /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		68D574911B95F7D500DC4F48 /* CellForUserTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellForUserTableViewCell.h; sourceTree = "<group>"; };
 		68D574921B95F7D500DC4F48 /* CellForUserTableViewCell.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CellForUserTableViewCell.mm; sourceTree = "<group>"; };
 		68D574931B95F7D500DC4F48 /* detailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = detailView.h; sourceTree = "<group>"; };
@@ -490,6 +484,10 @@
 		68D5763A1B95FE5B00DC4F48 /* UIScrollView+PullLoad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+PullLoad.h"; sourceTree = "<group>"; };
 		68D5763B1B95FE5B00DC4F48 /* UIScrollView+PullLoad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+PullLoad.m"; sourceTree = "<group>"; };
 		68D576761B95FEAD00DC4F48 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "Supporting Files/main.m"; sourceTree = "<group>"; };
+		E2F84A2F1B96AED9007EB582 /* RegistInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegistInformationViewController.h; path = "Pan大夫/SettingView/RegistInformationViewController.h"; sourceTree = SOURCE_ROOT; };
+		E2F84A301B96AED9007EB582 /* RegistInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegistInformationViewController.m; path = "Pan大夫/SettingView/RegistInformationViewController.m"; sourceTree = SOURCE_ROOT; };
+		E2F84A351B971865007EB582 /* ConfirmInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConfirmInformationViewController.h; path = "Pan大夫/SettingView/ConfirmInformationViewController.h"; sourceTree = SOURCE_ROOT; };
+		E2F84A361B971865007EB582 /* ConfirmInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConfirmInformationViewController.m; path = "Pan大夫/SettingView/ConfirmInformationViewController.m"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -634,8 +632,8 @@
 				68D574781B95F6F100DC4F48 /* AboutUSViewController.m */,
 				68D574791B95F6F100DC4F48 /* JKCountDownButton.h */,
 				68D5747A1B95F6F100DC4F48 /* JKCountDownButton.m */,
-				68D574741B95F69600DC4F48 /* UserTableViewController.m */,
 				68D574751B95F69600DC4F48 /* UserTableViewController.h */,
+				68D574741B95F69600DC4F48 /* UserTableViewController.m */,
 				68D574701B95F66300DC4F48 /* LoginViewController.h */,
 				68D5746E1B95F66300DC4F48 /* LoginViewController.m */,
 				68D574711B95F66300DC4F48 /* SettingsViewController.h */,
@@ -747,11 +745,10 @@
 		68D574871B95F78700DC4F48 /* RegistInformation */ = {
 			isa = PBXGroup;
 			children = (
-				68D574881B95F78700DC4F48 /* RegistInformation.storyboard */,
-				68D574891B95F78700DC4F48 /* RegistInformationViewController.h */,
-				68D5748A1B95F78700DC4F48 /* RegistInformationViewController.m */,
-				68D5748B1B95F78700DC4F48 /* SecondViewController.h */,
-				68D5748C1B95F78700DC4F48 /* SecondViewController.m */,
+				E2F84A2F1B96AED9007EB582 /* RegistInformationViewController.h */,
+				E2F84A301B96AED9007EB582 /* RegistInformationViewController.m */,
+				E2F84A351B971865007EB582 /* ConfirmInformationViewController.h */,
+				E2F84A361B971865007EB582 /* ConfirmInformationViewController.m */,
 			);
 			name = RegistInformation;
 			path = SettingView/RegistInformation;
@@ -1286,7 +1283,6 @@
 				68D574E21B95F96F00DC4F48 /* CommentTableViewCell.xib in Resources */,
 				68D5752E1B95FCA200DC4F48 /* area.plist in Resources */,
 				68D5763D1B95FE5B00DC4F48 /* HZAreaPickerView.xib in Resources */,
-				68D5748D1B95F78700DC4F48 /* RegistInformation.storyboard in Resources */,
 				4D82440C1A91C8AA0050A6A7 /* LaunchScreen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1347,7 +1343,6 @@
 				68D574F71B95FA2A00DC4F48 /* Doctor.m in Sources */,
 				68D576491B95FE5B00DC4F48 /* Reachability.m in Sources */,
 				68D576431B95FE5B00DC4F48 /* NSDictionary+RequestEncoding.m in Sources */,
-				68D5748F1B95F78700DC4F48 /* SecondViewController.m in Sources */,
 				68D576571B95FE5B00DC4F48 /* UIImageView+HighlightedWebCache.m in Sources */,
 				68D574D81B95F94300DC4F48 /* CommentViewController.m in Sources */,
 				68D5751F1B95FBDC00DC4F48 /* SVRootScrollView.m in Sources */,
@@ -1371,13 +1366,14 @@
 				68D5749D1B95F7D500DC4F48 /* InformationViewController.mm in Sources */,
 				68D5749F1B95F7D500DC4F48 /* SearcherViewController.m in Sources */,
 				68D5753F1B95FD9A00DC4F48 /* MyScrollView.m in Sources */,
+				E2F84A371B971865007EB582 /* ConfirmInformationViewController.m in Sources */,
 				68D574D71B95F94300DC4F48 /* CertificationViewController.m in Sources */,
 				68D576411B95FE5B00DC4F48 /* NSData+MKBase64.m in Sources */,
 				68D575431B95FD9A00DC4F48 /* TestViewController.m in Sources */,
 				68D574761B95F69600DC4F48 /* UserTableViewController.m in Sources */,
+				E2F84A311B96AED9007EB582 /* RegistInformationViewController.m in Sources */,
 				68D575101B95FB8A00DC4F48 /* questionManagedObject.m in Sources */,
 				68D576521B95FE5B00DC4F48 /* SDWebImagePrefetcher.m in Sources */,
-				68D5748E1B95F78700DC4F48 /* RegistInformationViewController.m in Sources */,
 				68D574C81B95F8F300DC4F48 /* DashLineView.m in Sources */,
 				68D576421B95FE5B00DC4F48 /* NSDate+RFC1123.m in Sources */,
 				68D574B61B95F85A00DC4F48 /* PaymentViewController.m in Sources */,
