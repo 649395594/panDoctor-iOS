@@ -10,6 +10,7 @@
 
 @interface ConfirmInformationViewController : UIViewController
 
--(id)initWithInformationDictionary:(NSDictionary *)informationDictionary keyArray:(NSArray *)aKeyArray;
+//初始化试图控制器，通过字典传值
+-(id)initWithInformationDictionary:(NSDictionary *)informationDictionary;
 
 @end

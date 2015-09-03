@@ -121,7 +121,6 @@
     settingsView.tabBarItem = item4;
     
     [self.window addSubview:self.tabBarController.view];
-    self.tabBarController.selectedIndex = 3;
     [self.window setRootViewController:self.tabBarController];
     [self.window makeKeyAndVisible];
     

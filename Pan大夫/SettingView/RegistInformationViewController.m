@@ -11,19 +11,19 @@
 
 #define kThemeColor [UIColor colorWithRed:0/255.0 green:175.0/255.0 blue:170.0/255.0 alpha:1.0]
 
-#define kHeaderViewSizeHeight 216
-#define kEidtiViewSizeHeight 35*4
-#define kFooterViewSizeHeight ( kScreenHeight - kHeaderViewSizeHeight - kEidtiViewSizeHeight - 64 - 49)
-#define kLeftBlankSpaceWidth 35
-#define kLabelWidth 35
-#define kMidleBlankSpaceWidth 10
-#define kHeadSize 155
-#define kHeadTopSpace 10
-#define kSexButtonSizeWidth 100
-#define kSexButtonSizeHeight 35
-#define kSexButtonMiddleSpace 25
-#define kCommitButtonSizeWidth 200
-#define kCommitButtonSizeHeight 35
+#define kLabelSizeHeight 33*deviceWidthRate
+#define kEidtiViewSizeHeight 4*kLabelSizeHeight
+#define kFooterViewSizeHeight ( kScreenHeight - kHeaderViewSizeHeight - kEidtiViewSizeHeight - 64 - 49)*deviceWidthRate
+#define kLeftBlankSpaceWidth 35*deviceWidthRate
+#define kLabelWidth 35*deviceWidthRate
+#define kMidleBlankSpaceWidth 10*deviceWidthRate
+#define kHeadSize 135*deviceWidthRate
+#define kHeadTopSpace 7*deviceWidthRate
+#define kSexButtonSizeWidth 100*deviceWidthRate
+#define kSexButtonSizeHeight 35*deviceWidthRate
+#define kSexButtonMiddleSpace 25*deviceWidthRate
+#define kCommitButtonSizeWidth 200*deviceWidthRate
+#define kCommitButtonSizeHeight 35*deviceWidthRate
 
 
 #define kLabelTag 100
@@ -45,18 +45,19 @@
 @property(nonatomic)int editingTextFieldTag;
 @property(strong, nonatomic)UIButton *commitButton;
 @property(strong, nonatomic)ConfirmInformationViewController *confirmInformationViewController;
+@property(nonatomic)CGFloat deviceWidthRate;
 
 @end
 
 @implementation RegistInformationViewController
-@synthesize editView, infoArray, promptArray, infoDictionary, editingTextFieldTag, backgroundScrollView, headImageView, boyButton, girlButton, commitButton, confirmInformationViewController;
+@synthesize editView, infoArray, promptArray, infoDictionary, editingTextFieldTag, backgroundScrollView, headImageView, boyButton, girlButton, commitButton, confirmInformationViewController, deviceWidthRate;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     
-    infoArray = @[@"姓名", @"学号", @"学院", @"专业", @"性别"];
+    infoArray = @[@"姓名", @"学号", @"学院", @"专业"];
     promptArray = @[@"请输入您的姓名", @"请输入您的学号", @"请输入您的学院", @"请输入您的专业"];
     infoDictionary = [[NSMutableDictionary alloc]initWithCapacity:5];
     editingTextFieldTag = 0;
@@ -64,7 +65,6 @@
     
     
     backgroundScrollView = [[UIScrollView alloc]initWithFrame:[UIScreen mainScreen].bounds];
-    
     
     UITapGestureRecognizer *singleTapGestureRecoginzer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(backgroudClicked)];
     [backgroundScrollView addGestureRecognizer:singleTapGestureRecoginzer];
@@ -88,8 +88,7 @@
     girlButton.tag = 51;
     [backgroundScrollView addSubview:girlButton];
     
-    editView = [[UIView alloc]initWithFrame:CGRectMake(0, kHeaderViewSizeHeight + 64, kScreenWidth, kEidtiViewSizeHeight)];
-//    editView.backgroundColor = [UIColor lightGrayColor];
+    editView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(boyButton.frame) + kHeadTopSpace, kScreenWidth, kEidtiViewSizeHeight)];
     
     [self initLabelAndTextField];
     
@@ -109,6 +108,17 @@
 }
 
 -(id)init{
+    
+    //适配机型
+    if (kScreenWidth == 320) {
+        deviceWidthRate = 1.0;
+    }else if (kScreenWidth == 375){
+        deviceWidthRate = 1.172;
+    }else if (kScreenWidth == 414){
+        deviceWidthRate = 1.294;
+    }else{
+        deviceWidthRate = kScreenWidth/320.0;
+    }
     self = [super init];
     if (self) {
         self.view.backgroundColor = [UIColor whiteColor];
@@ -119,18 +129,18 @@
     return self;
 }
 
+
+//设置编辑部分
 -(void)initLabelAndTextField{
-    CGFloat cellHeight = kEidtiViewSizeHeight / promptArray.count;
     for (int index = 0; index < promptArray.count; index++) {
-        UILabel *infoLabel = [[UILabel alloc]initWithFrame:CGRectMake(kLeftBlankSpaceWidth, cellHeight * index, kLabelWidth, cellHeight)];
-        UITextField *infoTextField = [[UITextField alloc]initWithFrame:CGRectMake(kLeftBlankSpaceWidth + kLabelWidth + kMidleBlankSpaceWidth, cellHeight * index, (kScreenWidth - kLeftBlankSpaceWidth*2 - kLabelWidth - kMidleBlankSpaceWidth), cellHeight)];
+        UILabel *infoLabel = [[UILabel alloc]initWithFrame:CGRectMake(kLeftBlankSpaceWidth, kLabelSizeHeight * index, kLabelWidth, kLabelSizeHeight)];
+        UITextField *infoTextField = [[UITextField alloc]initWithFrame:CGRectMake(kLeftBlankSpaceWidth + kLabelWidth + kMidleBlankSpaceWidth, kLabelSizeHeight * index, (kScreenWidth - kLeftBlankSpaceWidth*2 - kLabelWidth - kMidleBlankSpaceWidth), kLabelSizeHeight)];
         infoLabel.textColor = kThemeColor;
         infoLabel.text = infoArray[index];
         infoTextField.placeholder = promptArray[index];
         infoLabel.tag = index + kLabelTag;
         infoTextField.tag = index + kTextFieldTag;
         infoTextField.delegate = self;
-//        infoLabel.backgroundColor = [UIColor greenColor];
         infoTextField.textAlignment = NSTextAlignmentCenter;
         [editView addSubview:infoTextField];
         [editView addSubview:infoLabel];
@@ -141,14 +151,7 @@
     }
 }
 
--(void)beginEdit{
-    [backgroundScrollView setContentOffset:CGPointMake(0, 150) animated:YES];
-}
 
--(void)endEdit{
-    [self.view endEditing:YES];
-    [backgroundScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
-}
 
 -(void)setButtonClicked:(UIButton *)button{
     NSLog(@"cliced");
@@ -177,7 +180,7 @@
     }else{
         [infoDictionary setObject:@"女" forKey:@"性别"];
     }
-    confirmInformationViewController = [[ConfirmInformationViewController alloc]initWithInformationDictionary:infoDictionary keyArray:infoArray];
+    confirmInformationViewController = [[ConfirmInformationViewController alloc]initWithInformationDictionary:infoDictionary];
     [self.navigationController pushViewController:confirmInformationViewController animated:YES];
 }
 
@@ -211,6 +214,21 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
      [self endEdit];
     return YES;
+}
+
+-(void)beginEdit{
+    if (kScreenHeight == 480) {
+        [backgroundScrollView setContentOffset:CGPointMake(0, 150) animated:YES];
+    }else if (kScreenHeight == 568) {
+        [backgroundScrollView setContentOffset:CGPointMake(0, 120) animated:YES];
+    }else{
+        [backgroundScrollView setContentOffset:CGPointMake(0, 100) animated:YES];
+    }
+}
+
+-(void)endEdit{
+    [self.view endEditing:YES];
+    [backgroundScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
 }
 
 

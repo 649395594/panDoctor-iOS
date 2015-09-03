@@ -108,10 +108,9 @@
     
     
     // 登录的lable
-    IDlabel = [[UILabel alloc]initWithFrame:CGRectMake(0, userImageH + 64, [[UIScreen mainScreen]bounds].size.width, 60)];
+    IDlabel = [[UILabel alloc]initWithFrame:CGRectMake(0, userImageH + 64, [[UIScreen mainScreen]bounds].size.width, tableUp)];
     IDlabel.backgroundColor = [UIColor colorWithRed:255/255.0 green:230/255.0 blue:230/255.0 alpha:0.3];
     IDlabel.textAlignment = NSTextAlignmentCenter;
-    IDlabel.font = [UIFont systemFontOfSize:25];
     if (self.IDNum == nil) {
         IDlabel.text = @"请登陆";
     }else{
