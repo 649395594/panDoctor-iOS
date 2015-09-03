@@ -158,8 +158,9 @@
 		68D576741B95FE5C00DC4F48 /* ShareSDKShareActionSheet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D576391B95FE5B00DC4F48 /* ShareSDKShareActionSheet.framework */; };
 		68D576751B95FE5C00DC4F48 /* UIScrollView+PullLoad.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D5763B1B95FE5B00DC4F48 /* UIScrollView+PullLoad.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		68D576771B95FEAD00DC4F48 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D576761B95FEAD00DC4F48 /* main.m */; };
-		E2F84A311B96AED9007EB582 /* RegistInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F84A301B96AED9007EB582 /* RegistInformationViewController.m */; };
-		E2F84A371B971865007EB582 /* ConfirmInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F84A361B971865007EB582 /* ConfirmInformationViewController.m */; };
+		68DE17D71B986E7A00556113 /* ConfirmInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DE17D21B986E7A00556113 /* ConfirmInformationViewController.m */; };
+		68DE17D81B986E7A00556113 /* RegistInformationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DE17D41B986E7A00556113 /* RegistInformationView.m */; };
+		68DE17D91B986E7A00556113 /* RegistInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DE17D61B986E7A00556113 /* RegistInformationViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -486,10 +487,12 @@
 		68D5763A1B95FE5B00DC4F48 /* UIScrollView+PullLoad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+PullLoad.h"; sourceTree = "<group>"; };
 		68D5763B1B95FE5B00DC4F48 /* UIScrollView+PullLoad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+PullLoad.m"; sourceTree = "<group>"; };
 		68D576761B95FEAD00DC4F48 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "Supporting Files/main.m"; sourceTree = "<group>"; };
-		E2F84A2F1B96AED9007EB582 /* RegistInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegistInformationViewController.h; path = "Pan大夫/SettingView/RegistInformationViewController.h"; sourceTree = SOURCE_ROOT; };
-		E2F84A301B96AED9007EB582 /* RegistInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegistInformationViewController.m; path = "Pan大夫/SettingView/RegistInformationViewController.m"; sourceTree = SOURCE_ROOT; };
-		E2F84A351B971865007EB582 /* ConfirmInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConfirmInformationViewController.h; path = "Pan大夫/SettingView/ConfirmInformationViewController.h"; sourceTree = SOURCE_ROOT; };
-		E2F84A361B971865007EB582 /* ConfirmInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConfirmInformationViewController.m; path = "Pan大夫/SettingView/ConfirmInformationViewController.m"; sourceTree = SOURCE_ROOT; };
+		68DE17D11B986E7A00556113 /* ConfirmInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmInformationViewController.h; sourceTree = "<group>"; };
+		68DE17D21B986E7A00556113 /* ConfirmInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmInformationViewController.m; sourceTree = "<group>"; };
+		68DE17D31B986E7A00556113 /* RegistInformationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistInformationView.h; sourceTree = "<group>"; };
+		68DE17D41B986E7A00556113 /* RegistInformationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistInformationView.m; sourceTree = "<group>"; };
+		68DE17D51B986E7A00556113 /* RegistInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistInformationViewController.h; sourceTree = "<group>"; };
+		68DE17D61B986E7A00556113 /* RegistInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistInformationViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -636,8 +639,8 @@
 		4D40CA8F1A9334E1005EB7DE /* SettingsView */ = {
 			isa = PBXGroup;
 			children = (
+				68DE17D01B986E7A00556113 /* RegistInformation */,
 				68D574901B95F7D500DC4F48 /* InformationManagement */,
-				68D574871B95F78700DC4F48 /* RegistInformation */,
 				68D5747D1B95F73C00DC4F48 /* MyOrders */,
 				68D574771B95F6F100DC4F48 /* AboutUSViewController.h */,
 				68D574781B95F6F100DC4F48 /* AboutUSViewController.m */,
@@ -753,18 +756,6 @@
 			);
 			name = MyOrders;
 			path = SettingView/MyOrders;
-			sourceTree = "<group>";
-		};
-		68D574871B95F78700DC4F48 /* RegistInformation */ = {
-			isa = PBXGroup;
-			children = (
-				E2F84A2F1B96AED9007EB582 /* RegistInformationViewController.h */,
-				E2F84A301B96AED9007EB582 /* RegistInformationViewController.m */,
-				E2F84A351B971865007EB582 /* ConfirmInformationViewController.h */,
-				E2F84A361B971865007EB582 /* ConfirmInformationViewController.m */,
-			);
-			name = RegistInformation;
-			path = SettingView/RegistInformation;
 			sourceTree = "<group>";
 		};
 		68D574901B95F7D500DC4F48 /* InformationManagement */ = {
@@ -1197,6 +1188,20 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		68DE17D01B986E7A00556113 /* RegistInformation */ = {
+			isa = PBXGroup;
+			children = (
+				68DE17D11B986E7A00556113 /* ConfirmInformationViewController.h */,
+				68DE17D21B986E7A00556113 /* ConfirmInformationViewController.m */,
+				68DE17D31B986E7A00556113 /* RegistInformationView.h */,
+				68DE17D41B986E7A00556113 /* RegistInformationView.m */,
+				68DE17D51B986E7A00556113 /* RegistInformationViewController.h */,
+				68DE17D61B986E7A00556113 /* RegistInformationViewController.m */,
+			);
+			name = RegistInformation;
+			path = SettingView/RegistInformation;
+			sourceTree = "<group>";
+		};
 		7B77AA532DBA2AC1133F13B3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1364,6 +1369,7 @@
 				68D574851B95F73C00DC4F48 /* OrderItemViewCell.m in Sources */,
 				68D576481B95FE5B00DC4F48 /* MKNetworkOperation.m in Sources */,
 				68D5751D1B95FBDC00DC4F48 /* NewsThumbnailTableViewCell.m in Sources */,
+				68DE17D71B986E7A00556113 /* ConfirmInformationViewController.m in Sources */,
 				68D574CA1B95F8F300DC4F48 /* DoctorInfoScrollView.m in Sources */,
 				68D5750E1B95FB8A00DC4F48 /* CoreDataQuestions.xcdatamodel in Sources */,
 				4D48F7991ACA39D0002BE00D /* AppDelegate.m in Sources */,
@@ -1421,12 +1427,10 @@
 				68D5749D1B95F7D500DC4F48 /* InformationViewController.mm in Sources */,
 				68D5749F1B95F7D500DC4F48 /* SearcherViewController.m in Sources */,
 				68D5753F1B95FD9A00DC4F48 /* MyScrollView.m in Sources */,
-				E2F84A371B971865007EB582 /* ConfirmInformationViewController.m in Sources */,
 				68D574D71B95F94300DC4F48 /* CertificationViewController.m in Sources */,
 				68D576411B95FE5B00DC4F48 /* NSData+MKBase64.m in Sources */,
 				68D575431B95FD9A00DC4F48 /* TestViewController.m in Sources */,
 				68D574761B95F69600DC4F48 /* UserTableViewController.m in Sources */,
-				E2F84A311B96AED9007EB582 /* RegistInformationViewController.m in Sources */,
 				68D575101B95FB8A00DC4F48 /* questionManagedObject.m in Sources */,
 				68D576521B95FE5B00DC4F48 /* SDWebImagePrefetcher.m in Sources */,
 				68D574C81B95F8F300DC4F48 /* DashLineView.m in Sources */,
@@ -1436,8 +1440,10 @@
 				68D5751C1B95FBDC00DC4F48 /* MyScollViewController.m in Sources */,
 				68D574CB1B95F8F300DC4F48 /* DoctorItemViewCell.m in Sources */,
 				68D575201B95FBDC00DC4F48 /* SVTopScrollView.m in Sources */,
+				68DE17D91B986E7A00556113 /* RegistInformationViewController.m in Sources */,
 				68D576531B95FE5B00DC4F48 /* UIButton+WebCache.m in Sources */,
 				68D574CC1B95F8F300DC4F48 /* DoctorTableView.m in Sources */,
+				68DE17D81B986E7A00556113 /* RegistInformationView.m in Sources */,
 				68D576451B95FE5B00DC4F48 /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
 				68D575411B95FD9A00DC4F48 /* ServiceItemSViewController.m in Sources */,
 				68D5764A1B95FE5B00DC4F48 /* MKAnnotationView+WebCache.m in Sources */,

@@ -15,6 +15,7 @@
 //#define HOSTNAME @"zhangxingyu.sinaapp.com.cn/"
 
 #define HOSTNAME @"pandoctor.sinaapp.com"
-#define MAS_SHORTHAND
+#define kScreenWidth [UIScreen mainScreen].bounds.size.width
+#define kScreenHeight [UIScreen mainScreen].bounds.size.height
 
 #endif
