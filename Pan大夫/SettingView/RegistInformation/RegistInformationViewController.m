@@ -18,7 +18,7 @@
 #import "RegistInformationViewController.h"
 #import "ConfirmInformationViewController.h"
 #import "RegistInformationView.h"
-//#import <ReactiveCocoa/ReactiveCocoa.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 
 @interface RegistInformationViewController ()<UITextFieldDelegate>
 
@@ -48,16 +48,18 @@
     [view refreshText];
     [self.view addSubview:view];
     
-//    view.boyButton.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-//        view.girlButton.selected = NO;
-//        view.headImageView.image = [UIImage imageNamed:@"picOfBoyHead"];
-//        return [RACSignal empty];
-//    }];
-//    view.girlButton.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-//        view.boyButton.selected = NO;
-//        view.headImageView.image = [UIImage imageNamed:@"picOfGirlHead"];
-//        return [RACSignal empty];
-//    }];
+    view.boyButton.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        view.boyButton.selected = YES;
+        view.girlButton.selected = NO;
+        view.headImageView.image = [UIImage imageNamed:@"picOfBoyHead"];
+        return [RACSignal empty];
+    }];
+    view.girlButton.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        view.boyButton.selected = NO;
+        view.girlButton.selected = YES;
+        view.headImageView.image = [UIImage imageNamed:@"picOfGirlHead"];
+        return [RACSignal empty];
+    }];
 }
 
 -(id)init{

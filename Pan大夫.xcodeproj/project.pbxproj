@@ -161,6 +161,7 @@
 		68DE17D71B986E7A00556113 /* ConfirmInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DE17D21B986E7A00556113 /* ConfirmInformationViewController.m */; };
 		68DE17D81B986E7A00556113 /* RegistInformationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DE17D41B986E7A00556113 /* RegistInformationView.m */; };
 		68DE17D91B986E7A00556113 /* RegistInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DE17D61B986E7A00556113 /* RegistInformationViewController.m */; };
+		A0AABBBD8F7AF4906647CD6D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BEA1EBDB727C3410DADED4AC /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -493,6 +494,7 @@
 		68DE17D41B986E7A00556113 /* RegistInformationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistInformationView.m; sourceTree = "<group>"; };
 		68DE17D51B986E7A00556113 /* RegistInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistInformationViewController.h; sourceTree = "<group>"; };
 		68DE17D61B986E7A00556113 /* RegistInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistInformationViewController.m; sourceTree = "<group>"; };
+		BEA1EBDB727C3410DADED4AC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -545,6 +547,7 @@
 				4D14A1E41A91D4FE0098D198 /* SystemConfiguration.framework in Frameworks */,
 				68D5765F1B95FE5C00DC4F48 /* SinaWeiboConnection.framework in Frameworks */,
 				4D14A1E21A91D4F60098D198 /* CoreTelephony.framework in Frameworks */,
+				A0AABBBD8F7AF4906647CD6D /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1205,6 +1208,7 @@
 		7B77AA532DBA2AC1133F13B3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BEA1EBDB727C3410DADED4AC /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1633,12 +1637,7 @@
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = (
-					"-all_load",
-					"-ObjC",
-					"-framework",
-					Reveal,
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = "armv7 armv7s";
 			};
@@ -1700,12 +1699,7 @@
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = (
-					"-all_load",
-					"-ObjC",
-					"-framework",
-					Reveal,
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = "armv7 armv7s";
 			};
