@@ -1,0 +1,6 @@
+platform :ios, '6.0'
+pod "ReactiveCocoa", "~> 2.5"
+
+pod 'Masonry'
+
+pod "Mantle", "~> 2.0"
