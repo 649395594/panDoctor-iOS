@@ -24,10 +24,4 @@
     return self;
 }
 
-+ (NSDictionary *)JSONKeyPathsByPropertyKey {
-    return @{
-             @"patientName": @"patientName",
-             };
-}
-
 @end

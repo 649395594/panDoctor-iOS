@@ -7,9 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <Mantle.h>
 
-@interface Comment : NSObject <MTLJSONSerializing>
+@interface Comment : NSObject
 
 @property (strong, nonatomic) NSString *patientName;
 @property (strong, nonatomic) NSString *patientTel;

@@ -3,6 +3,7 @@ PODS:
     - Mantle/extobjc (= 2.0.4)
   - Mantle/extobjc (2.0.4)
   - Masonry (0.6.2)
+  - MJRefresh (2.4.7)
   - ReactiveCocoa (2.5):
     - ReactiveCocoa/UI (= 2.5)
   - ReactiveCocoa/Core (2.5):
@@ -14,11 +15,13 @@ PODS:
 DEPENDENCIES:
   - Mantle (~> 2.0)
   - Masonry
+  - MJRefresh
   - ReactiveCocoa (~> 2.5)
 
 SPEC CHECKSUMS:
   Mantle: 6bee68168423948be0c0c5924832bf3af188e099
   Masonry: 362e8a1cc0beada4a4c4832d5e863da2a51533be
+  MJRefresh: 6eb2f61338f89f64fd628fd43debcf479381ff59
   ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
 
 COCOAPODS: 0.38.2
