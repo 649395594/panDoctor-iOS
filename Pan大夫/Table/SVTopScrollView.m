@@ -21,10 +21,6 @@
 #define kButtonWidth_6plus 48
 //滑动id
 #define BUTTONSELECTEDID (scrollViewSelectedChannelID - 100)
-#define IS_IPHONE_4S_SCREEN ([[UIScreen mainScreen]bounds].size.width >=315.0f&&[[UIScreen mainScreen]bounds].size.width <=325.0f)&&([[UIScreen mainScreen]bounds].size.height<=485.0f&&[[UIScreen mainScreen]bounds].size.height>=475.0f)
-#define IS_IPHONE_5S_SCREEN ([[UIScreen mainScreen]bounds].size.width >=315.0f&&[[UIScreen mainScreen]bounds].size.width <=325.0f)&&([[UIScreen mainScreen]bounds].size.height<=570.0f&&[[UIScreen mainScreen]bounds].size.height>=565.0f)
-#define IS_IPHONE_6_SCREEN ([[UIScreen mainScreen]bounds].size.width >=370.0f&&[[UIScreen mainScreen]bounds].size.width <=380.0f)&&([[UIScreen mainScreen]bounds].size.height<=670.0f&&[[UIScreen mainScreen]bounds].size.height>=660.0f)
-#define IS_IPHONE_6plus_SCREEN ([[UIScreen mainScreen]bounds].size.width >=535.0f&&[[UIScreen mainScreen]bounds].size.width <=545.0f)&&([[UIScreen mainScreen]bounds].size.height<=735.0f&&[[UIScreen mainScreen]bounds].size.height>=740.0f)
 
 @implementation SVTopScrollView
 

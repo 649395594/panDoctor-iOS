@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-#define kScreenWidth [UIScreen mainScreen].bounds.size.width
-
 @interface MyScrollView : UIScrollView<UIScrollViewDelegate,UIGestureRecognizerDelegate>
 
 @property (nonatomic,strong) UIPageControl *pageControl;

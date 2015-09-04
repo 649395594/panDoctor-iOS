@@ -6,10 +6,6 @@
 //  Copyright (c) 2015年 Neil. All rights reserved.
 //
 
-
-#define kScreenWidth [UIScreen mainScreen].bounds.size.width
-#define kScreenHeight [UIScreen mainScreen].bounds.size.height
-
 #define kThemeColor [UIColor colorWithRed:0/255.0 green:175.0/255.0 blue:170.0/255.0 alpha:1.0]
 
 #define kPromptViewOrigneY 80*deviceWidthRate

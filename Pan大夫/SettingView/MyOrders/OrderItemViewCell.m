@@ -15,10 +15,6 @@
 #define kColor4 [UIColor colorWithRed:1.0/255.0 green:175/255.0  blue:173/255.0  alpha:1.0]//order_finished
 #define kColor_cancle [UIColor colorWithRed:160/255.0 green:160/255.0  blue:160/255.0  alpha:1.0]//order_finished
 
-#define IS_IPHONE_4S_SCREEN [[UIScreen mainScreen]bounds].size.height<=485.0f&&[[UIScreen mainScreen]bounds].size.height>=475.0f
-#define IS_IPHONE_5S_SCREEN [[UIScreen mainScreen]bounds].size.height<=570.0f&&[[UIScreen mainScreen]bounds].size.height>=565.0f
-#define IS_IPHONE_6_SCREEN [[UIScreen mainScreen]bounds].size.height<=670.0f&&[[UIScreen mainScreen]bounds].size.height>=660.0f
-#define IS_IPHONE_6plus_SCREEN [[UIScreen mainScreen]bounds].size.height<=740.0f&&[[UIScreen mainScreen]bounds].size.height>=735.0f
 #define kInch1 370.0/320.0;
 
 

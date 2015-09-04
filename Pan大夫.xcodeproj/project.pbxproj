@@ -96,7 +96,6 @@
 		68D575311B95FCA200DC4F48 /* test.plist in Resources */ = {isa = PBXBuildFile; fileRef = 68D5752C1B95FCA200DC4F48 /* test.plist */; };
 		68D5753F1B95FD9A00DC4F48 /* MyScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D575361B95FD9A00DC4F48 /* MyScrollView.m */; };
 		68D575401B95FD9A00DC4F48 /* ServiceItemSTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D575381B95FD9A00DC4F48 /* ServiceItemSTableViewCell.m */; };
-		68D575411B95FD9A00DC4F48 /* ServiceItemSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D5753A1B95FD9A00DC4F48 /* ServiceItemSViewController.m */; };
 		68D575421B95FD9A00DC4F48 /* ServiceItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D5753C1B95FD9A00DC4F48 /* ServiceItemViewController.m */; };
 		68D575431B95FD9A00DC4F48 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D5753E1B95FD9A00DC4F48 /* TestViewController.m */; };
 		68D5763C1B95FE5B00DC4F48 /* HZAreaPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D575921B95FE5B00DC4F48 /* HZAreaPickerView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -162,6 +161,7 @@
 		68DE17D81B986E7A00556113 /* RegistInformationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DE17D41B986E7A00556113 /* RegistInformationView.m */; };
 		68DE17D91B986E7A00556113 /* RegistInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DE17D61B986E7A00556113 /* RegistInformationViewController.m */; };
 		68E29DAE1B994D2A00DEF186 /* RegistInformationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E29DAD1B994D2A00DEF186 /* RegistInformationViewModel.m */; };
+		68E29DB11B99C27500DEF186 /* ServiceItemTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E29DB01B99C27500DEF186 /* ServiceItemTableView.m */; };
 		A0AABBBD8F7AF4906647CD6D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BEA1EBDB727C3410DADED4AC /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -327,8 +327,6 @@
 		68D575361B95FD9A00DC4F48 /* MyScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyScrollView.m; sourceTree = "<group>"; };
 		68D575371B95FD9A00DC4F48 /* ServiceItemSTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceItemSTableViewCell.h; sourceTree = "<group>"; };
 		68D575381B95FD9A00DC4F48 /* ServiceItemSTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceItemSTableViewCell.m; sourceTree = "<group>"; };
-		68D575391B95FD9A00DC4F48 /* ServiceItemSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceItemSViewController.h; sourceTree = "<group>"; };
-		68D5753A1B95FD9A00DC4F48 /* ServiceItemSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceItemSViewController.m; sourceTree = "<group>"; };
 		68D5753B1B95FD9A00DC4F48 /* ServiceItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceItemViewController.h; sourceTree = "<group>"; };
 		68D5753C1B95FD9A00DC4F48 /* ServiceItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceItemViewController.m; sourceTree = "<group>"; };
 		68D5753D1B95FD9A00DC4F48 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
@@ -497,6 +495,8 @@
 		68DE17D61B986E7A00556113 /* RegistInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistInformationViewController.m; sourceTree = "<group>"; };
 		68E29DAC1B994D2A00DEF186 /* RegistInformationViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistInformationViewModel.h; sourceTree = "<group>"; };
 		68E29DAD1B994D2A00DEF186 /* RegistInformationViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistInformationViewModel.m; sourceTree = "<group>"; };
+		68E29DAF1B99C27500DEF186 /* ServiceItemTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceItemTableView.h; sourceTree = "<group>"; };
+		68E29DB01B99C27500DEF186 /* ServiceItemTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceItemTableView.m; sourceTree = "<group>"; };
 		BEA1EBDB727C3410DADED4AC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -741,8 +741,8 @@
 			children = (
 				68D575341B95FD9A00DC4F48 /* ServiceItem */,
 				68D574A61B95F85A00DC4F48 /* Order */,
-				68D574A01B95F81200DC4F48 /* HomeViewController.m */,
 				68D574A11B95F81200DC4F48 /* HomeViewController.h */,
+				68D574A01B95F81200DC4F48 /* HomeViewController.m */,
 				68D574A21B95F81200DC4F48 /* ChooseCurrentCity.h */,
 				68D574A31B95F81200DC4F48 /* ChooseCurrentCity.m */,
 				2A624B081AAC366000189660 /* DoctorList */,
@@ -894,12 +894,12 @@
 				68D575361B95FD9A00DC4F48 /* MyScrollView.m */,
 				68D575371B95FD9A00DC4F48 /* ServiceItemSTableViewCell.h */,
 				68D575381B95FD9A00DC4F48 /* ServiceItemSTableViewCell.m */,
-				68D575391B95FD9A00DC4F48 /* ServiceItemSViewController.h */,
-				68D5753A1B95FD9A00DC4F48 /* ServiceItemSViewController.m */,
 				68D5753B1B95FD9A00DC4F48 /* ServiceItemViewController.h */,
 				68D5753C1B95FD9A00DC4F48 /* ServiceItemViewController.m */,
 				68D5753D1B95FD9A00DC4F48 /* TestViewController.h */,
 				68D5753E1B95FD9A00DC4F48 /* TestViewController.m */,
+				68E29DAF1B99C27500DEF186 /* ServiceItemTableView.h */,
+				68E29DB01B99C27500DEF186 /* ServiceItemTableView.m */,
 			);
 			name = ServiceItem;
 			path = Home/ServiceItem;
@@ -1455,9 +1455,9 @@
 				68D574CC1B95F8F300DC4F48 /* DoctorTableView.m in Sources */,
 				68DE17D81B986E7A00556113 /* RegistInformationView.m in Sources */,
 				68D576451B95FE5B00DC4F48 /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
-				68D575411B95FD9A00DC4F48 /* ServiceItemSViewController.m in Sources */,
 				68D5764A1B95FE5B00DC4F48 /* MKAnnotationView+WebCache.m in Sources */,
 				68D5764B1B95FE5B00DC4F48 /* NSData+ImageContentType.m in Sources */,
+				68E29DB11B99C27500DEF186 /* ServiceItemTableView.m in Sources */,
 				68D574EA1B95F9EB00DC4F48 /* DiagnosisViewController.m in Sources */,
 				68D5750F1B95FB8A00DC4F48 /* Question.m in Sources */,
 				68D574F81B95FA2A00DC4F48 /* Order.m in Sources */,

@@ -9,15 +9,7 @@
 #import "detailView.h"
 #import "SearcherViewController.h"
 
-#define IS_IPHONE_4S_SCREEN [[UIScreen mainScreen]bounds].size.height<=485.0f&&[[UIScreen mainScreen]bounds].size.height>=475.0f
-#define IS_IPHONE_5S_SCREEN [[UIScreen mainScreen]bounds].size.height<=570.0f&&[[UIScreen mainScreen]bounds].size.height>=565.0f
-#define IS_IPHONE_6_SCREEN [[UIScreen mainScreen]bounds].size.height<=670.0f&&[[UIScreen mainScreen]bounds].size.height>=660.0f
-#define IS_IPHONE_6plus_SCREEN [[UIScreen mainScreen]bounds].size.height<=740.0f&&[[UIScreen mainScreen]bounds].size.height>=735.0f
-#define DEVICE_ID IS_IPHONE_4S_SCREEN?1:(IS_IPHONE_5S_SCREEN?2:(IS_IPHONE_6_SCREEN?3:(IS_IPHONE_6plus_SCREEN?4:5)))
-
 //设置frame 的宏的情况
-#define Kwidth [UIScreen mainScreen].bounds.size.width
-#define Kheight [[UIScreen mainScreen]bounds].size.height
 #define heightBetween 0
 #define LengthBefore 10
 #define lengthBetween 5
@@ -25,7 +17,7 @@
 #define HeighToTop [[UIScreen mainScreen]bounds].size.height/7.5
 #define HeightBig 10
 #define widthOfLabel [[UIScreen mainScreen]bounds].size.height/15
-#define lengthOfTextField Kwidth-lengthOftabel-LengthBefore
+#define lengthOfTextField kScreenWidth - lengthOftabel - LengthBefore
 #define lineColor colorWithRed:0.667 green:0.667 blue:0.667 alpha:1
 #define wordColor colorWithRed:0.416 green:0.416 blue:0.416 alpha:1
 @interface detailView (){

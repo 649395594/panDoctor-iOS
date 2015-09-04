@@ -11,7 +11,6 @@
 #import "DoctorDetailViewController.h"
 #import "ChooseCurrentCity.h"
 #import "ServiceItemViewController.h"
-#import "ServiceItemSViewController.h"
 #import "TestViewController.h"
 
 #define KDeviceWidth [[UIScreen mainScreen]bounds].size.width
@@ -23,13 +22,12 @@
 @property (strong, nonatomic) ChooseCurrentCity *chooseCityView;
 @property (strong, nonatomic) AppDelegate *appDelegate;
 @property (strong, nonatomic) NSString *defaultCity;
-@property (strong, nonatomic) ServiceItemSViewController *serviceItemSVC;
 @property (strong, nonatomic) UISegmentedControl *segment;
 @end
 
 @implementation HomeViewController
 
-@synthesize serviceItemVC,doctorListVC,chooseCityView,serviceItemSVC;
+@synthesize serviceItemVC,doctorListVC,chooseCityView;
 @synthesize appDelegate;
 @synthesize leftButton;
 @synthesize segment;
@@ -62,24 +60,19 @@
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(share:)];
     self.navigationItem.rightBarButtonItem = rightButton;
     
-    serviceItemVC = [[ServiceItemViewController alloc]initWithPushDelegate:self];
+    serviceItemVC = [[ServiceItemViewController alloc] init];
     serviceItemVC.view.frame = CGRectMake(0, 64, KDeviceWidth, KDeviceHeight - 64 -49);
-    
-//    serviceItemSVC = [[ServiceItemSViewController alloc]init];
-    serviceItemSVC = [[ServiceItemSViewController alloc]initWithPushDelegate:self];
-    serviceItemSVC.view.frame = CGRectMake(0, 64, KDeviceWidth, KDeviceHeight - 64 - 49);
     
     doctorListVC = [[DoctorsListViewController alloc]initWithDelegate:self Special:nil];
     doctorListVC.view.frame = CGRectMake(0, 64, KDeviceWidth, KDeviceHeight - 64 -49);
-    [self.view addSubview:serviceItemSVC.myTableView];
-//    [self.view addSubview:serviceItemVC.view];
+    
+    [self.view addSubview:serviceItemVC.view];
     [self.view addSubview:doctorListVC.view];
     doctorListVC.view.hidden = YES;
     
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc]init];
     backItem.title = @"返回";
     self.navigationItem.backBarButtonItem = backItem;
-
 }
 
 - (void)didReceiveMemoryWarning {
@@ -87,20 +80,18 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)segmentAction:(UISegmentedControl *)segment{
-    NSInteger index = segment.selectedSegmentIndex;
+- (void)segmentAction:(UISegmentedControl *)theSegment{
+    NSInteger index = theSegment.selectedSegmentIndex;
   
     NSLog(@"%ld",(long)index);
     switch (index) {
         case 0:{
-//            serviceItemVC.view.hidden = NO;
-            serviceItemSVC.view.hidden = NO;
+            serviceItemVC.view.hidden = NO;
             doctorListVC.view.hidden = YES;
             break;
         }
         case 1:{
-//            serviceItemVC.view.hidden = YES;
-            serviceItemSVC.view.hidden = YES;
+            serviceItemVC.view.hidden = YES;
             doctorListVC.view.hidden = NO;
             NSLog(@"%ld",(long)index);
             break;

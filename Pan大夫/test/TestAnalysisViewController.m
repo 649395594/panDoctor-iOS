@@ -10,14 +10,6 @@
 #import "TestAnalysisViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
-#define IS_IPHONE_4S_SCREEN [[UIScreen mainScreen]bounds].size.height<=485.0f&&[[UIScreen mainScreen]bounds].size.height>=475.0f
-#define IS_IPHONE_5S_SCREEN [[UIScreen mainScreen]bounds].size.height<=570.0f&&[[UIScreen mainScreen]bounds].size.height>=565.0f
-#define IS_IPHONE_6_SCREEN [[UIScreen mainScreen]bounds].size.height<=670.0f&&[[UIScreen mainScreen]bounds].size.height>=660.0f
-#define IS_IPHONE_6plus_SCREEN [[UIScreen mainScreen]bounds].size.height<=740.0f&&[[UIScreen mainScreen]bounds].size.height>=735.0f
-#define DEVICE_ID IS_IPHONE_4S_SCREEN?1:(IS_IPHONE_5S_SCREEN?2:(IS_IPHONE_6_SCREEN?3:(IS_IPHONE_6plus_SCREEN?4:5)))
-#define KDeviceWidth [[UIScreen mainScreen]bounds].size.width
-#define KDeviceHeight [[UIScreen mainScreen]bounds].size.height
-
 @interface TestAnalysisViewController ()
 
 @property (nonatomic , strong) UITextView *resultLabel;
@@ -93,7 +85,7 @@
     [saveButton.layer setBorderColor:[[UIColor grayColor] CGColor]];
     
     [saveButton setTitle:@"保存" forState:UIControlStateNormal];
-    saveButton.frame = CGRectMake((KDeviceWidth - KDeviceWidth/5)/2,0.75 * KDeviceHeight, KDeviceWidth/5, KDeviceWidth/10);
+    saveButton.frame = CGRectMake((kScreenWidth - kScreenWidth/5)/2,0.75 * kScreenHeight, kScreenWidth/5, kScreenWidth/10);
     [saveButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [saveButton addTarget:self action:@selector(saveResultToImage) forControlEvents:UIControlEventTouchUpInside];
     switch (DEVICE_ID) {

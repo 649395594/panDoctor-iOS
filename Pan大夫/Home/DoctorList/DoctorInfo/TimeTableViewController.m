@@ -6,9 +6,6 @@
 //  Copyright (c) 2015年 Tom. All rights reserved.
 //
 
-#define kScreenWidth [UIScreen mainScreen].bounds.size.width
-#define kScreenHeight [UIScreen mainScreen].bounds.size.height
-
 #define kDateButtonWidth (60 * deviceWidthRate)
 #define kTimeButtonWidth (68 * deviceWidthRate)
 #define kDateButtonHeiht (60 * deviceWidthRate)
