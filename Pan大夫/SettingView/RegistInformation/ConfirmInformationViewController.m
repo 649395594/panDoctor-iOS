@@ -22,7 +22,7 @@
 #define kLineSpace2 30*deviceWidthRate
 #define kLeftBlankSpaceWidth 30*deviceWidthRate
 #define kLabelLeftWidth 35*deviceWidthRate
-#define kMidleBlankSpaceWidth 5*deviceWidthRate
+#define kMidleBlankSpaceWidth 5 * deviceWidthRate
 #define kHeadSize 125*deviceWidthRate
 #define kButtonSizeWidth 100*deviceWidthRate
 #define kButtonSizeHeight 35*deviceWidthRate
@@ -44,9 +44,9 @@
 @property(strong, nonatomic)UIButton *commitButton;
 
 @property(strong, nonatomic)NSDictionary *infoDictionay;
-@property(strong, nonatomic)NSArray *keyArray;
+@property(strong, nonatomic) NSArray *keyArray;
 
-@property(nonatomic)CGFloat deviceWidthRate;
+@property(nonatomic) CGFloat deviceWidthRate;
 
 @end
 

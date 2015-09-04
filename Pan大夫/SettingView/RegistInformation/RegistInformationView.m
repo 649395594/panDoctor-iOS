@@ -23,7 +23,7 @@
 
 #import "RegistInformationView.h"
 
-@interface RegistInformationView(){
+@interface RegistInformationView() <UITextFieldDelegate>{
     CGFloat _deviceWidthRate;
 }
 
@@ -65,6 +65,7 @@
     _boyButton.frame = CGRectMake((kScreenWidth - kSexButtonMiddleSpace - kSexButtonSizeWidth*2)/2, CGRectGetMaxY(_headImageView.frame) + 5, kSexButtonSizeWidth, kSexButtonSizeHeight);
     [_boyButton setImage:[UIImage imageNamed:@"picOfBoy"] forState:UIControlStateNormal];
     [_boyButton setImage:[UIImage imageNamed:@"picOfBoyYes"] forState:UIControlStateSelected];
+    _boyButton.selected = YES;
     [self addSubview:_boyButton];
 }
 
@@ -81,6 +82,7 @@
     _nameField = [[UITextField alloc]initWithFrame:CGRectMake(kLeftBlankSpaceWidth + kLabelWidth + kMidleBlankSpaceWidth, CGRectGetMaxY(_boyButton.frame) + kLabelSizeHeight * 0, (kScreenWidth - kLeftBlankSpaceWidth*2 - kLabelWidth - kMidleBlankSpaceWidth), kLabelSizeHeight)];
     _nameLabel.textColor = kThemeColor;
     _nameField.textAlignment = NSTextAlignmentCenter;
+    _nameField.delegate = self;
     [self addSubview:_nameField];
     [self addSubview:_nameLabel];
 }
@@ -91,6 +93,7 @@
     _studentIdLabel.textColor = kThemeColor;
     _studentIdField.textAlignment = NSTextAlignmentCenter;
     _studentIdField.keyboardType = UIKeyboardTypeNumberPad;
+    _studentIdField.delegate = self;
     [self addSubview:_studentIdField];
     [self addSubview:_studentIdLabel];
 }
@@ -100,6 +103,7 @@
     _collegeField = [[UITextField alloc]initWithFrame:CGRectMake(kLeftBlankSpaceWidth + kLabelWidth + kMidleBlankSpaceWidth, CGRectGetMaxY(_boyButton.frame) + kLabelSizeHeight * 2, (kScreenWidth - kLeftBlankSpaceWidth * 2 - kLabelWidth - kMidleBlankSpaceWidth), kLabelSizeHeight)];
     _collegeLabel.textColor = kThemeColor;
     _collegeField.textAlignment = NSTextAlignmentCenter;
+    _collegeField.delegate = self;
     [self addSubview:_collegeField];
     [self addSubview:_collegeLabel];
 }
@@ -109,6 +113,7 @@
     _majorField = [[UITextField alloc]initWithFrame:CGRectMake(kLeftBlankSpaceWidth + kLabelWidth + kMidleBlankSpaceWidth, CGRectGetMaxY(_boyButton.frame) + kLabelSizeHeight * 3, (kScreenWidth - kLeftBlankSpaceWidth * 2 - kLabelWidth - kMidleBlankSpaceWidth), kLabelSizeHeight)];
     _majorLabel.textColor = kThemeColor;
     _majorField.textAlignment = NSTextAlignmentCenter;
+    _majorField.delegate = self;
     [self addSubview:_majorField];
     [self addSubview:_majorLabel];
 }
@@ -116,7 +121,6 @@
 - (void)setupCommitButton{
     _commitButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     _commitButton.frame = CGRectMake((kScreenWidth - kCommitButtonSizeWidth)/2, CGRectGetMaxY(_boyButton.frame) + 4 * kLabelSizeHeight + 5, kCommitButtonSizeWidth, kCommitButtonSizeHeight);
-    _commitButton.backgroundColor = kThemeColor;
     [_commitButton setTitle:@"确定" forState:UIControlStateNormal];
     [_commitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _commitButton.layer.cornerRadius = 10;
@@ -135,6 +139,35 @@
     _collegeField.placeholder = _promptArray[2];
     _majorLabel.text = _infoArray[3];
     _majorField.placeholder = _promptArray[3];
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    [self endEdit];
+}
+
+-(void)beginEdit{
+    if (kScreenHeight == 480) {
+        [self setContentOffset:CGPointMake(0, 150) animated:YES];
+    }else if (kScreenHeight == 568) {
+        [self setContentOffset:CGPointMake(0, 120) animated:YES];
+    }else{
+        [self setContentOffset:CGPointMake(0, 100) animated:YES];
+    }
+}
+
+-(void)endEdit{
+    [self endEditing:YES];
+    [self setContentOffset:CGPointMake(0, 0) animated:YES];
+}
+
+#pragma mark - text field delegate
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    [self beginEdit];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+     [self endEdit];
+    return YES;
 }
 
 @end

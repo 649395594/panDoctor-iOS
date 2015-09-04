@@ -161,6 +161,7 @@
 		68DE17D71B986E7A00556113 /* ConfirmInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DE17D21B986E7A00556113 /* ConfirmInformationViewController.m */; };
 		68DE17D81B986E7A00556113 /* RegistInformationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DE17D41B986E7A00556113 /* RegistInformationView.m */; };
 		68DE17D91B986E7A00556113 /* RegistInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DE17D61B986E7A00556113 /* RegistInformationViewController.m */; };
+		68E29DAE1B994D2A00DEF186 /* RegistInformationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E29DAD1B994D2A00DEF186 /* RegistInformationViewModel.m */; };
 		A0AABBBD8F7AF4906647CD6D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BEA1EBDB727C3410DADED4AC /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -494,6 +495,8 @@
 		68DE17D41B986E7A00556113 /* RegistInformationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistInformationView.m; sourceTree = "<group>"; };
 		68DE17D51B986E7A00556113 /* RegistInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistInformationViewController.h; sourceTree = "<group>"; };
 		68DE17D61B986E7A00556113 /* RegistInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistInformationViewController.m; sourceTree = "<group>"; };
+		68E29DAC1B994D2A00DEF186 /* RegistInformationViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistInformationViewModel.h; sourceTree = "<group>"; };
+		68E29DAD1B994D2A00DEF186 /* RegistInformationViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistInformationViewModel.m; sourceTree = "<group>"; };
 		BEA1EBDB727C3410DADED4AC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -1200,6 +1203,8 @@
 				68DE17D41B986E7A00556113 /* RegistInformationView.m */,
 				68DE17D51B986E7A00556113 /* RegistInformationViewController.h */,
 				68DE17D61B986E7A00556113 /* RegistInformationViewController.m */,
+				68E29DAC1B994D2A00DEF186 /* RegistInformationViewModel.h */,
+				68E29DAD1B994D2A00DEF186 /* RegistInformationViewModel.m */,
 			);
 			name = RegistInformation;
 			path = SettingView/RegistInformation;
@@ -1435,6 +1440,7 @@
 				68D576411B95FE5B00DC4F48 /* NSData+MKBase64.m in Sources */,
 				68D575431B95FD9A00DC4F48 /* TestViewController.m in Sources */,
 				68D574761B95F69600DC4F48 /* UserTableViewController.m in Sources */,
+				68E29DAE1B994D2A00DEF186 /* RegistInformationViewModel.m in Sources */,
 				68D575101B95FB8A00DC4F48 /* questionManagedObject.m in Sources */,
 				68D576521B95FE5B00DC4F48 /* SDWebImagePrefetcher.m in Sources */,
 				68D574C81B95F8F300DC4F48 /* DashLineView.m in Sources */,

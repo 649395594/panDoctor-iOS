@@ -18,56 +18,46 @@
 #import "RegistInformationViewController.h"
 #import "ConfirmInformationViewController.h"
 #import "RegistInformationView.h"
+#import "RegistInformationViewModel.h"
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
-@interface RegistInformationViewController ()<UITextFieldDelegate>
+@interface RegistInformationViewController ()
 
-@property(strong, nonatomic)UIView *editView;
-@property(strong, nonatomic)UIScrollView *backgroundScrollView;
-@property(strong, nonatomic)NSArray *infoArray;
-@property(strong, nonatomic)NSArray *promptArray;
-@property(strong, nonatomic)NSMutableDictionary *infoDictionary;
-@property(strong, nonatomic)UIImageView *headImageView;
-@property(strong, nonatomic)UIButton *boyButton;
-@property(strong, nonatomic)UIButton *girlButton;
-@property(strong, nonatomic)UIButton *commitButton;
-@property(strong, nonatomic)ConfirmInformationViewController *confirmInformationViewController;
-@property(nonatomic)CGFloat deviceWidthRate;
+@property (strong, nonatomic) RegistInformationView *registView;
+@property (strong, nonatomic) RegistInformationViewModel *viewModel;
+@property (strong, nonatomic) ConfirmInformationViewController *confirmInformationViewController;
+@property (strong, nonatomic) NSArray *infoArray;
+@property (strong, nonatomic) NSArray *promptArray;
 
 @end
 
 @implementation RegistInformationViewController
-@synthesize editView, infoArray, promptArray, infoDictionary, backgroundScrollView, headImageView, boyButton, girlButton, commitButton, confirmInformationViewController, deviceWidthRate;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    RegistInformationView *view = [[RegistInformationView alloc] initWithFactor:[self adjustDevice]];
-    view.infoArray = @[@"姓名", @"学号", @"学院", @"专业"];
-    view.promptArray = @[@"请输入您的姓名", @"请输入您的学号", @"请输入您的学院", @"请输入您的专业"];
-    [view refreshText];
-    [self.view addSubview:view];
+    _registView = [[RegistInformationView alloc] initWithFactor:[self adjustDevice]];
+    _registView.infoArray = _infoArray;
+    _registView.promptArray = _promptArray;
+    [_registView refreshText];
+    [self.view addSubview:_registView];
     
-    view.boyButton.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        view.boyButton.selected = YES;
-        view.girlButton.selected = NO;
-        view.headImageView.image = [UIImage imageNamed:@"picOfBoyHead"];
-        return [RACSignal empty];
-    }];
-    view.girlButton.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        view.boyButton.selected = NO;
-        view.girlButton.selected = YES;
-        view.headImageView.image = [UIImage imageNamed:@"picOfGirlHead"];
-        return [RACSignal empty];
-    }];
+    [self bindViewModelData];  //绑定视图模型中的数据
+    [self setCommitButtonStatus];  // 绑定commit按钮的状态，根据输入信息动态改变
+    [self bindChooseSexButton];  // 设置选择性别的按钮按下后的事件
+    [self bindCommitButton];  // 设置选择提交的按钮按下后的事件
 }
 
--(id)init{
+- (id)init{
     self = [super init];
     if (self) {
+        self.title = @"注册信息";
+        _infoArray = @[@"姓名", @"学号", @"学院", @"专业"];
+        _promptArray = @[@"请输入您的姓名", @"请输入您的学号", @"请输入您的学院", @"请输入您的专业"];
+        _viewModel = [[RegistInformationViewModel alloc] init];
         self.view.backgroundColor = [UIColor whiteColor];
         self.automaticallyAdjustsScrollViewInsets = NO;
-        self.title = @"注册信息";
+        
     }
     return self;
 }
@@ -86,81 +76,80 @@
    }
 }
 
--(void)setButtonClicked:(UIButton *)button{
-    NSLog(@"cliced");
-    if (button.selected) {
-        return;
-    }
-    button.selected = YES;
-    if (button.tag == 50) {
-        girlButton.selected = NO;
-        headImageView.image = [UIImage imageNamed:@"picOfBoyHead"];
-    }else{
-        boyButton.selected = NO;
-        headImageView.image = [UIImage imageNamed:@"picOfGirlHead"];
-    }
-}
-
--(void)commitButtonClicked{
-    NSLog(@"commitButtonClicked");
-    for (int index = 0; index<promptArray.count; index++) {
-        UITextField *textField = (UITextField*)[editView viewWithTag:index + kTextFieldTag];
-        [infoDictionary setObject:textField.text forKey:infoArray[index]];
-        NSLog(@"%@", [infoDictionary objectForKey: infoArray[index]]);
-    }
-    if (boyButton.selected) {
-        [infoDictionary setObject:@"男" forKey:@"性别"];
-    }else{
-        [infoDictionary setObject:@"女" forKey:@"性别"];
-    }
-    confirmInformationViewController = [[ConfirmInformationViewController alloc]initWithInformationDictionary:infoDictionary];
-    [self.navigationController pushViewController:confirmInformationViewController animated:YES];
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
--(void)backgroudClicked{
-    [self endEdit];
+- (BOOL)isValidName:(NSString *)name {
+    return name.length >= 2 && name.length <=4;
 }
 
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-#pragma mark - text field delegate
-- (void)textFieldDidBeginEditing:(UITextField *)textField{
-    [self beginEdit];
+- (BOOL)isValidStudentId:(NSString *)studentId {
+    return studentId.length == 8;
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
-     [self endEdit];
-    return YES;
+- (BOOL)isValidInformation:(NSString *)input {
+    return input.length > 0;
 }
 
--(void)beginEdit{
-    if (kScreenHeight == 480) {
-        [backgroundScrollView setContentOffset:CGPointMake(0, 150) animated:YES];
-    }else if (kScreenHeight == 568) {
-        [backgroundScrollView setContentOffset:CGPointMake(0, 120) animated:YES];
-    }else{
-        [backgroundScrollView setContentOffset:CGPointMake(0, 100) animated:YES];
-    }
+- (void)bindViewModelData{
+    RAC(self.viewModel, name) = _registView.nameField.rac_textSignal;
+    RAC(self.viewModel, studentId) = _registView.studentIdField.rac_textSignal;
+    RAC(self.viewModel, college) = _registView.collegeField.rac_textSignal;
+    RAC(self.viewModel, major) = _registView.majorField.rac_textSignal;
 }
 
--(void)endEdit{
-    [self.view endEditing:YES];
-    [backgroundScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+- (void)setCommitButtonStatus{
+    RACSignal *validNameSingal = [_registView.nameField.rac_textSignal map:^id(NSString *name) {
+        return @([self isValidName:name]);
+    }];
+    RACSignal *validStudentIdSingal = [_registView.studentIdField.rac_textSignal map:^id(NSString *studentId) {
+        return @([self isValidStudentId:studentId]);
+    }];
+    RACSignal *validCollegeSingal = [_registView.collegeField.rac_textSignal map:^id(NSString *college) {
+        return @([self isValidInformation:college]);
+    }];
+    RACSignal *validMajorSingal = [_registView.majorField.rac_textSignal map:^id(NSString *major) {
+        return @([self isValidInformation:major]);
+    }];
+    
+    [[RACSignal combineLatest:@[validNameSingal,validStudentIdSingal,validMajorSingal,validCollegeSingal] reduce:^id(NSNumber *nameValid, NSNumber *studentIdValid, NSNumber *collegeValid, NSNumber *majorValid){
+        return @([nameValid boolValue] && [studentIdValid boolValue] && [collegeValid boolValue] && [majorValid boolValue]);
+    }]
+     subscribeNext:^(NSNumber *isValid) {
+         _registView.commitButton.enabled = [isValid boolValue];
+         _registView.commitButton.backgroundColor = [isValid boolValue] ? kThemeColor : [UIColor lightGrayColor];
+     }];
 }
 
+- (void)bindChooseSexButton{
+    [[_registView.boyButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        _registView.boyButton.selected = YES;
+        _registView.girlButton.selected = NO;
+        _registView.headImageView.image = [UIImage imageNamed:@"picOfBoyHead"];
+        self.viewModel.sex = @"男";
+    }];
+    
+    [[_registView.girlButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        _registView.boyButton.selected = NO;
+        _registView.girlButton.selected = YES;
+        _registView.headImageView.image = [UIImage imageNamed:@"picOfGirlHead"];
+        self.viewModel.sex = @"女";
+    }];
+}
+
+- (void)bindCommitButton{
+    [[_registView.commitButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        NSMutableDictionary *infoDictionary = [[NSMutableDictionary alloc] initWithObjects:@[_viewModel.name,
+                                                                               _viewModel.studentId,
+                                                                               _viewModel.college,
+                                                                               _viewModel.major
+                                                                               ]
+                                                                     forKeys:_infoArray];
+        [infoDictionary setObject:_viewModel.sex forKey:@"性别"];
+        _confirmInformationViewController = [[ConfirmInformationViewController alloc]initWithInformationDictionary:infoDictionary];
+        [self.navigationController pushViewController:_confirmInformationViewController animated:YES];
+    }];
+}
 
 @end
