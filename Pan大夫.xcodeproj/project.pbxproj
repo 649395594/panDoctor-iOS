@@ -89,7 +89,6 @@
 		68D575201B95FBDC00DC4F48 /* SVTopScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D5751B1B95FBDC00DC4F48 /* SVTopScrollView.m */; };
 		68D575261B95FC2C00DC4F48 /* NewsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D575231B95FC2C00DC4F48 /* NewsDetailViewController.m */; };
 		68D575271B95FC2C00DC4F48 /* ResourcesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D575251B95FC2C00DC4F48 /* ResourcesViewController.m */; };
-		68D5752D1B95FCA200DC4F48 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 68D575281B95FCA200DC4F48 /* Info.plist */; };
 		68D5752E1B95FCA200DC4F48 /* area.plist in Resources */ = {isa = PBXBuildFile; fileRef = 68D575291B95FCA200DC4F48 /* area.plist */; };
 		68D5752F1B95FCA200DC4F48 /* city.plist in Resources */ = {isa = PBXBuildFile; fileRef = 68D5752A1B95FCA200DC4F48 /* city.plist */; };
 		68D575301B95FCA200DC4F48 /* login.plist in Resources */ = {isa = PBXBuildFile; fileRef = 68D5752B1B95FCA200DC4F48 /* login.plist */; };
@@ -1264,7 +1263,7 @@
 		4D8243F01A91C8AA0050A6A7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = Neil;
 				TargetAttributes = {
 					4D8243F71A91C8AA0050A6A7 = {
@@ -1310,7 +1309,6 @@
 				4D8244071A91C8AA0050A6A7 /* Main.storyboard in Resources */,
 				68D5766D1B95FE5C00DC4F48 /* WeiboSDK.bundle in Resources */,
 				68D575311B95FCA200DC4F48 /* test.plist in Resources */,
-				68D5752D1B95FCA200DC4F48 /* Info.plist in Resources */,
 				68D576651B95FE5C00DC4F48 /* ShareSDKLocalizable.strings in Resources */,
 				68D575301B95FCA200DC4F48 /* login.plist in Resources */,
 				68D5750D1B95FB8A00DC4F48 /* CoreDataQuestions.sqlite in Resources */,
@@ -1593,7 +1591,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Zhuofu Deng (5K7LYF77KE)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ShareSDK-iOS-v2.10.5/Comment",
@@ -1642,10 +1640,11 @@
 					"$(PROJECT_DIR)/Pan大夫/SDK/ShareSDK/Extend/WeChatSDK",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				VALID_ARCHS = "armv7 armv7s";
+				PROVISIONING_PROFILE = "266c86df-9b9a-4fe7-bddc-07396be50061";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
 		};
@@ -1655,7 +1654,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Zhuofu Deng (5K7LYF77KE)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ShareSDK-iOS-v2.10.5/Comment",
@@ -1704,10 +1703,11 @@
 					"$(PROJECT_DIR)/Pan大夫/SDK/ShareSDK/Extend/WeChatSDK",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				VALID_ARCHS = "armv7 armv7s";
+				PROVISIONING_PROFILE = "266c86df-9b9a-4fe7-bddc-07396be50061";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;
 		};
