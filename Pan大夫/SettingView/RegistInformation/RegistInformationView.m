@@ -14,12 +14,13 @@
 #define kLabelWidth 35 * _deviceWidthRate
 
 #define kHeadSize 135 * _deviceWidthRate
-#define kHeadTopSpace 7 * _deviceWidthRate
+#define kHeadTopSpace ((kScreenHeight == 480) ?  7  : (25 * _deviceWidthRate))
 #define kSexButtonSizeWidth 100 * _deviceWidthRate
 #define kSexButtonSizeHeight 35 * _deviceWidthRate
 #define kSexButtonMiddleSpace 25 * _deviceWidthRate
 #define kCommitButtonSizeWidth 200 * _deviceWidthRate
 #define kCommitButtonSizeHeight 35 * _deviceWidthRate
+#define kVerticalEdegeHeight ((kScreenHeight == 480) ?  0  : (5 * _deviceWidthRate))
 
 #import "RegistInformationView.h"
 
@@ -55,14 +56,14 @@
 #pragma mark - begin UI
 
 - (void)setupHeadImageView{
-    _headImageView = [[UIImageView alloc]initWithFrame:CGRectMake((kScreenWidth - kHeadSize)/2, kHeadTopSpace + 64, kHeadSize, kHeadSize)];
+    _headImageView = [[UIImageView alloc]initWithFrame:CGRectMake((kScreenWidth - kHeadSize)/2, 64 + kHeadTopSpace, kHeadSize, kHeadSize)];
     _headImageView.image = [UIImage imageNamed:@"picOfBoyHead"];
     [self addSubview:_headImageView];
 }
 
 - (void)setupBoyButton{
     _boyButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _boyButton.frame = CGRectMake((kScreenWidth - kSexButtonMiddleSpace - kSexButtonSizeWidth*2)/2, CGRectGetMaxY(_headImageView.frame) + 5, kSexButtonSizeWidth, kSexButtonSizeHeight);
+    _boyButton.frame = CGRectMake((kScreenWidth - kSexButtonMiddleSpace - kSexButtonSizeWidth*2)/2, CGRectGetMaxY(_headImageView.frame) + kVerticalEdegeHeight, kSexButtonSizeWidth, kSexButtonSizeHeight);
     [_boyButton setImage:[UIImage imageNamed:@"picOfBoy"] forState:UIControlStateNormal];
     [_boyButton setImage:[UIImage imageNamed:@"picOfBoyYes"] forState:UIControlStateSelected];
     _boyButton.selected = YES;
@@ -78,8 +79,8 @@
 }
 
 - (void)setupNameLabelAndField{
-    _nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(kLeftBlankSpaceWidth, CGRectGetMaxY(_boyButton.frame) + kLabelSizeHeight * 0, kLabelWidth, kLabelSizeHeight)];
-    _nameField = [[UITextField alloc]initWithFrame:CGRectMake(kLeftBlankSpaceWidth + kLabelWidth + kMidleBlankSpaceWidth, CGRectGetMaxY(_boyButton.frame) + kLabelSizeHeight * 0, (kScreenWidth - kLeftBlankSpaceWidth*2 - kLabelWidth - kMidleBlankSpaceWidth), kLabelSizeHeight)];
+    _nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(kLeftBlankSpaceWidth, CGRectGetMaxY(_boyButton.frame) + kLabelSizeHeight * 0 + kVerticalEdegeHeight, kLabelWidth, kLabelSizeHeight)];
+    _nameField = [[UITextField alloc]initWithFrame:CGRectMake(kLeftBlankSpaceWidth + kLabelWidth + kMidleBlankSpaceWidth, CGRectGetMaxY(_boyButton.frame) + kLabelSizeHeight * 0 + kVerticalEdegeHeight, (kScreenWidth - kLeftBlankSpaceWidth*2 - kLabelWidth - kMidleBlankSpaceWidth), kLabelSizeHeight)];
     _nameLabel.textColor = kThemeColor;
     _nameField.textAlignment = NSTextAlignmentCenter;
     _nameField.delegate = self;
@@ -88,8 +89,8 @@
 }
 
 - (void)setupIdLabelAndField{
-    _studentIdLabel = [[UILabel alloc]initWithFrame:CGRectMake(kLeftBlankSpaceWidth, CGRectGetMaxY(_boyButton.frame) + kLabelSizeHeight * 1, kLabelWidth, kLabelSizeHeight)];
-    _studentIdField = [[UITextField alloc]initWithFrame:CGRectMake(kLeftBlankSpaceWidth + kLabelWidth + kMidleBlankSpaceWidth, CGRectGetMaxY(_boyButton.frame) + kLabelSizeHeight * 1, (kScreenWidth - kLeftBlankSpaceWidth * 2 - kLabelWidth - kMidleBlankSpaceWidth), kLabelSizeHeight)];
+    _studentIdLabel = [[UILabel alloc]initWithFrame:CGRectMake(kLeftBlankSpaceWidth, CGRectGetMaxY(_boyButton.frame) + kLabelSizeHeight * 1 + kVerticalEdegeHeight, kLabelWidth, kLabelSizeHeight)];
+    _studentIdField = [[UITextField alloc]initWithFrame:CGRectMake(kLeftBlankSpaceWidth + kLabelWidth + kMidleBlankSpaceWidth, CGRectGetMaxY(_boyButton.frame) + kLabelSizeHeight * 1 + kVerticalEdegeHeight, (kScreenWidth - kLeftBlankSpaceWidth * 2 - kLabelWidth - kMidleBlankSpaceWidth), kLabelSizeHeight)];
     _studentIdLabel.textColor = kThemeColor;
     _studentIdField.textAlignment = NSTextAlignmentCenter;
     _studentIdField.keyboardType = UIKeyboardTypeNumberPad;
@@ -99,8 +100,8 @@
 }
 
 - (void)setupCollegeLabelAndField{
-    _collegeLabel = [[UILabel alloc]initWithFrame:CGRectMake(kLeftBlankSpaceWidth, CGRectGetMaxY(_boyButton.frame) + kLabelSizeHeight * 2, kLabelWidth, kLabelSizeHeight)];
-    _collegeField = [[UITextField alloc]initWithFrame:CGRectMake(kLeftBlankSpaceWidth + kLabelWidth + kMidleBlankSpaceWidth, CGRectGetMaxY(_boyButton.frame) + kLabelSizeHeight * 2, (kScreenWidth - kLeftBlankSpaceWidth * 2 - kLabelWidth - kMidleBlankSpaceWidth), kLabelSizeHeight)];
+    _collegeLabel = [[UILabel alloc]initWithFrame:CGRectMake(kLeftBlankSpaceWidth, CGRectGetMaxY(_boyButton.frame) + kLabelSizeHeight * 2 + kVerticalEdegeHeight, kLabelWidth, kLabelSizeHeight)];
+    _collegeField = [[UITextField alloc]initWithFrame:CGRectMake(kLeftBlankSpaceWidth + kLabelWidth + kMidleBlankSpaceWidth, CGRectGetMaxY(_boyButton.frame) + kLabelSizeHeight * 2 + kVerticalEdegeHeight, (kScreenWidth - kLeftBlankSpaceWidth * 2 - kLabelWidth - kMidleBlankSpaceWidth), kLabelSizeHeight)];
     _collegeLabel.textColor = kThemeColor;
     _collegeField.textAlignment = NSTextAlignmentCenter;
     _collegeField.delegate = self;
@@ -109,8 +110,8 @@
 }
 
 - (void)setupMajorLabelAndField{
-    _majorLabel = [[UILabel alloc]initWithFrame:CGRectMake(kLeftBlankSpaceWidth, CGRectGetMaxY(_boyButton.frame) + kLabelSizeHeight * 3, kLabelWidth, kLabelSizeHeight)];
-    _majorField = [[UITextField alloc]initWithFrame:CGRectMake(kLeftBlankSpaceWidth + kLabelWidth + kMidleBlankSpaceWidth, CGRectGetMaxY(_boyButton.frame) + kLabelSizeHeight * 3, (kScreenWidth - kLeftBlankSpaceWidth * 2 - kLabelWidth - kMidleBlankSpaceWidth), kLabelSizeHeight)];
+    _majorLabel = [[UILabel alloc]initWithFrame:CGRectMake(kLeftBlankSpaceWidth, CGRectGetMaxY(_boyButton.frame) + kLabelSizeHeight * 3 + kVerticalEdegeHeight, kLabelWidth, kLabelSizeHeight)];
+    _majorField = [[UITextField alloc]initWithFrame:CGRectMake(kLeftBlankSpaceWidth + kLabelWidth + kMidleBlankSpaceWidth, CGRectGetMaxY(_boyButton.frame) + kLabelSizeHeight * 3 + kVerticalEdegeHeight, (kScreenWidth - kLeftBlankSpaceWidth * 2 - kLabelWidth - kMidleBlankSpaceWidth), kLabelSizeHeight)];
     _majorLabel.textColor = kThemeColor;
     _majorField.textAlignment = NSTextAlignmentCenter;
     _majorField.delegate = self;
@@ -120,7 +121,7 @@
 
 - (void)setupCommitButton{
     _commitButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    _commitButton.frame = CGRectMake((kScreenWidth - kCommitButtonSizeWidth)/2, CGRectGetMaxY(_boyButton.frame) + 4 * kLabelSizeHeight + 5, kCommitButtonSizeWidth, kCommitButtonSizeHeight);
+    _commitButton.frame = CGRectMake((kScreenWidth - kCommitButtonSizeWidth)/2, CGRectGetMaxY(_boyButton.frame) + 4 * kLabelSizeHeight + 5 + kVerticalEdegeHeight, kCommitButtonSizeWidth, kCommitButtonSizeHeight);
     [_commitButton setTitle:@"确定" forState:UIControlStateNormal];
     [_commitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _commitButton.layer.cornerRadius = 10;
@@ -149,7 +150,7 @@
     if (kScreenHeight == 480) {
         [self setContentOffset:CGPointMake(0, 150) animated:YES];
     }else if (kScreenHeight == 568) {
-        [self setContentOffset:CGPointMake(0, 120) animated:YES];
+        [self setContentOffset:CGPointMake(0, 130) animated:YES];
     }else{
         [self setContentOffset:CGPointMake(0, 100) animated:YES];
     }
