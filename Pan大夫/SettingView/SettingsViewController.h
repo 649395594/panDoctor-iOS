@@ -17,7 +17,7 @@
 #define   labelH  (((FrameH > 567) && (FrameH < 569))?15:(((FrameH > 666) && (FrameH < 668))? 15*ratio6 : (((FrameH > 735) && (FrameH < 737))? 15*ratio6plus : 15)))
 #define   labelW  (((FrameH > 567) && (FrameH < 569))?48:(((FrameH > 666) && (FrameH < 668))? 50*ratio6 : (((FrameH > 735) && (FrameH < 737))? 49*ratio6plus : 48)))
 #define   labelWL  (((FrameH > 567) && (FrameH < 569))?105:(((FrameH > 666) && (FrameH < 668))? 104*ratio6 : (((FrameH > 735) && (FrameH < 737))? 103*ratio6plus : 105)))
-#define   tableUp (((FrameH > 567) && (FrameH < 569))?42:(((FrameH > 666) && (FrameH < 668))? 50*ratio6 : (((FrameH > 735) && (FrameH < 737))? 50*ratio6plus : 8)))
+#define   tableUp (((FrameH > 567) && (FrameH < 569))?42:(((FrameH > 666) && (FrameH < 668))? 50*ratio6 : (((FrameH > 735) && (FrameH < 737))? 50*ratio6plus : 40)))
 #define   bgH (FrameH - 113 - userImageH)
 #define   localLabelH  (((FrameH > 567) && (FrameH < 569))?14:(((FrameH > 666) && (FrameH < 668))? 14*ratio6 : (((FrameH > 735) && (FrameH < 737))? 14*ratio6plus : 14)))
 #define   localLabelW  (((FrameH > 567) && (FrameH < 569))?226:(((FrameH > 666) && (FrameH < 668))? 218*ratio6 : (((FrameH > 735) && (FrameH < 737))? 221*ratio6plus : 226)))

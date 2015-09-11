@@ -163,6 +163,7 @@
 		9B0DACFE1B9F0F6A000D4BB8 /* ServiceItemViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DACFD1B9F0F6A000D4BB8 /* ServiceItemViewModel.m */; };
 		9B27C5B01BA1A9C900B6F585 /* ServiceItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B27C5AF1BA1A9C900B6F585 /* ServiceItemModel.m */; };
 		A0AABBBD8F7AF4906647CD6D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BEA1EBDB727C3410DADED4AC /* libPods.a */; };
+		E274E2951B9F01CF000F1D44 /* ConfirmInformationView.m in Sources */ = {isa = PBXBuildFile; fileRef = E274E2941B9F01CF000F1D44 /* ConfirmInformationView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -500,6 +501,8 @@
 		9B27C5AE1BA1A9C900B6F585 /* ServiceItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceItemModel.h; sourceTree = "<group>"; };
 		9B27C5AF1BA1A9C900B6F585 /* ServiceItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceItemModel.m; sourceTree = "<group>"; };
 		BEA1EBDB727C3410DADED4AC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		E274E2931B9F01CF000F1D44 /* ConfirmInformationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmInformationView.h; sourceTree = "<group>"; };
+		E274E2941B9F01CF000F1D44 /* ConfirmInformationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmInformationView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1203,6 +1206,8 @@
 			children = (
 				68DE17D11B986E7A00556113 /* ConfirmInformationViewController.h */,
 				68DE17D21B986E7A00556113 /* ConfirmInformationViewController.m */,
+				E274E2931B9F01CF000F1D44 /* ConfirmInformationView.h */,
+				E274E2941B9F01CF000F1D44 /* ConfirmInformationView.m */,
 				68DE17D31B986E7A00556113 /* RegistInformationView.h */,
 				68DE17D41B986E7A00556113 /* RegistInformationView.m */,
 				68DE17D51B986E7A00556113 /* RegistInformationViewController.h */,
@@ -1428,6 +1433,7 @@
 				68D574B81B95F85A00DC4F48 /* WaitingForServiceViewController.m in Sources */,
 				68D576751B95FE5C00DC4F48 /* UIScrollView+PullLoad.m in Sources */,
 				68D5749B1B95F7D500DC4F48 /* CellForUserTableViewCell.mm in Sources */,
+				E274E2951B9F01CF000F1D44 /* ConfirmInformationView.m in Sources */,
 				68D575271B95FC2C00DC4F48 /* ResourcesViewController.m in Sources */,
 				68D5764F1B95FE5B00DC4F48 /* SDWebImageDownloader.m in Sources */,
 				68D574E11B95F96F00DC4F48 /* CommentTableViewCell.m in Sources */,
