@@ -8,12 +8,15 @@
 
 #import "ServiceItemViewController.h"
 #import "ServiceItemViewModel.h"
+#import "UIImageView+WebCache.h"
 #import <MJRefresh.h>
 
 #define kCellHeight 160.f
 #define kImageMargin 5.f
 
-@interface ServiceItemViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface ServiceItemViewController ()<UITableViewDataSource, UITableViewDelegate>{
+    int _currentPageNumber;
+}
 
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) ServiceItemViewModel *serviceItemViewModel;
@@ -29,6 +32,7 @@
     self = [super init];
     if (self) {
         _serviceItemViewModel = [[ServiceItemViewModel alloc] init];
+        _currentPageNumber = 1;
     }
     return self;
 }
@@ -45,7 +49,8 @@
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     _tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [[_serviceItemViewModel fetchItemPictureUrlWithPage:1] subscribeNext:^(id x) {
+        _currentPageNumber = 1;
+        [[_serviceItemViewModel fetchItemPictureUrlWithPage:_currentPageNumber] subscribeNext:^(id x) {
             _modelArray = x;
         } error:^(NSError *error) {
             ;
@@ -54,11 +59,23 @@
             [_tableView reloadData];
         }];
     }];
+    
     _tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-        [_tableView.footer endRefreshing];
+        _currentPageNumber ++;
+        [[_serviceItemViewModel fetchItemPictureUrlWithPage:_currentPageNumber] subscribeNext:^(id x) {
+            _modelArray = x;
+        } error:^(NSError *error) {
+            ;
+        } completed:^{
+            [_tableView.footer endRefreshing];
+            [_tableView reloadData];
+        }];
     }];
 
     [self.view addSubview:_tableView];
+    if ([_modelArray count] == 0) {
+        [_tableView.header beginRefreshing];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -78,7 +95,7 @@
         _cellImageView.layer.cornerRadius = 10;
         [cell.contentView addSubview:_cellImageView];
     }
-    _cellImageView.image = [UIImage imageNamed:@"2x_star_bigfull"];
+    [_cellImageView sd_setImageWithURL:[NSURL URLWithString:[_modelArray objectAtIndex:[indexPath row]]] placeholderImage:[UIImage imageNamed:@"ImageLoadError"]];
     return cell;
 }
 

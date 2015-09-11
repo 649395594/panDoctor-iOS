@@ -12,6 +12,5 @@
 @interface ServiceItemViewModel : NSObject
 
 - (RACSignal *)fetchItemPictureUrlWithPage:(int)pageNumber;
-- (RACSignal *)createSignal;
 
 @end
