@@ -318,7 +318,7 @@
 - (void)requestNetWork{
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
 
-    NSString *path = [NSString stringWithFormat:@"/doctordb.php?id=all&nextPage=%d&city=%@",pages,self.userChooseCity];
+    NSString *path = [NSString stringWithFormat:@"/mental/doctordb.php?id=all&nextPage=%d&city=%@",pages,self.userChooseCity];
     netOp = [appDelegate.netEngine operationWithPath:path];
     
     __block NSMutableArray *localDoctorsArray = doctorsArray;

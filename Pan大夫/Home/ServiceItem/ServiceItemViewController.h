@@ -9,13 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "HomeViewController.h"
 
-@protocol ServiceItemProtocol <NSObject>
-
-@end
-
 @interface ServiceItemViewController : UIViewController
-
-@property (nonatomic, strong) id<ServiceItemProtocol> delegate;
 
 @end
 

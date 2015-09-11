@@ -160,7 +160,8 @@
 		68DE17D81B986E7A00556113 /* RegistInformationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DE17D41B986E7A00556113 /* RegistInformationView.m */; };
 		68DE17D91B986E7A00556113 /* RegistInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DE17D61B986E7A00556113 /* RegistInformationViewController.m */; };
 		68E29DAE1B994D2A00DEF186 /* RegistInformationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E29DAD1B994D2A00DEF186 /* RegistInformationViewModel.m */; };
-		68E29DB11B99C27500DEF186 /* ServiceItemTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E29DB01B99C27500DEF186 /* ServiceItemTableView.m */; };
+		9B0DACFE1B9F0F6A000D4BB8 /* ServiceItemViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DACFD1B9F0F6A000D4BB8 /* ServiceItemViewModel.m */; };
+		9B27C5B01BA1A9C900B6F585 /* ServiceItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B27C5AF1BA1A9C900B6F585 /* ServiceItemModel.m */; };
 		A0AABBBD8F7AF4906647CD6D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BEA1EBDB727C3410DADED4AC /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -494,8 +495,10 @@
 		68DE17D61B986E7A00556113 /* RegistInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistInformationViewController.m; sourceTree = "<group>"; };
 		68E29DAC1B994D2A00DEF186 /* RegistInformationViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistInformationViewModel.h; sourceTree = "<group>"; };
 		68E29DAD1B994D2A00DEF186 /* RegistInformationViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistInformationViewModel.m; sourceTree = "<group>"; };
-		68E29DAF1B99C27500DEF186 /* ServiceItemTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceItemTableView.h; sourceTree = "<group>"; };
-		68E29DB01B99C27500DEF186 /* ServiceItemTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceItemTableView.m; sourceTree = "<group>"; };
+		9B0DACFC1B9F0F6A000D4BB8 /* ServiceItemViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceItemViewModel.h; sourceTree = "<group>"; };
+		9B0DACFD1B9F0F6A000D4BB8 /* ServiceItemViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceItemViewModel.m; sourceTree = "<group>"; };
+		9B27C5AE1BA1A9C900B6F585 /* ServiceItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceItemModel.h; sourceTree = "<group>"; };
+		9B27C5AF1BA1A9C900B6F585 /* ServiceItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceItemModel.m; sourceTree = "<group>"; };
 		BEA1EBDB727C3410DADED4AC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -895,10 +898,12 @@
 				68D575381B95FD9A00DC4F48 /* ServiceItemSTableViewCell.m */,
 				68D5753B1B95FD9A00DC4F48 /* ServiceItemViewController.h */,
 				68D5753C1B95FD9A00DC4F48 /* ServiceItemViewController.m */,
+				9B0DACFC1B9F0F6A000D4BB8 /* ServiceItemViewModel.h */,
+				9B0DACFD1B9F0F6A000D4BB8 /* ServiceItemViewModel.m */,
+				9B27C5AE1BA1A9C900B6F585 /* ServiceItemModel.h */,
+				9B27C5AF1BA1A9C900B6F585 /* ServiceItemModel.m */,
 				68D5753D1B95FD9A00DC4F48 /* TestViewController.h */,
 				68D5753E1B95FD9A00DC4F48 /* TestViewController.m */,
-				68E29DAF1B99C27500DEF186 /* ServiceItemTableView.h */,
-				68E29DB01B99C27500DEF186 /* ServiceItemTableView.m */,
 			);
 			name = ServiceItem;
 			path = Home/ServiceItem;
@@ -1391,6 +1396,7 @@
 				68D576511B95FE5B00DC4F48 /* SDWebImageManager.m in Sources */,
 				68D5747C1B95F6F100DC4F48 /* JKCountDownButton.m in Sources */,
 				68D574E01B95F96F00DC4F48 /* CommentTableView.m in Sources */,
+				9B0DACFE1B9F0F6A000D4BB8 /* ServiceItemViewModel.m in Sources */,
 				68D5749E1B95F7D500DC4F48 /* MyTableView.m in Sources */,
 				68D574A51B95F81200DC4F48 /* ChooseCurrentCity.m in Sources */,
 				68D5747B1B95F6F100DC4F48 /* AboutUSViewController.m in Sources */,
@@ -1433,6 +1439,7 @@
 				68D5764C1B95FE5B00DC4F48 /* SDImageCache.m in Sources */,
 				68D5749D1B95F7D500DC4F48 /* InformationViewController.mm in Sources */,
 				68D5749F1B95F7D500DC4F48 /* SearcherViewController.m in Sources */,
+				9B27C5B01BA1A9C900B6F585 /* ServiceItemModel.m in Sources */,
 				68D5753F1B95FD9A00DC4F48 /* MyScrollView.m in Sources */,
 				68D574D71B95F94300DC4F48 /* CertificationViewController.m in Sources */,
 				68D576411B95FE5B00DC4F48 /* NSData+MKBase64.m in Sources */,
@@ -1455,7 +1462,6 @@
 				68D576451B95FE5B00DC4F48 /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
 				68D5764A1B95FE5B00DC4F48 /* MKAnnotationView+WebCache.m in Sources */,
 				68D5764B1B95FE5B00DC4F48 /* NSData+ImageContentType.m in Sources */,
-				68E29DB11B99C27500DEF186 /* ServiceItemTableView.m in Sources */,
 				68D574EA1B95F9EB00DC4F48 /* DiagnosisViewController.m in Sources */,
 				68D5750F1B95FB8A00DC4F48 /* Question.m in Sources */,
 				68D574F81B95FA2A00DC4F48 /* Order.m in Sources */,
