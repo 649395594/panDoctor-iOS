@@ -6,3 +6,5 @@ pod 'Masonry'
 pod "Mantle", "~> 2.0"
 
 pod 'MJRefresh'
+
+pod 'MBProgressHUD', '~> 0.9.1'

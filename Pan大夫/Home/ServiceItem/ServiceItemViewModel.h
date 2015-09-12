@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <ReactiveCocoa.h>
 
+#define NoUrlError     @"HttpGetNoUrlError"
+
 @interface ServiceItemViewModel : NSObject
 
 - (RACSignal *)fetchItemPictureUrlWithPage:(int)pageNumber;
