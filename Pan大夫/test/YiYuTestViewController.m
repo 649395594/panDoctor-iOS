@@ -5,525 +5,291 @@
 //  Created by 张星宇 on 14-9-18.
 //  Copyright (c) 2014年 Roman Efimov. All rights reserved.
 //
-#define IS_IPHONE_5_SCREEN [[UIScreen mainScreen] bounds].size.height >= 568.0f && [[UIScreen mainScreen] bounds].size.height < 1024.0f
+
 #import "YiYuTestViewController.h"
 #import "TestAnalysisViewController.h"
 #import "CoreDataManager.h"
 #import "Question.h"
-@interface YiYuTestViewController ()
+#import "ChoicesImageView.h"
+#import "OperationImageView.h"
 
-@property (nonatomic , strong) UITextView *testTitle;
-@property (nonatomic , strong) UILabel *statusLabel;
+@interface YiYuTestViewController ()
+// 将choicesImageView设置为全局变量，在所有方法中均可调用
+{
+    ChoicesImageView *choicesImageView;
+    OperationImageView *operationImageView;
+}
+
 @property (nonatomic , strong) CoreDataManager *manager;
 @property (nonatomic , strong) UIButton *record;
-@property (nonatomic) BOOL isAnythingSelected;
-@property (nonatomic , strong) UIView *buttonView;
-@property (nonatomic) NSInteger intTag;
 @property (nonatomic , strong) NSMutableArray *questionLabels;
-@property (nonatomic) NSInteger questionNumber;
-@property (nonatomic) NSInteger currentPosition;
+@property (nonatomic , assign) NSInteger questionNumber;
+@property (nonatomic , assign) NSInteger currentPosition;
+@property (nonatomic , assign) NSInteger intTag;
+@property (strong, nonatomic) UIButton *endButton;
+@property (strong, nonatomic) UIButton *tempButton;
+
 
 @end
 
 @implementation YiYuTestViewController
-@synthesize tag,kind,testTitle,manager,record,isAnythingSelected;
-@synthesize aButton,bButton,cButton,dButton,eButton,nextButton,previousButton,endButton,tempButton,buttonView,statusLabel,intTag;
-@synthesize delegate,tags,questionLabels,questionNumber,currentPosition;
--(id)initWithKind:(NSString *)newKind{
+
+// 自定义初始化
+-(id)initWithKind:(NSString *)newKind
+{
     self = [super init];
     if (self) {
-        kind = newKind;
+        _kind = newKind;
     }
     return self;
 }
 
+#pragma mark - 视图的加载
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.frame = CGRectMake(0,0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height-40);//设置测试视图的frame
     
-    UIImageView *grayConver1 = [[UIImageView alloc]initWithFrame:CGRectMake(0, 64, [[UIScreen mainScreen] bounds].size.width, 45)];
-    grayConver1.backgroundColor = [UIColor grayColor];
-    grayConver1.alpha = 0.3;
-    [self.view addSubview:grayConver1];
-    
-    UIImageView *grayConver2 = [[UIImageView alloc]initWithFrame:CGRectMake(0, [[UIScreen mainScreen] bounds].size.height-110.5, [[UIScreen mainScreen] bounds].size.width, 70)];
-    grayConver2.backgroundColor = [UIColor grayColor];
-    grayConver2.alpha = 0.3;
-    [self.view addSubview:grayConver2];
-    
-    aButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [aButton setTitle:@"A.没有" forState:UIControlStateNormal];
-    [aButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [aButton addTarget:self action:@selector(chooseA:) forControlEvents:UIControlEventTouchUpInside];
-    [aButton addTarget:self action:@selector(changeColorGreen:) forControlEvents:UIControlEventTouchDown];
-    aButton.tag = 1;
-    
-    bButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [bButton setTitle:@"B.轻度" forState:UIControlStateNormal];
-    [bButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [bButton addTarget:self action:@selector(chooseB:) forControlEvents:UIControlEventTouchUpInside];
-    [bButton addTarget:self action:@selector(changeColorGreen:) forControlEvents:UIControlEventTouchDown];
-    bButton.tag = 2;
-    
-    cButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [cButton setTitle:@"C.中度" forState:UIControlStateNormal];
-    [cButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [cButton addTarget:self action:@selector(chooseC:) forControlEvents:UIControlEventTouchUpInside];
-    [cButton addTarget:self action:@selector(changeColorGreen:) forControlEvents:UIControlEventTouchDown];
-    cButton.tag = 3;
-    
-    dButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [dButton setTitle:@"D.重度" forState:UIControlStateNormal];
-    [dButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [dButton addTarget:self action:@selector(chooseD:) forControlEvents:UIControlEventTouchUpInside];
-    [dButton addTarget:self action:@selector(changeColorGreen:) forControlEvents:UIControlEventTouchDown];
-    dButton.tag = 4;
-    
-    eButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [eButton setTitle:@"E.非常严重" forState:UIControlStateNormal];
-    [eButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [eButton addTarget:self action:@selector(chooseE:) forControlEvents:UIControlEventTouchUpInside];
-    [eButton addTarget:self action:@selector(changeColorGreen:) forControlEvents:UIControlEventTouchDown];
-    eButton.tag = 5;
-    
-    nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [nextButton setTitle:@"下一题" forState:UIControlStateNormal];
-    [nextButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [nextButton addTarget:self action:@selector(nextQuestion:) forControlEvents:UIControlEventTouchUpInside];
-    [nextButton addTarget:self action:@selector(changeColor:) forControlEvents:UIControlEventTouchDown];
+    // 1、最上面的grayConver
+    UIImageView *grayConver = [[UIImageView alloc]initWithFrame:CGRectMake(0, 64, [[UIScreen mainScreen] bounds].size.width, 45)];
+    grayConver.backgroundColor = [UIColor grayColor];
+    grayConver.alpha = 0.3;
+    [self.view addSubview:grayConver];
 
-    previousButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [previousButton setTitle:@"上一题" forState:UIControlStateNormal];
-    [previousButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [previousButton addTarget:self action:@selector(previousQuestion:) forControlEvents:UIControlEventTouchUpInside];
-    if ([[UIScreen mainScreen] bounds].size.height < 568) {//适配4s的屏幕
-        UIImageView *frame = [[UIImageView alloc]init];
-        if ([kind isEqualToString:@"SCL"]) {
-            frame.frame = CGRectMake(0, 108, 320, 250);
-            frame.image = [UIImage imageNamed:@"app_tests_框5_phone4_小"];
-        }
-        else{
-            frame.frame = CGRectMake(0, 108, 320, 250);
-            frame.image = [UIImage imageNamed:@"app_tests_bg"];
-        }
-        [self.view addSubview:frame];
-        
-        aButton.frame = CGRectMake(0, 260, 160, 50);
-        bButton.frame = CGRectMake(160, 260, 160, 50);
-        if ([kind isEqualToString:@"SCL"]) {
-            cButton.frame = CGRectMake(0, 310, 107, 50);
-            dButton.frame = CGRectMake(107, 310, 107, 50);
-            eButton.frame = CGRectMake(213, 310, 107, 50);
-        }
-        else{
-            cButton.frame = CGRectMake(0, 309, 160, 50);
-            dButton.frame = CGRectMake(160, 309, 160, 50);
-        }
-        nextButton.frame = CGRectMake(230, 380, 60, 40);
-        previousButton.frame = CGRectMake(30, 380, 60, 40);
-        
-        if ([kind isEqualToString:@"SCL"]) {
-            [self.view addSubview:eButton];
-        }
-        
-        CGRect labelFrame = CGRectMake(0, 110, 320, 100);
-        testTitle = [[UITextView alloc]initWithFrame:labelFrame];
-        testTitle.font = [UIFont fontWithName:@"Helvetica-Bold" size:25];
-        testTitle.textAlignment = NSTextAlignmentCenter;
-        [self.view addSubview:testTitle];
-        
-        CGRect statusLabelFrame = CGRectMake(0, 150, 320, 100);
-        statusLabel = [[UILabel alloc]initWithFrame:statusLabelFrame];
-        statusLabel.textAlignment = NSTextAlignmentCenter;
-        [self.view addSubview:statusLabel];
-        
-    }
-    else if([[UIScreen mainScreen] bounds].size.height>=568&&[[UIScreen mainScreen]bounds].size.height<580){//适配5s的屏幕
-        UIImageView *frame = [[UIImageView alloc]init];
-        if ([kind isEqualToString:@"SCL"]) {
-            frame.frame = CGRectMake(0, 108, 320, 350);
-            frame.image = [UIImage imageNamed:@"app_tests_框5_H720"];
-        }
-        else{
-            frame.frame = CGRectMake(0, 108, 320, 305);
-            frame.image = [UIImage imageNamed:@"app_tests_backgroud_4"];
-        }
-        [self.view addSubview:frame];
-        
-        aButton.frame = CGRectMake(0, 235, 320, 45);
-        aButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        aButton.contentEdgeInsets = UIEdgeInsetsMake(0, 50, 0, 0);
-        
-        bButton.frame = CGRectMake(0, 280, 320, 45);
-        bButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        bButton.contentEdgeInsets = UIEdgeInsetsMake(0, 50, 0, 0);
+    // 2、OperationImageView的初始化
+    operationImageView = [[OperationImageView alloc]initWithScreenSize:[UIScreen mainScreen].bounds.size];
+    // 使ImageView上面的控件能够进行交互
+    operationImageView.userInteractionEnabled = YES;
+    [self.view addSubview:operationImageView];
     
-        cButton.frame = CGRectMake(0, 324, 320, 45);
-        cButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        cButton.contentEdgeInsets = UIEdgeInsetsMake(0, 50, 0, 0);
-        
-        dButton.frame = CGRectMake(0, 368, 320, 45);
-        dButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        dButton.contentEdgeInsets = UIEdgeInsetsMake(0, 50, 0, 0);
-        
-        eButton.frame = CGRectMake(0, 412, 320, 45);
-        eButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        eButton.contentEdgeInsets = UIEdgeInsetsMake(0, 50, 0, 0);
-        
-        nextButton.frame = CGRectMake(230, 470, 60, 40);
-        previousButton.frame = CGRectMake(30,470, 60, 40);
-        
-        if ([kind isEqualToString:@"SCL"]) {
-            [self.view addSubview:eButton];
-        }
-        
-        CGRect labelFrame = CGRectMake(0, 110, 320, 100);
-        testTitle = [[UITextView alloc]initWithFrame:labelFrame];
-        testTitle.font = [UIFont fontWithName:@"Helvetica-Bold" size:25];
-        testTitle.textAlignment = NSTextAlignmentCenter;
-        [self.view addSubview:testTitle];
-        
-        CGRect statusLabelFrame = CGRectMake(0, 150, 320, 100);
-        statusLabel = [[UILabel alloc]initWithFrame:statusLabelFrame];
-        statusLabel.textAlignment = NSTextAlignmentCenter;
-        [self.view addSubview:statusLabel];
-    }
-    else if ([[UIScreen mainScreen]bounds].size.height>=667&&[[UIScreen mainScreen]bounds].size.height<670){
-        UIImageView *frame = [[UIImageView alloc]init];
-        if ([kind isEqualToString:@"SCL"]) {
-            frame.frame = CGRectMake(0, 108, [[UIScreen mainScreen]bounds].size.width, 350);
-            frame.image = [UIImage imageNamed:@"frame6 750*5"];
-        }
-        else{
-            frame.frame = CGRectMake(0, 108, [[UIScreen mainScreen]bounds].size.width, 305);
-            frame.image = [UIImage imageNamed:@"frame6 750*4"];
-        }
-        [self.view addSubview:frame];
-        
-        aButton.frame = CGRectMake(0, 235, [[UIScreen mainScreen]bounds].size.width, 45);
-        aButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        aButton.contentEdgeInsets = UIEdgeInsetsMake(0, 50, 0, 0);
-        
-        bButton.frame = CGRectMake(0, 280, [[UIScreen mainScreen]bounds].size.width, 45);
-        bButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        bButton.contentEdgeInsets = UIEdgeInsetsMake(0, 50, 0, 0);
-        
-        cButton.frame = CGRectMake(0, 324, [[UIScreen mainScreen]bounds].size.width, 45);
-        cButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        cButton.contentEdgeInsets = UIEdgeInsetsMake(0, 50, 0, 0);
-        
-        dButton.frame = CGRectMake(0, 368, [[UIScreen mainScreen]bounds].size.width, 45);
-        dButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        dButton.contentEdgeInsets = UIEdgeInsetsMake(0, 50, 0, 0);
-        
-        eButton.frame = CGRectMake(0, 412, [[UIScreen mainScreen]bounds].size.width, 45);
-        eButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        eButton.contentEdgeInsets = UIEdgeInsetsMake(0, 50, 0, 0);
-        
-        nextButton.frame = CGRectMake(280, 566, 60, 40);
-        previousButton.frame = CGRectMake(30,566, 60, 40);
-
-        if ([kind isEqualToString:@"SCL"]) {
-            [self.view addSubview:eButton];
-        }
-        
-        CGRect labelFrame = CGRectMake(0, 110, [[UIScreen mainScreen]bounds].size.width, 100);
-        testTitle = [[UITextView alloc]initWithFrame:labelFrame];
-        testTitle.font = [UIFont fontWithName:@"Helvetica-Bold" size:25];
-        testTitle.textAlignment = NSTextAlignmentCenter;
-        [self.view addSubview:testTitle];
-        
-        CGRect statusLabelFrame = CGRectMake(0, 150, [[UIScreen mainScreen]bounds].size.width, 100);
-        statusLabel = [[UILabel alloc]initWithFrame:statusLabelFrame];
-        statusLabel.textAlignment = NSTextAlignmentCenter;
-        [self.view addSubview:statusLabel];
-
-    }
-    else{
-        UIImageView *frame = [[UIImageView alloc]init];
-        if ([kind isEqualToString:@"SCL"]) {
-            frame.frame = CGRectMake(0, 108, [[UIScreen mainScreen]bounds].size.width, 350);
-            frame.image = [UIImage imageNamed:@"frame6+ 1242*5"];
-        }
-        else{
-            frame.frame = CGRectMake(0, 108, [[UIScreen mainScreen]bounds].size.width, 305);
-            frame.image = [UIImage imageNamed:@"frame6+ 1242*4"];
-        }
-        [self.view addSubview:frame];
-        
-        aButton.frame = CGRectMake(0, 235, [[UIScreen mainScreen]bounds].size.width, 45);
-        aButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        aButton.contentEdgeInsets = UIEdgeInsetsMake(0, 50, 0, 0);
-        
-        bButton.frame = CGRectMake(0, 280, [[UIScreen mainScreen]bounds].size.width, 45);
-        bButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        bButton.contentEdgeInsets = UIEdgeInsetsMake(0, 50, 0, 0);
-        
-        cButton.frame = CGRectMake(0, 324, [[UIScreen mainScreen]bounds].size.width, 45);
-        cButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        cButton.contentEdgeInsets = UIEdgeInsetsMake(0, 50, 0, 0);
-        
-        dButton.frame = CGRectMake(0, 368, [[UIScreen mainScreen]bounds].size.width, 45);
-        dButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        dButton.contentEdgeInsets = UIEdgeInsetsMake(0, 50, 0, 0);
-        
-        eButton.frame = CGRectMake(0, 412, [[UIScreen mainScreen]bounds].size.width, 45);
-        eButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        eButton.contentEdgeInsets = UIEdgeInsetsMake(0, 50, 0, 0);
-        
-        nextButton.frame = CGRectMake(320, 635, 60, 40);
-        previousButton.frame = CGRectMake(30,635, 60, 40);
-        
-        if ([kind isEqualToString:@"SCL"]) {
-            [self.view addSubview:eButton];
-        }
-        
-        CGRect labelFrame = CGRectMake(0, 110, [[UIScreen mainScreen]bounds].size.width, 100);
-        testTitle = [[UITextView alloc]initWithFrame:labelFrame];
-        testTitle.font = [UIFont fontWithName:@"Helvetica-Bold" size:25];
-        testTitle.textAlignment = NSTextAlignmentCenter;
-        [self.view addSubview:testTitle];
-        
-        CGRect statusLabelFrame = CGRectMake(0, 150, [[UIScreen mainScreen]bounds].size.width, 100);
-        statusLabel = [[UILabel alloc]initWithFrame:statusLabelFrame];
-        statusLabel.textAlignment = NSTextAlignmentCenter;
-        [self.view addSubview:statusLabel];
-    }
+    // 3、为operationImageView的两个button添加事件
+    [operationImageView.nextButton addTarget:self action:@selector(nextQuestion:) forControlEvents:UIControlEventTouchUpInside];
+    [operationImageView.nextButton addTarget:self action:@selector(changeColor:) forControlEvents:UIControlEventTouchUpInside];
+    [operationImageView.previousButton addTarget:self action:@selector(previousQuestion:) forControlEvents:UIControlEventTouchUpInside];
     
-    currentPosition = 0;
+    // 4、对operationImageView的两个button进行初始化设置（第一次进入测试的界面展示）
+    operationImageView.previousButton.enabled = NO;
+    operationImageView.nextButton.enabled = NO;
+    [operationImageView.previousButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [operationImageView.nextButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [operationImageView.previousButton setBackgroundColor:[UIColor clearColor]];
+    [operationImageView.nextButton setBackgroundColor:[UIColor clearColor]];
     
-    [self.view addSubview:aButton];
-    [self.view addSubview:bButton];
-    [self.view addSubview:cButton];
-    [self.view addSubview:dButton];
-    [self.view addSubview:nextButton];
-    [self.view addSubview:previousButton];
-    [self.view addSubview:buttonView];
-    previousButton.enabled = NO;
-    nextButton.enabled = NO;
-    [previousButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    [nextButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    [previousButton setBackgroundColor:[UIColor clearColor]];
-    [nextButton setBackgroundColor:[UIColor clearColor]];
+     _currentPosition = 0;
 }
 
-- (void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:YES];
-}
-
--(void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:YES];
+    _manager = [[CoreDataManager alloc]init];
+    Question *now = [_manager findById:_tag kind:_kind];
+    _questionLabels = [_manager findQuestionLabelsByKind:_kind andTags:_tags];
+    _questionNumber = [_questionLabels count];
     
-    manager = [[CoreDataManager alloc]init];
-    Question *now = [manager findById:tag kind:kind];
-    testTitle.text = now.questionLabel;
-    testTitle.text = [self changeQuestionLabel:testTitle.text];
-    testTitle.editable = NO;
+    // 1、选项和题目序号所在的View的初始化(由于数据因为某种原因需要在视图加载之前进行处理，所以将view的加载也放在这个方法里面)
+    choicesImageView = [[ChoicesImageView alloc]initWithScreenHeight:[UIScreen mainScreen].bounds.size.height withKind:_kind];
     
-    questionLabels = [manager findQuestionLabelsByKind:kind andTags:tags];
-    questionNumber = [questionLabels count];
-    statusLabel.text = [[NSString alloc]initWithFormat:@"%@测试  ： %ld/%ld",kind,(long)currentPosition + 1,(long)questionNumber];
+    // 2、将coreData的数据传入view中(标题和序号)
+    [choicesImageView setTestTitleWithText:[self changeQuestionLabel:now.questionLabel]];
+    [choicesImageView setStatusLabelWithText:[[NSString alloc]initWithFormat:@"%@测试  ： %ld/%ld",_kind,(long)_currentPosition + 1,(long)_questionNumber]];
+    [self.view addSubview:choicesImageView];
+    // 使得UIImageView具有交互功能
+    [choicesImageView setUserInteractionEnabled:YES];
     
+    // 3、为button添加事件
+    [choicesImageView.aButton addTarget:self action:@selector(chooseA:) forControlEvents:UIControlEventTouchUpInside];
+    [choicesImageView.aButton addTarget:self action:@selector(changeColorGreen:) forControlEvents:UIControlEventTouchUpInside];
+    [choicesImageView.bButton addTarget:self action:@selector(chooseB:) forControlEvents:UIControlEventTouchUpInside];
+    [choicesImageView.bButton addTarget:self action:@selector(changeColorGreen:) forControlEvents:UIControlEventTouchDown];
+    [choicesImageView.cButton addTarget:self action:@selector(chooseC:) forControlEvents:UIControlEventTouchUpInside];
+    [choicesImageView.cButton addTarget:self action:@selector(changeColorGreen:) forControlEvents:UIControlEventTouchDown];
+    [choicesImageView.dButton addTarget:self action:@selector(chooseD:) forControlEvents:UIControlEventTouchUpInside];
+    [choicesImageView.dButton addTarget:self action:@selector(changeColorGreen:) forControlEvents:UIControlEventTouchDown];
+    [choicesImageView.eButton addTarget:self action:@selector(chooseE:) forControlEvents:UIControlEventTouchUpInside];
+    [choicesImageView.eButton addTarget:self action:@selector(changeColorGreen:) forControlEvents:UIControlEventTouchDown];
 }
 
-- (void)didReceiveMemoryWarning
+#pragma mark - 操作按钮事件
+- (void)nextQuestion:(id)sender
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-- (IBAction)nextQuestion:(id)sender {
-    intTag = [tag intValue];
-    nextButton.enabled = NO;
-    record.enabled = YES;
+    _intTag = [_tag intValue];
+    operationImageView.nextButton.enabled = NO;
+    _record.enabled = YES;
     NSLog(@"1");
-    if (currentPosition < questionNumber - 1) {
-        currentPosition = currentPosition + 1;
-        tag = [tags objectAtIndex:currentPosition];
-        Question *now = [manager findById:tag kind:kind];
-        testTitle.text = now.questionLabel;
-        testTitle.text = [self changeQuestionLabel:testTitle.text];
+    if (_currentPosition < _questionNumber - 1) {
+        _currentPosition = _currentPosition + 1;
+        _tag = [_tags objectAtIndex:_currentPosition];
+        Question *now = [_manager findById:_tag kind:_kind];
+        choicesImageView.testTitle.text = now.questionLabel;
+        choicesImageView.testTitle.text = [self changeQuestionLabel:choicesImageView.testTitle.text];
     }
-    if (currentPosition) {
-        previousButton.enabled = YES;
-        [previousButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    if (_currentPosition) {
+        operationImageView.previousButton.enabled = YES;
+        [operationImageView.previousButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     }
-    statusLabel.text = [[NSString alloc]initWithFormat:@"%@测试  ： %ld/%ld",kind,(long)currentPosition + 1,(long)questionNumber];
-    [nextButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    
-    [record setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [record setBackgroundColor:[UIColor clearColor]];
+    choicesImageView.statusLabel.text = [[NSString alloc]initWithFormat:@"%@测试  ： %ld/%ld",_kind,(long)_currentPosition + 1,(long)_questionNumber];
+    [operationImageView.nextButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [_record setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_record setBackgroundColor:[UIColor clearColor]];
 }
 
-- (IBAction)previousQuestion:(id)sender {
-    [tempButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    nextButton.enabled = NO;
-    [nextButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    if (currentPosition) {
-        currentPosition = currentPosition - 1;
-        tag = [tags objectAtIndex:currentPosition];
-        Question *now = [manager findById:tag kind:kind];
-        testTitle.text = now.questionLabel;
-        testTitle.text = [self changeQuestionLabel:testTitle.text];
-        if (currentPosition == 0) {
-            previousButton.enabled = NO;
-            [previousButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+- (void)previousQuestion:(id)sender {
+    [_tempButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    operationImageView.nextButton.enabled = NO;
+    [operationImageView.nextButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    if (_currentPosition) {
+        _currentPosition = _currentPosition - 1;
+        _tag = [_tags objectAtIndex:_currentPosition];
+        Question *now = [_manager findById:_tag kind:_kind];
+        choicesImageView.testTitle.text = now.questionLabel;
+        choicesImageView.testTitle.text = [self changeQuestionLabel:choicesImageView.testTitle.text];
+        if (_currentPosition == 0) {
+            operationImageView.previousButton.enabled = NO;
+            [operationImageView.previousButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
         }
         if ([now.answer isEqualToString:@"A"]) {
-            [aButton setTitleColor:[UIColor colorWithRed:163.0/255.0 green:229.0/255.0 blue:215.0/255.0 alpha:100] forState:UIControlStateNormal];
-            aButton.enabled = YES;
-            tempButton = aButton;
+            [choicesImageView.aButton setTitleColor:[UIColor colorWithRed:163.0/255.0 green:229.0/255.0 blue:215.0/255.0 alpha:100] forState:UIControlStateNormal];
+            choicesImageView.aButton.enabled = YES;
+            _tempButton = choicesImageView.aButton;
         }
         if ([now.answer isEqualToString:@"B"]) {
-            bButton.enabled = YES;
-            [bButton setTitleColor:[UIColor colorWithRed:25.0/255.0 green:189.0/255.0 blue:154.0/255.0 alpha:100] forState:UIControlStateNormal];
-            tempButton = bButton;
+            choicesImageView.bButton.enabled = YES;
+            [choicesImageView.bButton setTitleColor:[UIColor colorWithRed:25.0/255.0 green:189.0/255.0 blue:154.0/255.0 alpha:100] forState:UIControlStateNormal];
+            _tempButton = choicesImageView.bButton;
         }
         if ([now.answer isEqualToString:@"C"]) {
-            cButton.enabled = YES;
-            [cButton setTitleColor:[UIColor colorWithRed:25.0/255.0 green:189.0/255.0 blue:154.0/255.0 alpha:100] forState:UIControlStateNormal];
-            tempButton = cButton;
+            choicesImageView.cButton.enabled = YES;
+            [choicesImageView.cButton setTitleColor:[UIColor colorWithRed:25.0/255.0 green:189.0/255.0 blue:154.0/255.0 alpha:100] forState:UIControlStateNormal];
+            _tempButton = choicesImageView.cButton;
         }
         if ([now.answer isEqualToString:@"D"]) {
-            dButton.enabled = YES;
-            [dButton setTitleColor:[UIColor colorWithRed:25.0/255.0 green:189.0/255.0 blue:154.0/255.0 alpha:100] forState:UIControlStateNormal];
-            tempButton = dButton;
+            choicesImageView.dButton.enabled = YES;
+            [choicesImageView.dButton setTitleColor:[UIColor colorWithRed:25.0/255.0 green:189.0/255.0 blue:154.0/255.0 alpha:100] forState:UIControlStateNormal];
+            _tempButton = choicesImageView.dButton;
         }
         if ([now.answer isEqualToString:@"E"]) {
-            eButton.enabled = YES;
-            [eButton setTitleColor:[UIColor colorWithRed:25.0/255.0 green:189.0/255.0 blue:154.0/255.0 alpha:100] forState:UIControlStateNormal];
-            tempButton = eButton;
+            choicesImageView.eButton.enabled = YES;
+            [choicesImageView.eButton setTitleColor:[UIColor colorWithRed:25.0/255.0 green:189.0/255.0 blue:154.0/255.0 alpha:100] forState:UIControlStateNormal];
+            _tempButton = choicesImageView.eButton;
         }
     }
-    [record setBackgroundColor:[UIColor clearColor]];
-    statusLabel.text = [[NSString alloc]initWithFormat:@"%@测试  ： %ld/%ld",kind,(long)currentPosition + 1,(long)questionNumber];
-    if (currentPosition == questionNumber -2) {
-        [nextButton setTitle:@"下一题" forState:UIControlStateNormal];
-        [nextButton removeTarget:nil action:nil forControlEvents:UIControlEventTouchUpOutside];
-        [nextButton addTarget:self action:@selector(nextQuestion:) forControlEvents:UIControlEventTouchUpInside];
+    [_record setBackgroundColor:[UIColor clearColor]];
+    choicesImageView.statusLabel.text = [[NSString alloc]initWithFormat:@"%@测试  ： %ld/%ld",_kind,(long)_currentPosition + 1,(long)_questionNumber];
+    if (_currentPosition == _questionNumber -2) {
+        [operationImageView.nextButton setTitle:@"下一题" forState:UIControlStateNormal];
+        [operationImageView.nextButton removeTarget:nil action:nil forControlEvents:UIControlEventTouchUpOutside];
+        [operationImageView.nextButton addTarget:self action:@selector(nextQuestion:) forControlEvents:UIControlEventTouchUpInside];
+    }
+}
+#pragma mark - 5个选项的按钮操作
+- (void)chooseA:(id)sender {
+    if (_record.tag != 1) {
+        _record.enabled = YES;
+        [_record setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_record setBackgroundColor:[UIColor clearColor]];
+    }
+    // 防止重复选中
+    choicesImageView.aButton.enabled = NO;
+    _record = choicesImageView.aButton;
+    [_manager modify:_tag kind:_kind answer:@"A"];
+    
+    operationImageView.nextButton.enabled = YES;
+    [operationImageView.nextButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    if (_currentPosition == _questionNumber -1) {
+        [operationImageView.nextButton setTitle:@"提交" forState:UIControlStateNormal];
+        [operationImageView.nextButton addTarget:self action:@selector(submit:) forControlEvents:UIControlEventTouchUpInside];
     }
 }
 
-- (IBAction)chooseA:(id)sender {
-    if (record.tag != 1) {
-        record.enabled = YES;
-        [record setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [record setBackgroundColor:[UIColor clearColor]];
+- (void)chooseB:(id)sender {
+    _record.enabled = YES;
+    if (_record.tag != 2) {
+        _record.enabled = YES;
+        [_record setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_record setBackgroundColor:[UIColor clearColor]];
     }
-    aButton.enabled = NO;
-    //[aButton setTitleColor:[UIColor colorWithRed:25.0/255.0 green:189.0/255.0 blue:154.0/255.0 alpha:100] forState:UIControlStateNormal];
-    record = aButton;
-    [manager modify:tag kind:kind answer:@"A"];
-    nextButton.enabled = YES;
-    [nextButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    if (currentPosition == questionNumber -1) {
-        [nextButton setTitle:@"提交" forState:UIControlStateNormal];
-        [nextButton addTarget:self action:@selector(submit:) forControlEvents:UIControlEventTouchUpInside];
-    }
-}
-
-- (IBAction)chooseB:(id)sender {
-    record.enabled = YES;
-    if (record.tag != 2) {
-        record.enabled = YES;
-        [record setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [record setBackgroundColor:[UIColor clearColor]];
-    }
-    bButton.enabled = NO;
-    record = bButton;
-    [manager modify:tag kind:kind answer:@"B"];
-    nextButton.enabled = YES;
-    [nextButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    if (currentPosition == questionNumber -1) {
-        [nextButton setTitle:@"提交" forState:UIControlStateNormal];
-        [nextButton addTarget:self action:@selector(submit:) forControlEvents:UIControlEventTouchUpInside];
+    choicesImageView.bButton.enabled = NO;
+    _record = choicesImageView.bButton;
+    [_manager modify:_tag kind:_kind answer:@"B"];
+    
+    operationImageView.nextButton.enabled = YES;
+    [operationImageView.nextButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    if (_currentPosition == _questionNumber -1) {
+        [operationImageView.nextButton setTitle:@"提交" forState:UIControlStateNormal];
+        [operationImageView.nextButton addTarget:self action:@selector(submit:) forControlEvents:UIControlEventTouchUpInside];
     }
 }
 
-- (IBAction)chooseC:(id)sender {
-    if (record.tag != 3) {
-        [record setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        record.enabled = YES;
-        [record setBackgroundColor:[UIColor clearColor]];
+- (void)chooseC:(id)sender {
+    if (_record.tag != 3) {
+        [_record setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        _record.enabled = YES;
+        [_record setBackgroundColor:[UIColor clearColor]];
     }
-    cButton.enabled = NO;
-    record = cButton;
-    [manager modify:tag kind:kind answer:@"C"];
-    nextButton.enabled = YES;
-    [nextButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    if (currentPosition == questionNumber -1) {
-        [nextButton setTitle:@"提交" forState:UIControlStateNormal];
-        [nextButton addTarget:self action:@selector(submit:) forControlEvents:UIControlEventTouchUpInside];
-    }
-}
-
-- (IBAction)chooseD:(id)sender {
-    if (record.tag != 4) {
-        [record setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        record.enabled = YES;
-        [record setBackgroundColor:[UIColor clearColor]];
-    }
-    dButton.enabled = NO;
-    record = dButton;
-    [manager modify:tag kind:kind answer:@"D"];
-    nextButton.enabled = YES;
-    [nextButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    if (currentPosition == questionNumber -1) {
-        [nextButton setTitle:@"提交" forState:UIControlStateNormal];
-        [nextButton addTarget:self action:@selector(submit:) forControlEvents:UIControlEventTouchUpInside];
+    choicesImageView.cButton.enabled = NO;
+    _record = choicesImageView.cButton;
+    [_manager modify:_tag kind:_kind answer:@"C"];
+    operationImageView.nextButton.enabled = YES;
+    [operationImageView.nextButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    if (_currentPosition == _questionNumber -1) {
+        [operationImageView.nextButton setTitle:@"提交" forState:UIControlStateNormal];
+        [operationImageView.nextButton addTarget:self action:@selector(submit:) forControlEvents:UIControlEventTouchUpInside];
     }
 }
 
-- (IBAction)chooseE:(id)sender {
-    if (record.tag != 5) {
-        [record setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        record.enabled = YES;
-        [record setBackgroundColor:[UIColor clearColor]];
+- (void)chooseD:(id)sender {
+    if (_record.tag != 4) {
+        [_record setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        _record.enabled = YES;
+        [_record setBackgroundColor:[UIColor clearColor]];
     }
-    eButton.enabled = NO;
-    record = eButton;
-    [manager modify:tag kind:kind answer:@"E"];
-    nextButton.enabled = YES;
-    [nextButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    if (currentPosition == questionNumber -1) {
-        [nextButton setTitle:@"提交" forState:UIControlStateNormal];
-        [nextButton addTarget:self action:@selector(submit:) forControlEvents:UIControlEventTouchUpInside];
+    choicesImageView.dButton.enabled = NO;
+    _record = choicesImageView.dButton;
+    [_manager modify:_tag kind:_kind answer:@"D"];
+    operationImageView.nextButton.enabled = YES;
+    [operationImageView.nextButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    if (_currentPosition == _questionNumber -1) {
+        [operationImageView.nextButton setTitle:@"提交" forState:UIControlStateNormal];
+        [operationImageView.nextButton addTarget:self action:@selector(submit:) forControlEvents:UIControlEventTouchUpInside];
     }
 }
 
-- (IBAction)end:(id)sender {
-    self.view.hidden = YES;
-}
-
-- (void)changeColorGreen:(id)sender{
-    [sender setBackgroundColor:[UIColor colorWithRed:163.0/255.0 green:229.0/255.0 blue:215.0/255.0 alpha:100]];
-    if (tempButton) {
-        [tempButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+- (void)chooseE:(id)sender {
+    if (_record.tag != 5) {
+        [_record setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        _record.enabled = YES;
+        [_record setBackgroundColor:[UIColor clearColor]];
+    }
+    choicesImageView.eButton.enabled = NO;
+    _record = choicesImageView.eButton;
+    [_manager modify:_tag kind:_kind answer:@"E"];
+    operationImageView.nextButton.enabled = YES;
+    [operationImageView.nextButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    if (_currentPosition == _questionNumber -1) {
+        [operationImageView.nextButton setTitle:@"提交" forState:UIControlStateNormal];
+        [operationImageView.nextButton addTarget:self action:@selector(submit:) forControlEvents:UIControlEventTouchUpInside];
     }
 }
+
+#pragma mark -
 
 - (void)changeColor:(id)sender{
     [sender setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
 }
 
--(void)submit:(id)sender{
-    
-    [delegate submit];
+- (void)submit:(id)sender{
+    [_delegate submit];
 }
 
--(NSString *)changeQuestionLabel:(NSString *)questionLabel{
+// 改变button颜色
+- (void)changeColorGreen:(id)sender{
+    [sender setBackgroundColor:[UIColor colorWithRed:163.0/255.0 green:229.0/255.0 blue:215.0/255.0 alpha:100]];
+    if (_tempButton) {
+        [_tempButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    }
+}
+
+// 标题字符串的处理
+- (NSString *)changeQuestionLabel:(NSString *)questionLabel{
     NSArray *separator = [questionLabel componentsSeparatedByString:@"."];
     NSString *later = [[NSString alloc]init];
     if ([separator count] > 1) {
@@ -532,7 +298,8 @@
     else{
         later = [questionLabel substringFromIndex:2];
     }
-    NSString *changedQuestinoLabel = [NSString stringWithFormat:@"%d.%@",currentPosition+1,later];
+    NSString *changedQuestinoLabel = [NSString stringWithFormat:@"%ld.%@",_currentPosition+1,later];
     return changedQuestinoLabel;
 }
+
 @end

@@ -160,6 +160,8 @@
 		68DE17D81B986E7A00556113 /* RegistInformationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DE17D41B986E7A00556113 /* RegistInformationView.m */; };
 		68DE17D91B986E7A00556113 /* RegistInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DE17D61B986E7A00556113 /* RegistInformationViewController.m */; };
 		68E29DAE1B994D2A00DEF186 /* RegistInformationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E29DAD1B994D2A00DEF186 /* RegistInformationViewModel.m */; };
+		773752901BA7B1E800A65B0F /* ChoicesImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7737528F1BA7B1E800A65B0F /* ChoicesImageView.m */; };
+		773752931BA7B29900A65B0F /* OperationImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 773752921BA7B29900A65B0F /* OperationImageView.m */; };
 		9B0DACFE1B9F0F6A000D4BB8 /* ServiceItemViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DACFD1B9F0F6A000D4BB8 /* ServiceItemViewModel.m */; };
 		9B27C5B01BA1A9C900B6F585 /* ServiceItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B27C5AF1BA1A9C900B6F585 /* ServiceItemModel.m */; };
 		A0AABBBD8F7AF4906647CD6D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BEA1EBDB727C3410DADED4AC /* libPods.a */; };
@@ -496,6 +498,10 @@
 		68DE17D61B986E7A00556113 /* RegistInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistInformationViewController.m; sourceTree = "<group>"; };
 		68E29DAC1B994D2A00DEF186 /* RegistInformationViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistInformationViewModel.h; sourceTree = "<group>"; };
 		68E29DAD1B994D2A00DEF186 /* RegistInformationViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistInformationViewModel.m; sourceTree = "<group>"; };
+		7737528E1BA7B1E800A65B0F /* ChoicesImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoicesImageView.h; sourceTree = "<group>"; };
+		7737528F1BA7B1E800A65B0F /* ChoicesImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoicesImageView.m; sourceTree = "<group>"; };
+		773752911BA7B29900A65B0F /* OperationImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OperationImageView.h; sourceTree = "<group>"; };
+		773752921BA7B29900A65B0F /* OperationImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OperationImageView.m; sourceTree = "<group>"; };
 		9B0DACFC1B9F0F6A000D4BB8 /* ServiceItemViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceItemViewModel.h; sourceTree = "<group>"; };
 		9B0DACFD1B9F0F6A000D4BB8 /* ServiceItemViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceItemViewModel.m; sourceTree = "<group>"; };
 		9B27C5AE1BA1A9C900B6F585 /* ServiceItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceItemModel.h; sourceTree = "<group>"; };
@@ -829,6 +835,7 @@
 				68D574E71B95F9EB00DC4F48 /* TestAnalysisViewController.m */,
 				68D574E81B95F9EB00DC4F48 /* YiYuTestViewController.h */,
 				68D574E91B95F9EB00DC4F48 /* YiYuTestViewController.m */,
+				7737528D1BA7B18200A65B0F /* View */,
 			);
 			name = Test;
 			path = test;
@@ -1219,6 +1226,17 @@
 			path = SettingView/RegistInformation;
 			sourceTree = "<group>";
 		};
+		7737528D1BA7B18200A65B0F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7737528E1BA7B1E800A65B0F /* ChoicesImageView.h */,
+				7737528F1BA7B1E800A65B0F /* ChoicesImageView.m */,
+				773752911BA7B29900A65B0F /* OperationImageView.h */,
+				773752921BA7B29900A65B0F /* OperationImageView.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		7B77AA532DBA2AC1133F13B3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1443,6 +1461,7 @@
 				68D5764E1B95FE5B00DC4F48 /* SDWebImageDecoder.m in Sources */,
 				68D576471B95FE5B00DC4F48 /* MKNetworkEngine.m in Sources */,
 				68D5764C1B95FE5B00DC4F48 /* SDImageCache.m in Sources */,
+				773752901BA7B1E800A65B0F /* ChoicesImageView.m in Sources */,
 				68D5749D1B95F7D500DC4F48 /* InformationViewController.mm in Sources */,
 				68D5749F1B95F7D500DC4F48 /* SearcherViewController.m in Sources */,
 				9B27C5B01BA1A9C900B6F585 /* ServiceItemModel.m in Sources */,
@@ -1468,6 +1487,7 @@
 				68D576451B95FE5B00DC4F48 /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
 				68D5764A1B95FE5B00DC4F48 /* MKAnnotationView+WebCache.m in Sources */,
 				68D5764B1B95FE5B00DC4F48 /* NSData+ImageContentType.m in Sources */,
+				773752931BA7B29900A65B0F /* OperationImageView.m in Sources */,
 				68D574EA1B95F9EB00DC4F48 /* DiagnosisViewController.m in Sources */,
 				68D5750F1B95FB8A00DC4F48 /* Question.m in Sources */,
 				68D574F81B95FA2A00DC4F48 /* Order.m in Sources */,
