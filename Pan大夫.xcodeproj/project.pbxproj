@@ -147,7 +147,6 @@
 		68D5766B1B95FE5C00DC4F48 /* RennSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D576271B95FE5B00DC4F48 /* RennSDK.framework */; };
 		68D5766C1B95FE5C00DC4F48 /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D576291B95FE5B00DC4F48 /* libWeiboSDK.a */; };
 		68D5766D1B95FE5C00DC4F48 /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 68D5762A1B95FE5B00DC4F48 /* WeiboSDK.bundle */; };
-		68D5766E1B95FE5C00DC4F48 /* libTCWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D5762D1B95FE5B00DC4F48 /* libTCWeiboSDK.a */; };
 		68D5766F1B95FE5C00DC4F48 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D576311B95FE5B00DC4F48 /* libWeChatSDK.a */; };
 		68D576701B95FE5C00DC4F48 /* ShareSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D576341B95FE5B00DC4F48 /* ShareSDK.framework */; };
 		68D576711B95FE5C00DC4F48 /* SMS_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D576351B95FE5B00DC4F48 /* SMS_SDK.framework */; };
@@ -531,7 +530,6 @@
 				4D33F2AE1A91D94000592A91 /* libstdc++.dylib in Frameworks */,
 				68D5765A1B95FE5B00DC4F48 /* DouBanConnection.framework in Frameworks */,
 				4D33F2B01A91D94900592A91 /* libsqlite3.dylib in Frameworks */,
-				68D5766E1B95FE5C00DC4F48 /* libTCWeiboSDK.a in Frameworks */,
 				4DA5C8151A9617E400BFF070 /* CoreLocation.framework in Frameworks */,
 				68D576621B95FE5C00DC4F48 /* WeChatConnection.framework in Frameworks */,
 				68D5766B1B95FE5C00DC4F48 /* RennSDK.framework in Frameworks */,
@@ -1624,6 +1622,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Zhuofu Deng (5K7LYF77KE)";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ShareSDK-iOS-v2.10.5/Comment",
@@ -1687,6 +1686,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Zhuofu Deng (5K7LYF77KE)";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ShareSDK-iOS-v2.10.5/Comment",

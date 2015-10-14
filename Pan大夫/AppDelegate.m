@@ -17,7 +17,7 @@
 #import <TencentOpenAPI/QQApiInterface.h>
 #import <TencentOpenAPI/TencentOAuth.h>
 #import "WXApi.h"
-#import "WeiboApi.h"
+//#import "WeiboApi.h"
 #import "WeiboSDK.h"
 #import <RennSDK/RennSDK.h>
 #import <SMS_SDK/SMS_SDK.h>
