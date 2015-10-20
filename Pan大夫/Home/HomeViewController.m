@@ -16,7 +16,7 @@
 #define KDeviceWidth [[UIScreen mainScreen]bounds].size.width
 #define KDeviceHeight [[UIScreen mainScreen]bounds].size.height
 #define KSegmentWidth 150
-@interface HomeViewController ()
+@interface HomeViewController ()<ServiceItemViewControllerProtocol>
 
 @property (strong, nonatomic) ServiceItemViewController *serviceItemVC;
 @property (strong, nonatomic) ChooseCurrentCity *chooseCityView;
@@ -61,6 +61,7 @@
     self.navigationItem.rightBarButtonItem = rightButton;
     
     serviceItemVC = [[ServiceItemViewController alloc] init];
+    serviceItemVC.delegate = self;
     serviceItemVC.view.frame = CGRectMake(0, 64, KDeviceWidth, KDeviceHeight - 64 -49);
     
     doctorListVC = [[DoctorsListViewController alloc]initWithDelegate:self Special:nil];
@@ -188,5 +189,9 @@
     NSString *documentsDirectory =[paths objectAtIndex:0];
     NSString *documentPlistPath = [documentsDirectory stringByAppendingPathComponent:@"login.plist"];//plist文件位置
     return documentPlistPath;
+}
+
+- (void)pushViewController:(UIViewController *)controller animated:(BOOL)animated{
+    [self.navigationController pushViewController:controller animated:animated];
 }
 @end

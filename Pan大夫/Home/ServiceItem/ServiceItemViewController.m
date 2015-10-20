@@ -7,7 +7,10 @@
 //
 
 #import "ServiceItemViewController.h"
+#import "EventDetailViewController.h"
 #import "ServiceItemViewModel.h"
+
+
 #import "UIImageView+WebCache.h"
 #import <MJRefresh.h>
 #import <MBProgressHUD.h>
@@ -109,6 +112,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [_tableView deselectRowAtIndexPath:indexPath animated:YES];  // 取消选中状态
+    EventDetailViewController *eventDetailViewController = [[EventDetailViewController alloc] init];
+    [self.delegate pushViewController:eventDetailViewController animated:YES];
 }
 
 - (void)showHud{

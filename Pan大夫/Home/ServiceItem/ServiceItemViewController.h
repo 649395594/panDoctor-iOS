@@ -9,7 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "HomeViewController.h"
 
+@protocol ServiceItemViewControllerProtocol <NSObject>
+
+- (void)pushViewController:(UIViewController *)controller animated:(BOOL)animated;
+
+@end
+
 @interface ServiceItemViewController : UIViewController
+
+@property (weak, nonatomic) id<ServiceItemViewControllerProtocol> delegate;
 
 @end
 

@@ -162,6 +162,7 @@
 		773752901BA7B1E800A65B0F /* ChoicesImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7737528F1BA7B1E800A65B0F /* ChoicesImageView.m */; };
 		773752931BA7B29900A65B0F /* OperationImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 773752921BA7B29900A65B0F /* OperationImageView.m */; };
 		9B0DACFE1B9F0F6A000D4BB8 /* ServiceItemViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B0DACFD1B9F0F6A000D4BB8 /* ServiceItemViewModel.m */; };
+		9B25FF911BD6324100CAE739 /* EventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B25FF901BD6324100CAE739 /* EventDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
 		9B27C5B01BA1A9C900B6F585 /* ServiceItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B27C5AF1BA1A9C900B6F585 /* ServiceItemModel.m */; };
 		A0AABBBD8F7AF4906647CD6D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BEA1EBDB727C3410DADED4AC /* libPods.a */; };
 		E274E2951B9F01CF000F1D44 /* ConfirmInformationView.m in Sources */ = {isa = PBXBuildFile; fileRef = E274E2941B9F01CF000F1D44 /* ConfirmInformationView.m */; };
@@ -503,6 +504,8 @@
 		773752921BA7B29900A65B0F /* OperationImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OperationImageView.m; sourceTree = "<group>"; };
 		9B0DACFC1B9F0F6A000D4BB8 /* ServiceItemViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceItemViewModel.h; sourceTree = "<group>"; };
 		9B0DACFD1B9F0F6A000D4BB8 /* ServiceItemViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceItemViewModel.m; sourceTree = "<group>"; };
+		9B25FF8F1BD6324100CAE739 /* EventDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDetailViewController.h; sourceTree = "<group>"; };
+		9B25FF901BD6324100CAE739 /* EventDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailViewController.m; sourceTree = "<group>"; };
 		9B27C5AE1BA1A9C900B6F585 /* ServiceItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceItemModel.h; sourceTree = "<group>"; };
 		9B27C5AF1BA1A9C900B6F585 /* ServiceItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceItemModel.m; sourceTree = "<group>"; };
 		BEA1EBDB727C3410DADED4AC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -904,6 +907,8 @@
 				68D575361B95FD9A00DC4F48 /* MyScrollView.m */,
 				68D575371B95FD9A00DC4F48 /* ServiceItemSTableViewCell.h */,
 				68D575381B95FD9A00DC4F48 /* ServiceItemSTableViewCell.m */,
+				9B25FF8F1BD6324100CAE739 /* EventDetailViewController.h */,
+				9B25FF901BD6324100CAE739 /* EventDetailViewController.m */,
 				68D5753B1B95FD9A00DC4F48 /* ServiceItemViewController.h */,
 				68D5753C1B95FD9A00DC4F48 /* ServiceItemViewController.m */,
 				9B0DACFC1B9F0F6A000D4BB8 /* ServiceItemViewModel.h */,
@@ -1436,6 +1441,7 @@
 				68D574C91B95F8F300DC4F48 /* DoctorDetailViewController.m in Sources */,
 				68D574B41B95F85A00DC4F48 /* InformationConfirmViewController.m in Sources */,
 				68D574F71B95FA2A00DC4F48 /* Doctor.m in Sources */,
+				9B25FF911BD6324100CAE739 /* EventDetailViewController.m in Sources */,
 				68D576491B95FE5B00DC4F48 /* Reachability.m in Sources */,
 				68D576431B95FE5B00DC4F48 /* NSDictionary+RequestEncoding.m in Sources */,
 				68D576571B95FE5B00DC4F48 /* UIImageView+HighlightedWebCache.m in Sources */,
